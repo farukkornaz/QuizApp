@@ -2057,7 +2057,3 @@ const List testQ = [ //map list, Questions and answers stored locally
     "answer_index": 2,
   },
 ];
-
-
-
-

@@ -116,7 +116,7 @@ class ScoreScreen extends StatelessWidget {
                         padding: EdgeInsets.all(kDefaultPadding / 2),
                         decoration: BoxDecoration(
                             gradient: kPrimaryGradient, borderRadius: BorderRadius.all(Radius.circular(12))),
-                        child: AutoSizeText('Giriş Sayfası',
+                        child: AutoSizeText('Ana sayfa',
                             style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white, fontSize: 17)),
                       ),
                     ),
