@@ -7,7 +7,7 @@ class Quizes {
 
 }
 
-
+// TODO: burası iptal edilecek
 const List quiz_list = [
   {
     "id": 1,

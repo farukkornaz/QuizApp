@@ -501,28 +501,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                                 children: [
                                                   CategorySample(index: 6),
                                                   CategorySample(index: 7),
-                                                  /*Container(
-                                                        width: 225,
-                                                        child: ElevatedButton(
-                                                          style: ElevatedButton.styleFrom(
-                                                            primary: Colors.purple,
-                                                          ),
-                                                          onPressed: (){
-                                                            _controller.survivalActive = true;
-                                                            _controller.survHigh.value = 0;
-                                                            _controller.getTheRightSurvivalQuestions("surv_3");
-                                                            Get.to(SurvivalQuizScreen());
-                                                          },
-                                                          child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                            children: [
-                                                              Text('Hayatta Kalma Modu',style: TextStyle(color: Colors.white,fontSize: 15),),
-                                                              Icon(Icons.access_time_rounded),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      SizedBox(height: 10,)*/
+                                                  SizedBox(height: 10,),
                                                 ],
                                               ),
                                             ),
@@ -566,7 +545,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                     _controller.survivalActive = true;
                                     _controller.survHigh.value = 0;
                                     _controller
-                                        .getTheRightSurvivalQuestions("surv_1");
+                                        .getTheRightSurvivalQuestions("surv_3");
                                     Get.to(SurvivalQuizScreen());
                                   },
                                   child: GetBuilder<GlowAnimationController>(

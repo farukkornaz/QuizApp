@@ -1134,344 +1134,147 @@ const List allQuestions = [
     "answer_index": 0
   },
 ];
-const List survival_questions = [ //map list, Questions and answers stored locally
+const List survival_questions = [//map list, Questions and answers stored locally
   {
-    "questionsId": "nk_1",
+    "questionsId": "surv_3",
     "id": 1,
     "question": "12 x 5 = ?",
     "options": ['40', '50', '60', '70'],
     "answer_index": 2
   },
   {
-    "questionsId": "nk_1",
+    "questionsId": "surv_3",
     "id": 2,
     "question": "Sıfır hariç en küçük asal sayı nedir?",
     "options": ['1', '2', '3', '5'],
     "answer_index": 1
   },
   {
-    "questionsId": "nk_1",
+    "questionsId": "surv_3",
     "id": 3,
     "question": "Karekök(144) kaçtır?",
     "options": ['10', '12', '14', '16'],
     "answer_index": 1
   },
   {
-    "questionsId": "nk_1",
+    "questionsId": "surv_3",
     "id": 4,
     "question": "Bir dizi sayının ortalaması bulunurken kullanılan matematiksel işlem hangisidir?",
     "options": ['Toplama', 'Çarpma', 'Bölme', 'Çıkarma'],
     "answer_index": 2
   },
   {
-    "questionsId": "nk_1",
+    "questionsId": "surv_3",
     "id": 5,
     "question": "Bir dik üçgenin hipotenüsü 10 birim, bir kenarı 6 birim ise, diğer kenarı kaç birimdir?",
     "options": ['4', '6', '8', '10'],
     "answer_index": 2
   },
   {
-    "questionsId": "nk_1",
+    "questionsId": "surv_3",
     "id": 6,
     "question": "2^3 kaçtır?",
     "options": ['4', '6', '8', '16'],
     "answer_index": 2
   },
   {
-    "questionsId": "nk_1",
+    "questionsId": "surv_3",
     "id": 7,
     "question": "Bir çemberin çevresini hesaplamak için kullanılan matematiksel sabit nedir?",
     "options": ['π (pi)', 'e', 'φ (altın oran)', '√2'],
     "answer_index": 0
   },
   {
-    "questionsId": "nk_1",
+    "questionsId": "surv_3",
     "id": 8,
     "question": "3! (Faktöriyel üç) kaçtır?",
     "options": ['3', '6', '9', '12'],
     "answer_index": 1
   },
   {
-    "questionsId": "nk_1",
+    "questionsId": "surv_3",
     "id": 9,
     "question": "Bir silindirin hacmi hesaplanırken kullanılan formül hangisidir?",
     "options": ['V = πr^2h', 'V = (1/3)πr^2h', 'V = (4/3)πr^3', 'V = 2πrh'],
     "answer_index": 0
   },
   {
-    "questionsId": "nk_1",
+    "questionsId": "surv_3",
     "id": 10,
     "question": "30'un 10'a bölümü kaçtır?",
     "options": ['2', '3', '4', '5'],
     "answer_index": 3
   },
   {
-    "questionsId": "nk_1",
+    "questionsId": "surv_3",
     "id": 11,
     "question": "Bir geometrik şeklin alanını hesaplamak için kullanılan matematiksel sabit nedir?",
     "options": ['π (pi)', 'e', 'φ (altın oran)', '√2'],
     "answer_index": 0
   },
   {
-    "questionsId": "nk_1",
+    "questionsId": "surv_3",
     "id": 12,
     "question": "Bir karenin çevresi nasıl hesaplanır?",
     "options": ['P = a^2', 'P = 2a', 'P = 4a', 'P = (1/2)a'],
     "answer_index": 2
   },
   {
-    "questionsId": "nk_1",
+    "questionsId": "surv_3",
     "id": 13,
     "question": "Bir zarın üzerindeki rakamların toplamı kaçtır?",
     "options": ['14', '21', '28', '36'],
     "answer_index": 1
   },
   {
-    "questionsId": "nk_1",
+    "questionsId": "surv_3",
     "id": 14,
     "question": "Bir açının derece cinsinden ölçüsü 90 ise, bu açının tipi nedir?",
     "options": ['Dik açı', 'Geniş açı', 'Dar açı', 'Tam açı'],
     "answer_index": 0
   },
   {
-    "questionsId": "nk_1",
+    "questionsId": "surv_3",
     "id": 15,
     "question": "Bir dairenin alanı hesaplanırken kullanılan matematiksel sabit nedir?",
     "options": ['π (pi)', 'e', 'φ (altın oran)', '√2'],
     "answer_index": 0
   },
   {
-    "questionsId": "nk_1",
+    "questionsId": "surv_3",
     "id": 16,
     "question": "Bir futbol takımının sahada kaç oyuncusu vardır?",
     "options": ['9', '10', '11', '12'],
     "answer_index": 2
   },
   {
-    "questionsId": "nk_1",
+    "questionsId": "surv_3",
     "id": 17,
     "question": "Bir yıl kaç gün sürer?",
     "options": ['365', '366', '367', '364'],
     "answer_index": 0
   },
   {
-    "questionsId": "nk_1",
+    "questionsId": "surv_3",
     "id": 18,
     "question": "10! (Faktöriyel on) kaçtır?",
     "options": ['10', '100', '1000', '3628800'],
     "answer_index": 3
   },
   {
-    "questionsId": "nk_1",
+    "questionsId": "surv_3",
     "id": 19,
     "question": "Bir dörtgenin iç açılarının toplamı kaçtır?",
     "options": ['180', '270', '360', '450'],
     "answer_index": 2
   },
   {
-    "questionsId": "nk_1",
+    "questionsId": "surv_3",
     "id": 20,
     "question": "3^4 kaçtır?",
     "options": ['9', '12', '27', '81'],
     "answer_index": 3
   },
-
-  /*{
-    "id": 1,
-    "question": "s2question1",
-    "questionsId": "surv_2",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 2,
-    "question": "s2question2",
-    "questionsId": "surv_2",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 3,
-    "question": "s2question3",
-    "questionsId": "surv_2",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 4,
-    "question": "s2question4",
-    "questionsId": "surv_2",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 5,
-    "question": "s2question5",
-    "questionsId": "surv_2",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 6,
-    "question": "s2question6",
-    "questionsId": "surv_2",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 7,
-    "question": "s2question7",
-    "questionsId": "surv_2",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 8,
-    "question": "s2question8",
-    "questionsId": "surv_2",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 9,
-    "question": "s2question9",
-    "questionsId": "surv_2",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 10,
-    "question": "s2question10",
-    "questionsId": "surv_2",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 11,
-    "question": "s2question11",
-    "questionsId": "surv_2",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 12,
-    "question": "s2question12",
-    "questionsId": "surv_2",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 13,
-    "question": "s2question13",
-    "questionsId": "surv_2",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 14,
-    "question": "s2question14",
-    "questionsId": "surv_2",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 1,
-    "question": "s3question1",
-    "questionsId": "surv_3",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 2,
-    "question": "s3question2",
-    "questionsId": "surv_3",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 3,
-    "question": "s3question3",
-    "questionsId": "surv_3",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 4,
-    "question": "s3question4",
-    "questionsId": "surv_3",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 5,
-    "question": "s3question5",
-    "questionsId": "surv_3",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 6,
-    "question": "s3question6",
-    "questionsId": "surv_3",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 7,
-    "question": "s3question7",
-    "questionsId": "surv_3",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 8,
-    "question": "s3question8",
-    "questionsId": "surv_3",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 9,
-    "question": "s3question9",
-    "questionsId": "surv_3",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 10,
-    "question": "s3question10",
-    "questionsId": "surv_3",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 11,
-    "question": "s3question11",
-    "questionsId": "surv_3",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 12,
-    "question": "s3question12",
-    "questionsId": "surv_3",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 13,
-    "question": "s3question13",
-    "questionsId": "surv_3",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },
-  {
-    "id": 14,
-    "question": "s3question14",
-    "questionsId": "surv_3",
-    "options": ['answer1', 'answer2', 'answer3*', 'answer4'],
-    "answer_index": 2,
-  },*/
 ];
 const List testQ = [ //map list, Questions and answers stored locally
   {

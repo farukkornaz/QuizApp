@@ -10,7 +10,8 @@ import '../constants.dart'; // question controller class
 class SurvivalQuizScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    QuestionController _controller = Get.put(QuestionController());
+    QuestionController _controller = Get.find<QuestionController>();
+    //QuestionController _controller = Get.put(QuestionController());
     CooldownControl _ccontroller = Get.put(CooldownControl());
     //_controller.onInit();
 
@@ -174,41 +175,13 @@ class SurvivalQuizScreen extends StatelessWidget {
                               physics: NeverScrollableScrollPhysics(),
                               controller: _controller.pageController,
                               onPageChanged: _controller.updateTheQnNum,
-                              itemCount: _controller.sModeLength,
+                              itemCount: _controller.pSurvivalQuestions!.length,
                               itemBuilder: (context, index) => QuestionCard(
                                   question:
                                       _controller.pSurvivalQuestions![index]), // sending question name via constructor
                             ),
                           ),
                         ),
-                        /*Expanded(
-                        flex:3,
-                        child: Obx(() =>Visibility(
-                          visible: _questionController.isVisible.value,
-                          child:Center(
-                            child: InkWell( // provides clickable and cool click animation
-                              onTap: () {
-                                _questionController.nextQuestion();
-                                _questionController.alreadyAnswered = false;
-                              },
-                              child: Container(
-                                width: 100,
-                                margin: EdgeInsets.fromLTRB(0, 10, 10, 10),
-                                alignment: Alignment.center,
-                                padding: EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                    gradient: kPrimaryGradient,
-                                    borderRadius: BorderRadius.all(Radius.circular(20))
-                                ),
-                                child:Text(
-                                    _questionController.nextQText.value,
-                                    style: Theme.of(context).textTheme.button.copyWith(color: Colors.white, fontSize: 14)),
-                              ),
-                            ),
-                          ),
-                        ),
-                        ),
-                      ),*/
                       ],
                     ),
                   ),
@@ -245,40 +218,6 @@ class SurvivalQuizScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  /*Positioned(
-                      left: MediaQuery.of(context).size.width*7/8,
-                      right: 0,
-                      bottom: MediaQuery.of(context).size.height*6/7,
-                      top: 0,
-                      child: Container(
-                        child:Center(
-                          child: InkWell( // provides clickable and cool click animation
-                            onTap: () {
-                              Get.back();
-                              _controller.questReset();
-                              _controller.resetStatus();
-                              _controller.survivalActive = false;
-                              _controller.alreadyAnswered = false;
-                            },
-                            child: Container(
-                              width: 25,
-                              height: 25,
-                              //margin: EdgeInsets.fromLTRB(0, 10, 10, 10),
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                  color: Colors.redAccent,
-                                  borderRadius: BorderRadius.all(Radius.circular(25))
-                              ),
-                              child:Icon(
-                                Icons.close_rounded,
-                                size: 15,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),*/
                 ],
               ),
             ),

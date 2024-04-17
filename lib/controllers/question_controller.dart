@@ -121,7 +121,7 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
 
   var prefss;
 
-  int sModeLength = 102;
+  int sModeLength = survival_questions.length;
 
   int? activeQuiz;
 
@@ -202,7 +202,6 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
         /*if(timerMinute.value == databaseQuestions!.length){
           onlineTestTimeEnd();
         }*/
-        // TODO 10 min remaning
       },
     );
   }
@@ -414,7 +413,9 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
   }
 
   void survivalNextQuestion() {
-    if (_questionNumber.value != sModeLength) {
+    print(":::::::::::::::::::${_pSurvivalQuestions?.length}");
+    if (_questionNumber.value != _pSurvivalQuestions!.length) {
+      print("surv:::: $_pSurvivalQuestions");
       _isAnswered = false;
       //_pageController.nextPage(duration: Duration(milliseconds: 1), curve: Curves.ease);
       _pageController.nextPage(duration: Duration(milliseconds: 1), curve: Curves.easeIn);
@@ -505,7 +506,7 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
 
   bool popValue(bool value) {
     return value;
-    update();
+    //update();
   }
 
   bool hsCheck(String quizID) {
@@ -551,7 +552,8 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
     var rightSList = survivalQuestions.where((i) => i.questionsId == qId).toList();
     activeSurvivalQuiz = qId;
     rightSList.shuffle();
-    for (int i = 0; i < sModeLength; i++) {
+    for (int i = 0; i < rightSList.length; i++) {
+      print(rightSList[i]);
       pSurvivalQuestions![i] = rightSList[i];
     }
   }
