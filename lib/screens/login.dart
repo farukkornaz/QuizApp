@@ -68,7 +68,7 @@ class Login extends GetWidget<AuthController> {
                           textInputAction: TextInputAction.next,
                           decoration: InputDecoration(
                             hintText: 'Email',
-                            labelText: 'Email :',
+                            labelText: 'Email',
                           ),
                           controller: emailController,
                         ),
@@ -87,7 +87,7 @@ class Login extends GetWidget<AuthController> {
                               ),
                               //fillColor: Colors.blueAccent,
                               hintText: 'Şifre',
-                              labelText: 'Şifre :',
+                              labelText: 'Şifre',
                             ),
                             controller: passwordController,
                             obscureText: controller.showHide.value,
@@ -100,17 +100,6 @@ class Login extends GetWidget<AuthController> {
                     ),
                     Column(
                       children: [
-                        /*ConstrainedBox(
-                          constraints: BoxConstraints.tightFor(width: double.infinity,height: 50),
-                          child:ElevatedButton(onPressed: (){
-                            controller.login(emailController.text, passwordController.text);
-                          }, child: Text('Giriş'),
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.purple,
-                              minimumSize: Size.infinite,
-                            ),
-                          ),
-                        ),*/
                         InkWell(
                           onTap: () {
                             controller.login(emailController.text, passwordController.text);
@@ -135,7 +124,7 @@ class Login extends GetWidget<AuthController> {
                         ),
                         InkWell(
                           onTap: () {
-                            Get.to(WelcomeScreen() /*,transition: Transition.cupertino*/); // transition effect
+                            Get.to(WelcomeScreen() ,transition: Transition.cupertino); // transition effect
                             controller.guest = true;
                             sController.current.value = 0;
                             Get.find<QuestionController>().getQuizesScores();

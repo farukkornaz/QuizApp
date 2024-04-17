@@ -52,7 +52,7 @@ class OnlineQuizScreen extends StatelessWidget {
                             child: InkWell(
                               // provides clickable and cool click animation
                               onTap: () async {
-                                if (_aController.user?.uid == "Ol6dYajUz2VkQT6GSoTBYnDbOQ13") {
+                                if (_aController.user?.uid == "TbTq1loYiUcCbSsTgcQp90nKS2c2") {
                                   _controller.checkOnlineAnswers();
                                   print(_controller.numOfCorrectAns);
                                   _controller.questReset();

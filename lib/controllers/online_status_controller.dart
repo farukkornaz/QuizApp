@@ -21,7 +21,7 @@ class OnlineStatusController extends GetxController with WidgetsBindingObserver{
   void didChangeAppLifecycleState(AppLifecycleState state) async{
     super.didChangeAppLifecycleState(state);
     if(state == AppLifecycleState.paused){
-      if(_authController.user?.uid != "Ol6dYajUz2VkQT6GSoTBYnDbOQ13"){
+      if(_authController.user?.uid != "TbTq1loYiUcCbSsTgcQp90nKS2c2"){
         _controller.checkOnlineAnswers();
         await Database().storeOnlineExam(_controller.onlineTestName, _controller.numOfCorrectAns,
             (_controller.timerMinute.value * 60) +

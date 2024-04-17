@@ -67,8 +67,7 @@ class QuizCard extends StatelessWidget {
                     _controller.getQuizScreen();
                   },
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 30),
-                    primary: Colors.purple.withOpacity(0.5),
+                    padding: EdgeInsets.symmetric(horizontal: 30), backgroundColor: Colors.purple.withOpacity(0.5),
                     side: BorderSide(width: 1, style: BorderStyle.solid, color: Colors.white),
 
                     /*Color primary, // set the background color

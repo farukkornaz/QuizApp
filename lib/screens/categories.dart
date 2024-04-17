@@ -59,7 +59,7 @@ class CategoriesScreen extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      '  Namaz Kitabı',
+                                      '  Matematik',
                                       style: TextStyle(
                                           color: Colors.purple, fontSize: 20),
                                     ),
@@ -72,7 +72,7 @@ class CategoriesScreen extends StatelessWidget {
                               ),
                               expanded: Column(children: [
                                 Text(
-                                  'Namaz Kitabı Testleri',
+                                  'Matematik testleri',
                                   style: TextStyle(
                                       color: Colors.purple, fontSize: 25),
                                 ),
@@ -104,7 +104,7 @@ class CategoriesScreen extends StatelessWidget {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          '  Namaz Kitabı',
+                                          '  Matematik',
                                           style: TextStyle(
                                               color: Colors.purple,
                                               fontSize: 20),
@@ -147,7 +147,7 @@ class CategoriesScreen extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      '  Eshab-ı Kiram',
+                                      '  Turkce',
                                       style: TextStyle(
                                           color: Colors.purple, fontSize: 20),
                                     ),
@@ -160,7 +160,7 @@ class CategoriesScreen extends StatelessWidget {
                               ),
                               expanded: Column(children: [
                                 Text(
-                                  'Eshab-ı Kiram Testleri',
+                                  'Turkce Testleri',
                                   style: TextStyle(
                                       color: Colors.purple, fontSize: 25),
                                 ),
@@ -192,7 +192,7 @@ class CategoriesScreen extends StatelessWidget {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          '  Eshab-ı Kiram',
+                                          '  Turkce',
                                           style: TextStyle(
                                               color: Colors.purple,
                                               fontSize: 20),
@@ -235,7 +235,7 @@ class CategoriesScreen extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      '  İslam Ahlakı',
+                                      '  Genel Kültür',
                                       style: TextStyle(
                                           color: Colors.purple, fontSize: 20),
                                     ),
@@ -248,7 +248,7 @@ class CategoriesScreen extends StatelessWidget {
                               ),
                               expanded: Column(children: [
                                 Text(
-                                  'İslam Ahlakı Testleri',
+                                  'Genel Kültür Testleri',
                                   style: TextStyle(
                                       color: Colors.purple, fontSize: 25),
                                 ),
@@ -280,7 +280,7 @@ class CategoriesScreen extends StatelessWidget {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          '  İslam Ahlakı',
+                                          '  Genel Kültür',
                                           style: TextStyle(
                                               color: Colors.purple,
                                               fontSize: 20),

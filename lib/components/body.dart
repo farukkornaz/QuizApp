@@ -193,11 +193,11 @@ class Body extends StatelessWidget {
                                           () => Text.rich(
                                             TextSpan(
                                               text: '${_questionController.questionNumber.value}',
-                                              style: Theme.of(context).textTheme.headline5,
+                                              style: Theme.of(context).textTheme.headlineSmall,
                                               children: [
                                                 TextSpan(
                                                     text: '/${_questionController.questions.length}    ',
-                                                    style: Theme.of(context).textTheme.headline6),
+                                                    style: Theme.of(context).textTheme.titleLarge),
                                               ],
                                             ),
                                           ),

@@ -209,7 +209,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                                       .spaceBetween,
                                               children: [
                                                 Text(
-                                                  '  Namaz Kitabı',
+                                                  '  Matematik',
                                                   style: TextStyle(
                                                       color: Colors.purple,
                                                       fontSize: 18),
@@ -223,7 +223,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                           ),
                                           expanded: Column(children: [
                                             Text(
-                                              'Namaz Kitabı Testleri',
+                                              'Matematik Testleri',
                                               style: TextStyle(
                                                   color: Colors.purple,
                                                   fontSize: 25),
@@ -281,7 +281,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                                           .spaceBetween,
                                                   children: [
                                                     Text(
-                                                      '  Namaz Kitabı',
+                                                      '  Matematik',
                                                       style: TextStyle(
                                                           color: Colors.purple,
                                                           fontSize: 18),
@@ -338,7 +338,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                                       .spaceBetween,
                                               children: [
                                                 Text(
-                                                  '  İslam Ahlakı',
+                                                  '  Genel Kültür',
                                                   style: TextStyle(
                                                       color: Colors.purple,
                                                       fontSize: 18),
@@ -352,7 +352,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                           ),
                                           expanded: Column(children: [
                                             Text(
-                                              'İslam Ahlakı Testleri',
+                                              'Genel Kültür Testleri',
                                               style: TextStyle(
                                                   color: Colors.purple,
                                                   fontSize: 25),
@@ -408,7 +408,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                                           .spaceBetween,
                                                   children: [
                                                     Text(
-                                                      '  İslam Ahlakı',
+                                                      '  Genel Kültür',
                                                       style: TextStyle(
                                                           color: Colors.purple,
                                                           fontSize: 18),
@@ -465,7 +465,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                                       .spaceBetween,
                                               children: [
                                                 Text(
-                                                  '  Herkeze Lazım Olan İman',
+                                                  '  Tarih',
                                                   style: TextStyle(
                                                       color: Colors.purple,
                                                       fontSize: 18),
@@ -479,7 +479,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                           ),
                                           expanded: Column(children: [
                                             Text(
-                                              'Herkeze Lazım Olan İman Testleri',
+                                              'Tarih Testleri',
                                               style: TextStyle(
                                                   color: Colors.purple,
                                                   fontSize: 17),
@@ -536,7 +536,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                                           .spaceBetween,
                                                   children: [
                                                     Text(
-                                                      '  Herkeze Lazım Olan İman',
+                                                      '  Tarih',
                                                       style: TextStyle(
                                                           color: Colors.purple,
                                                           fontSize: 17),
@@ -640,14 +640,14 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                             child: Row(
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
-                                                Text('  Eshab-ı Kiram',style: TextStyle(color: Colors.purple,fontSize: 20),),
+                                                Text('  Türkçe',style: TextStyle(color: Colors.purple,fontSize: 20),),
                                                 Icon(Icons.arrow_downward_rounded,color: Colors.purple,),
                                               ],
                                             ),
                                           ),
                                           expanded: Column(
                                               children: [
-                                                Text('Eshab-ı Kiram Testleri',style: TextStyle(color: Colors.purple,fontSize: 25),),
+                                                Text('Türkçe Testleri',style: TextStyle(color: Colors.purple,fontSize: 25),),
                                                 Divider(color: Colors.purple,thickness: 2,),
                                                 Container(
                                                   padding: EdgeInsets.all(kDefaultPadding),
@@ -690,7 +690,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                                     child: Row(
                                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                       children: [
-                                                        Text('  Eshab-ı Kiram',style: TextStyle(color: Colors.purple,fontSize: 20),),
+                                                        Text('  Türkçe',style: TextStyle(color: Colors.purple,fontSize: 20),),
                                                         Icon(Icons.arrow_upward_rounded,color: Colors.purple,),
                                                       ],
                                                     ),

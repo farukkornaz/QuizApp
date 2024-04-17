@@ -25,7 +25,7 @@ class AuthController extends GetxController {
   }
 
   refreshUserInfo() async {
-    //Get.find<UserController>().user = await Database().getUser(Get.find<AuthController>().user.uid);
+    //Get.find<UserController>().user = await Database().getUser(Get.find<AuthController>().user?.uid ?? "");
   }
 
   void createUser(String email, String password, String name, DateTime birthday, String tel) async {
@@ -40,7 +40,7 @@ class AuthController extends GetxController {
             email: email,
             name: name,
             tel: tel,
-            birthday: birthday == null ? "" : "${birthday.day}/${birthday.month}/${birthday.year}",
+            birthday: "${birthday.day}/${birthday.month}/${birthday.year}",
           );
           bool _check = (await Database().createNewUser(_user));
           if (_check) {
@@ -128,7 +128,8 @@ class AuthController extends GetxController {
       }
     } else {
       try {
-        //final result = await InternetAddress.lookup('example.com');
+        // Todo: internet kontrolü için farklı bir metod kullan
+        // final result = await InternetAddress.lookup('example.com');
         if (/*result.isNotEmpty && result[0].rawAddress.isNotEmpty*/true) {
           try {
             UserCredential _userCredential =
@@ -140,7 +141,7 @@ class AuthController extends GetxController {
             Get.find<QuestionController>().getQuizesScores();
           } catch (e) {
             String hatamsj;
-            switch (e.toString() /** TODO: [e.code] => [e.toString()] */) {
+            switch (e.toString()) {
               case "ERROR_INVALID_EMAIL":
                 hatamsj = "Email adresinizi kontrol ediniz";
                 break;

@@ -5,6 +5,8 @@ import 'package:quiz_test_app/controllers/auth_controller.dart';
 import 'package:quiz_test_app/controllers/question_controller.dart';
 
 import '../constants.dart';
+import '../screens/profile_screen.dart';
+import '../screens/user_statistics.dart';
 
 class DrawerView extends GetWidget<AuthController> {
   const DrawerView({super.key});
@@ -43,47 +45,47 @@ class DrawerView extends GetWidget<AuthController> {
                   ),
                 ),
               ),
-              /*ListTile(
+              ListTile(
                 leading: Icon(Icons.account_circle),
                 title: Text('Profil'),
                 onTap: () async{
-                    /*Get.defaultDialog(
+                    Get.defaultDialog(
                         title: 'Kullanıcı Bilgileri',
                       titleStyle: TextStyle(fontSize: 25),
                       content: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text(controller.user.email),
+                          Text(controller.user?.email ?? ''),
                           SizedBox(height: 20),
                           Text('Veriler 1 2 3 4'),
                           SizedBox(height: 20),
                           Text('Başarımlar 1 2 3 4'),
                         ],
                       )
-                    );*/
+                    );
                   if(controller.user != null){
 
                     Get.back();
                     Get.to(ProfileScreen());
                   }
                 },
-              ),*/
-              /*ListTile(
+              ),
+              ListTile(
                 leading: Icon(Icons.bar_chart_rounded),
                 title: Text('İstatistikler'),
                 onTap: () {
-                  Get.back();
-                  //Get.to(UserStatistics());
+                  //Get.back();
+                  Get.to(UserStatistics());
                 },
-              ),*/
-              /*ListTile(
+              ),
+              ListTile(
                 leading: Icon(Icons.settings),
                 title: Text('Ayarlar'),
                 onTap: () {
 
                 },
-              ),*/
-              /*ListTile(
+              ),
+              ListTile(
                 leading: Icon(Icons.power_settings_new_rounded,color: Colors.blueAccent,),
                 title: (controller.guest)
                     ? Text('Giriş Yap')
@@ -98,10 +100,10 @@ class DrawerView extends GetWidget<AuthController> {
                     else
                       Get.find<AuthController>().signOut();
                 },
-              ),*/
-              //Divider(thickness: 2,color: Colors.purple,),
-              //SizedBox(height: 10,),
-              //Divider(color: Colors.purple,thickness: 2,),
+              ),
+              Divider(thickness: 2,color: Colors.purple,),
+              SizedBox(height: 10,),
+              Divider(color: Colors.purple,thickness: 2,),
               //SizedBox(height: 10,),
               SizedBox(
                 height: 10,

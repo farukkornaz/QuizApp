@@ -6,8 +6,10 @@ import 'package:get/get.dart';
 import 'package:quiz_test_app/bindings/auth_binding.dart';
 
 import 'components/root.dart';
+import 'controllers/auth_controller.dart';
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
@@ -19,6 +21,7 @@ void main() async {
     messagingSenderId: '573131445611',
     projectId: 'quiz-test-app-1fd6c',
   ));
+
   runApp(MyApp()); // runs main class
 }
 

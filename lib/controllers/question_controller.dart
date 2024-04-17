@@ -199,7 +199,7 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
           timerStart.value = 0;
           timerMinute.value++;
         }
-        /*if(timerMinute.value == databaseQuestions.length*5){
+        /*if(timerMinute.value == databaseQuestions!.length){
           onlineTestTimeEnd();
         }*/
         // TODO 10 min remaning
