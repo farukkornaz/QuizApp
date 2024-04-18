@@ -39,7 +39,8 @@ class ProfileScreen extends StatelessWidget {
                     TextFormField(
                       maxLength: 30,
                       decoration: InputDecoration(
-                        labelText: 'Adınız : ${_uController.user.name != "" ? _uController.user.name : ""}',
+                        labelText:
+                            'Adınız : ${_uController.user.name ?? ""/* != "" ? _uController.user.name : ""*/}',
                         counterText: "",
                       ),
                       controller: controller.SNameController,
@@ -69,7 +70,8 @@ class ProfileScreen extends StatelessWidget {
                     TextFormField(
                       maxLength: 11,
                       decoration: InputDecoration(
-                        labelText: 'Tel : ${_uController.user.tel != "" ? _uController.user.tel : ""}',
+                        labelText:
+                            'Tel : ${_uController.user.tel != "" ? _uController.user.tel : ""}',
                         counterText: "",
                       ),
                       controller: controller.STelController,
@@ -84,7 +86,8 @@ class ProfileScreen extends StatelessWidget {
                       height: 30,
                     ),
                     Container(
-                      padding: EdgeInsets.fromLTRB(kDefaultPadding, 5, kDefaultPadding, 5),
+                      padding: EdgeInsets.fromLTRB(
+                          kDefaultPadding, 5, kDefaultPadding, 5),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: Colors.purple,

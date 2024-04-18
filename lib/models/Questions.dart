@@ -6,7 +6,7 @@ class Question {
   Question({this.id, this.question,this.questionsId, this.answer, this.options});
 
 }
-const List allQuestions = [
+const List<Map<String, dynamic>> allQuestions = [
   {
     "questionsId": "nk_1",
     "id": 1,

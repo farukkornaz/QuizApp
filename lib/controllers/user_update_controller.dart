@@ -11,7 +11,7 @@ class UserUpdateController extends GetxController{
 
   Rx<AutovalidateMode> autovalidateMode = AutovalidateMode.disabled.obs;
   AuthController _Acontroller = Get.put(AuthController());
-  UserController _Ucontroller = Get.put(UserController());
+  UserController _Ucontroller = Get.find<UserController>();
 
 
   final formKey = GlobalKey<FormState>();

@@ -25,7 +25,7 @@ class AuthController extends GetxController {
   }
 
   refreshUserInfo() async {
-    //Get.find<UserController>().user = await Database().getUser(Get.find<AuthController>().user?.uid ?? "");
+    Get.find<UserController>().user = await Database().getUser(Get.find<AuthController>().user?.uid ?? "");
   }
 
   void createUser(String email, String password, String name, DateTime birthday, String tel) async {

@@ -1,9 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart'; // core flutter's material app
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:quiz_test_app/bindings/auth_binding.dart';
+import 'package:quiz_test_app/controllers/question_controller.dart';
+import 'package:quiz_test_app/models/Questions.dart';
 
 import 'components/root.dart';
 import 'controllers/auth_controller.dart';
@@ -22,6 +25,17 @@ void main() async {
     projectId: 'quiz-test-app-1fd6c',
   ));
 
+  
+
+
+  List<Map<String, dynamic>> questions = allQuestions;
+
+  var db = FirebaseFirestore.instance;
+  for(int i = 0; i<10; i++){
+    db.collection("questions").add(questions[i]);
+  }
+  
+  
   runApp(MyApp()); // runs main class
 }
 
