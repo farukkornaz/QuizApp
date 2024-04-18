@@ -94,8 +94,6 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
 
   bool alreadyAnswered = false;
 
-  bool test = false;
-
   bool survivalActive = false;
 
   bool onlineActive = false;
