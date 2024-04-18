@@ -4,7 +4,7 @@ import 'package:quiz_test_app/controllers/question_controller.dart';
 import 'package:quiz_test_app/controllers/quiz_controller.dart';
 import 'package:quiz_test_app/controllers/user_controller.dart';
 
-class AuthBinding extends Bindings{
+class EssentialBinding extends Bindings{
   @override
   void dependencies(){
     Get.lazyPut<AuthController>(() => AuthController());

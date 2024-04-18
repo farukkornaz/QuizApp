@@ -4,7 +4,7 @@ import 'package:flutter/material.dart'; // core flutter's material app
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'package:quiz_test_app/bindings/auth_binding.dart';
+import 'package:quiz_test_app/bindings/essential_binding.dart';
 import 'package:quiz_test_app/controllers/question_controller.dart';
 import 'package:quiz_test_app/models/Questions.dart';
 
@@ -28,15 +28,26 @@ void main() async {
   
 
 
-  List<Map<String, dynamic>> questions = allQuestions;
+ //List<Map<String, dynamic>> questions = allQuestions;
 
   var db = FirebaseFirestore.instance;
-  for(int i = 0; i<10; i++){
+  final snapshot = await db.collection("category").get();
+
+  final docs = snapshot.docs;
+  print("dokümanlar:::::::::::::::::::::::::::::::::::::::::::::");
+  for(int i = 0; i<docs.length; i++){
+    print(docs[i].toString());
+  }print("end");
+  
+  
+  
+  
+  /*for(int i = 0; i<10; i++){
     db.collection("questions").add(questions[i]);
-  }
+  }*/
   
   
-  runApp(MyApp()); // runs main class
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -123,7 +134,7 @@ class MyApp extends StatelessWidget {
           secondary: Colors.purpleAccent[100],
         ),
       ),
-      initialBinding: AuthBinding(),
+      initialBinding: EssentialBinding(),
       defaultTransition: Transition.cupertino,
       // page change effect
       transitionDuration: Duration(milliseconds: 150),
