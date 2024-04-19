@@ -22,11 +22,7 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
 
   late Animation _animation;
 
-  Animation get animation => this._animation; // getter method
-
   late PageController _pageController;
-
-  PageController get pageController => this._pageController;
 
   List<Question> _survivalQuestions = survival_questions
       .map(
@@ -78,19 +74,9 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
       )
       .toList();
 
-  List<Question> get survivalQuestions => this._survivalQuestions;
-
-  List<Question> get allQuestion => this._allQuestion;
-
-  List<Question> get questions => this._questions;
-
-  List<Quizes> get quizes => this._quizes;
-
   List<Quizes>? popularQuizes;
 
   bool _isAnswered = false;
-
-  bool get isAnswered => this._isAnswered;
 
   bool alreadyAnswered = false;
 
@@ -102,17 +88,11 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
 
   int? _onlineSelectedAnswer;
 
-  int? get onlineSelectedAnswer => this._onlineSelectedAnswer;
-
   var selectedOnlineAnswers;
 
   int? _correctAns;
 
-  int? get correctAns => this._correctAns;
-
   int? _selectedAns;
-
-  int? get selectedAns => this._selectedAns;
 
   RxInt skipped = 0.obs;
   RxInt correct = 0.obs;
@@ -129,20 +109,12 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
 
   List<Question>? _pSurvivalQuestions;
 
-  List<Question>? get pSurvivalQuestions => this._pSurvivalQuestions;
-
   RxBool _isVisible = false.obs;
-
-  RxBool get isVisible => this._isVisible;
 
   // obs type variable , can change from another class
   RxInt _questionNumber = 1.obs;
 
-  RxInt get questionNumber => this._questionNumber;
-
   int _numOfCorrectAns = 0;
-
-  int get numOfCorrectAns => this._numOfCorrectAns;
 
   RxList<int> quizesScores = [0, 0, 0, 0, 0, 0, 0, 0, 0].obs;
 
@@ -161,6 +133,34 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
 
   String onlineTestName = "";
   RxInt survHigh = 0.obs;
+
+  Animation get animation => this._animation; // getter method
+
+  PageController get pageController => this._pageController;
+
+  List<Question> get survivalQuestions => this._survivalQuestions;
+
+  List<Question> get allQuestion => this._allQuestion;
+
+  List<Question> get questions => this._questions;
+
+  List<Quizes> get quizes => this._quizes;
+
+  int? get selectedAns => this._selectedAns;
+
+  bool get isAnswered => this._isAnswered;
+
+  int? get onlineSelectedAnswer => this._onlineSelectedAnswer;
+
+  int? get correctAns => this._correctAns;
+
+  List<Question>? get pSurvivalQuestions => this._pSurvivalQuestions;
+
+  RxBool get isVisible => this._isVisible;
+
+  RxInt get questionNumber => this._questionNumber;
+
+  int get numOfCorrectAns => this._numOfCorrectAns;
 
   void getQuizesScores() async {
     /// Get scores of local quizes locally
