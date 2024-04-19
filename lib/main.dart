@@ -1,15 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart'; // core flutter's material app
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:quiz_test_app/bindings/essential_binding.dart';
-import 'package:quiz_test_app/controllers/question_controller.dart';
-import 'package:quiz_test_app/models/Questions.dart';
-
 import 'components/root.dart';
-import 'controllers/auth_controller.dart';
 
 void main() async {
 
@@ -25,35 +20,29 @@ void main() async {
     projectId: 'quiz-test-app-1fd6c',
   ));
 
-  
-
 
  //List<Map<String, dynamic>> questions = allQuestions;
 
-  var db = FirebaseFirestore.instance;
+  /*var db = FirebaseFirestore.instance;
   final snapshot = await db.collection("category").get();
 
   final docs = snapshot.docs;
   print("dokümanlar:::::::::::::::::::::::::::::::::::::::::::::");
   for(int i = 0; i<docs.length; i++){
     print(docs[i].toString());
-  }print("end");
-  
-  
-  
-  
+  }print("end");*/
+
   /*for(int i = 0; i<10; i++){
     db.collection("questions").add(questions[i]);
   }*/
-  
-  
+
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
 
-  ThemeData _theme = ThemeData(
+  final ThemeData _theme = ThemeData(
     brightness: Brightness.light,
     fontFamily: 'Quicksand',
     inputDecorationTheme: InputDecorationTheme(
@@ -87,11 +76,10 @@ class MyApp extends StatelessWidget {
       ),
     ),
     textTheme: TextTheme(
-      headline5: TextStyle(fontSize: 14),
-      headline6: TextStyle(fontSize: 12),
-      /*headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-          bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-          bodyText1: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),*/
+      headlineSmall: TextStyle(fontSize: 14),
+      titleLarge: TextStyle(fontSize: 12),
+      /*headline6: TextStyle(fontSize: 12),
+      headline5: TextStyle(fontSize: 14),*/
     ).apply(
       bodyColor: Colors.black87,
       displayColor: Colors.black87,
