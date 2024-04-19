@@ -2,14 +2,15 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quiz_test_app/constants.dart';
-import 'package:quiz_test_app/controllers/auth_controller.dart';
+//import 'package:quiz_test_app/controllers/auth_controller.dart';
 import 'package:quiz_test_app/controllers/question_controller.dart';
 
 class ScoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     QuestionController _qnController = Get.put(QuestionController());
-    AuthController _aController = Get.find<AuthController>();
+    //TODO: kullancının bilgileri skor ekranında gozuksun
+    //AuthController _aController = Get.find<AuthController>();
     return PopScope(
       canPop: false,
       child: Scaffold(

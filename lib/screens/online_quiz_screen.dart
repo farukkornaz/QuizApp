@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quiz_test_app/components/question_card.dart';
 import 'package:quiz_test_app/controllers/auth_controller.dart';
-import 'package:quiz_test_app/controllers/online_status_controller.dart';
+//import 'package:quiz_test_app/controllers/online_status_controller.dart';
 import 'package:quiz_test_app/controllers/question_controller.dart';
 import 'package:quiz_test_app/services/database.dart';
 
@@ -14,7 +14,7 @@ class OnlineQuizScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     QuestionController _controller = Get.put(QuestionController());
     AuthController _aController = Get.find<AuthController>();
-    OnlineStatusController _osc = Get.put(OnlineStatusController());
+    //OnlineStatusController _osc = Get.put(OnlineStatusController());
     _controller.onInit();
 
     return PopScope(

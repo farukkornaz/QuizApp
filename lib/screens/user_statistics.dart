@@ -18,8 +18,10 @@ class UserStatistics extends GetWidget<AuthController> {
 
   @override
   Widget build(BuildContext context) {
-    QuestionController _controller = Get.put(QuestionController());
-    AuthController _aController = Get.put(AuthController());
+
+    //AuthController _aController = Get.put(AuthController());
+    QuestionController _controller = Get.find<QuestionController>();
+    //AuthController _aController = Get.put(AuthController());
     _controller.getOnlineQuizesScoreData();
     return Scaffold(
       extendBodyBehindAppBar: true,

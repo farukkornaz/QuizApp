@@ -34,9 +34,11 @@ class QuizCard extends StatelessWidget {
                   SizedBox(
                     height: 5,
                   ),
-                  Text(
-                    quizes.quizName!,
-                    style: TextStyle(fontSize: 20, fontFamily: 'Swissblack'),
+                  Center(
+                    child: Text(
+                      quizes.quizName!,
+                      style: TextStyle(fontSize: 20, fontFamily: 'Swissblack'),
+                    ),
                   ),
                 ]),
           ),

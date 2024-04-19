@@ -19,7 +19,7 @@ class Option extends StatelessWidget {
   final int? index;
   final VoidCallback? press;
   final int? qid;
-  int? selected;
+  late final int? selected;
 
   @override
   Widget build(BuildContext context) {

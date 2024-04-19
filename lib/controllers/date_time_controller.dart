@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:ntp/ntp.dart';
 
 class DateTimeController extends GetxController{
 

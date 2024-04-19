@@ -7,7 +7,7 @@ import 'package:quiz_test_app/components/quiz_card.dart';
 import 'package:quiz_test_app/constants.dart'; // custom constants class
 import 'package:quiz_test_app/controllers/auth_controller.dart';
 import 'package:quiz_test_app/controllers/question_controller.dart';
-import 'package:quiz_test_app/controllers/refresh_user_info_controller.dart';
+//import 'package:quiz_test_app/controllers/refresh_user_info_controller.dart';
 import 'package:quiz_test_app/controllers/slider_controller.dart';
 import 'package:quiz_test_app/screens/survival_quiz_screen.dart';
 
@@ -17,9 +17,9 @@ class WelcomeScreen extends GetWidget<AuthController> {
   @override
   Widget build(BuildContext context) {
     SliderController sController = Get.put(SliderController());
-    AuthController authController = Get.put(AuthController());
+    //AuthController authController = Get.put(AuthController());
     QuestionController _controller = Get.put(QuestionController());
-    RefreshUserController _rucontroller = Get.put(RefreshUserController());
+    //RefreshUserController _rucontroller = Get.put(RefreshUserController());
     sController.BContext.value = MediaQuery.of(context).size.width;
     //var size = MediaQuery.of(context).size;
     /*if(!authController.guest){

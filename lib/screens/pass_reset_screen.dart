@@ -84,7 +84,7 @@ class PassResetScreen extends GetWidget<AuthController> {
                   },
                   child: Text("Sıfırlama maili gönder"),
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.purple,
+                    backgroundColor: Colors.purple,
                   ),
                 ),
               ],

@@ -162,7 +162,7 @@ class Signup extends GetWidget<SignUpController> {
                             },
                             child: Text('Kayıt Ol'),
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.purple,
+                              backgroundColor: Colors.purple,
                               minimumSize: Size.infinite,
                             ),
                           ),

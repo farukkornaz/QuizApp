@@ -11,6 +11,7 @@ class QuizController extends GetxController {
 
   @override
   void onInit() {
+    super.onInit();
     String uid = Get.find<AuthController>().user!.uid;
     quizList.bindStream(Database().quizStream(uid)); // binding our list to database
   }

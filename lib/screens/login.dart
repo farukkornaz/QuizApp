@@ -11,7 +11,7 @@ import 'package:quiz_test_app/screens/welcome_screen.dart';
 class Login extends GetWidget<AuthController> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  SliderController sController = SliderController();
+  final SliderController sController = SliderController();
 
   @override
   Widget build(BuildContext context) {
