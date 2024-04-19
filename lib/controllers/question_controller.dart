@@ -511,7 +511,7 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
 
   bool hsCheck(String quizID) {
     //high score checker , finds desired quiz info score and compere
-    var _updaterList = Get.find<QuizController>().quizinfo.where((i) => i.quizId == quizID).toList();
+    var _updaterList = Get.find<QuizController>().quizInfo.where((i) => i.quizId == quizID).toList();
     if (_updaterList.length == 0 || int.parse(_updaterList[0].score ?? '') < (numOfCorrectAns * 10)) {
       return true;
     } else {
@@ -540,7 +540,7 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
   void getQuizScreen() {
     //questReset();
     _animationController.forward().whenComplete(nextQuestion);
-    Get.to(QuizScreen());
+    Get.to(() => QuizScreen());
   }
 
   void getTheRightQuestions(String qId) {

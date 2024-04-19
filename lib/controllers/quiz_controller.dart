@@ -7,7 +7,7 @@ class QuizController extends GetxController {
   //class for getting and binding quiz list DB <-> local variable
   RxList<QuizModel> quizList = RxList<QuizModel>(); // Rx because update with every change
 
-  List<QuizModel> get quizinfo => quizList.value;
+  List<QuizModel> get quizInfo => quizList;
 
   @override
   void onInit() {
