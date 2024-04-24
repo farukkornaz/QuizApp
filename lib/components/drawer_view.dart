@@ -15,7 +15,7 @@ class DrawerView extends GetWidget<AuthController> {
   Widget build(BuildContext context) {
     QuestionController _controller = Get.put(QuestionController());
 
-    return Container(
+    return SizedBox(
       width: 225,
       child: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
@@ -27,14 +27,14 @@ class DrawerView extends GetWidget<AuthController> {
             // Important: Remove any padding from the ListView.
             //padding: EdgeInsets.zero,
             children: [
-              Container(
+              SizedBox(
                 height: 125,
-                child: DrawerHeader(
+                child: const DrawerHeader(
                   padding: EdgeInsets.zero,
                   decoration: BoxDecoration(
                     color: Colors.purple,
                   ),
-                  child: Container(
+                  child: SizedBox(
                     width: double.infinity,
                     child: Center(
                       child: Text(
@@ -49,32 +49,32 @@ class DrawerView extends GetWidget<AuthController> {
                 onTap: () {
                   if (controller.user != null) {
                     Get.back();
-                    Get.to(ProfileScreen());
+                    Get.to(const ProfileScreen());
                   }
                 },
                 child: Container(
                   width: double.infinity,
-                  margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                  padding: EdgeInsets.all(10),
+                  margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       border: Border.all(color: Colors.purple, width: 2)),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.account_circle_rounded,
                         color: Colors.purple,
                         size: 30,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       Obx(() {
                         return AutoSizeText(
-                          '${(Get.find<AuthController>().user != null) ? Get.find<AuthController>().user!.email!.split("@")[0] : 'Misafir'}',
+                          (Get.find<AuthController>().user != null) ? Get.find<AuthController>().user!.email!.split("@")[0] : 'Misafir',
                           maxLines: 1,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.purple,
                               fontSize: 15,
                               fontWeight: FontWeight.bold),
@@ -84,90 +84,86 @@ class DrawerView extends GetWidget<AuthController> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 12,
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                padding: EdgeInsets.all(10),
+                margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     border: Border.all(color: Colors.purple, width: 2)),
                 child: Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Column(
                       children: [
-                        Text(
+                        const Text(
                           "Toplanan Yıldızlar",
                           style: TextStyle(color: Colors.purple),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
-                        Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Icon(
-                                Icons.star,
-                                color: Colors.yellow,
-                                size: 35,
-                              ),
-                              Container(
-                                  width: 75,
-                                  child: Text(
-                                    "${_controller.quizesScoresSum} / ${_controller.quizes.length * 3}",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18),
-                                  )),
-                              SizedBox(
-                                width: 1,
-                              ),
-                            ],
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            const Icon(
+                              Icons.star,
+                              color: Colors.yellow,
+                              size: 35,
+                            ),
+                            SizedBox(
+                                width: 75,
+                                child: Text(
+                                  "${_controller.quizesScoresSum} / ${_controller.quizes.length * 3}",
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                )),
+                            const SizedBox(
+                              width: 1,
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Column(
                       children: [
-                        Text("Hayatta Kalma Modu",
+                        const Text("Hayatta Kalma Modu",
                             style: TextStyle(color: Colors.purple)),
-                        Text("Toplam Skor",
+                        const Text("Toplam Skor",
                             style: TextStyle(color: Colors.purple)),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
-                        Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Icon(
-                                Icons.watch_later_rounded,
-                                color: Colors.purple,
-                                size: 35,
-                              ),
-                              Container(
-                                  width: 75,
-                                  child: Text(
-                                    "${_controller.survivalScoresSum} Puan",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18),
-                                  )),
-                              SizedBox(
-                                width: 1,
-                              ),
-                            ],
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            const Icon(
+                              Icons.watch_later_rounded,
+                              color: Colors.purple,
+                              size: 35,
+                            ),
+                            SizedBox(
+                                width: 75,
+                                child: Text(
+                                  "${_controller.survivalScoresSum} Puan",
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                )),
+                            const SizedBox(
+                              width: 1,
+                            ),
+                          ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         )
                       ],
@@ -175,26 +171,26 @@ class DrawerView extends GetWidget<AuthController> {
                   ],
                 ),
               ),
-              Divider(
+              const Divider(
                 indent: 4,
                 endIndent: 4,
                 color: Colors.purple,
                 thickness: 2,
               ),
               ListTile(
-                leading: Icon(Icons.bar_chart_rounded),
-                title: Text('İstatistikler'),
+                leading: const Icon(Icons.bar_chart_rounded),
+                title: const Text('İstatistikler'),
                 onTap: () {
                   //Get.back();
-                  Get.to(UserStatistics());
+                  Get.to(const UserStatistics());
                 },
               ),
               ListTile(
-                leading: Icon(Icons.settings),
-                title: Text('Ayarlar'),
+                leading: const Icon(Icons.settings),
+                title: const Text('Ayarlar'),
                 onTap: () {},
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Expanded(child: Container()),
@@ -205,26 +201,27 @@ class DrawerView extends GetWidget<AuthController> {
                     Get.back();
                     Get.back();
                     controller.guest = false;
-                  } else
+                  } else {
                     Get.find<AuthController>().signOut();
+                  }
                 },
                 child: Container(
                   height: 50,
-                  margin: EdgeInsets.fromLTRB(10, 0, 10, 20),
+                  margin: const EdgeInsets.fromLTRB(10, 0, 10, 20),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
                       border: Border.all(color: Colors.purple, width: 2)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.power_settings_new_rounded,
                         color: Colors.blueAccent,
                       ),
                       (controller.guest)
-                          ? Text('Giriş Yap')
-                          : Text('Hesaptan Çıkış'),
-                      SizedBox(
+                          ? const Text('Giriş Yap')
+                          : const Text('Hesaptan Çıkış'),
+                      const SizedBox(
                         width: 1,
                       )
                     ],

@@ -13,7 +13,7 @@ class QuizCard extends StatelessWidget {
   Widget build(BuildContext context) {
     QuestionController _controller = Get.put(QuestionController());
     return Container(
-      margin: EdgeInsets.only(right: 10),
+      margin: const EdgeInsets.only(right: 10),
       child: Stack(
         children: [
           Container(
@@ -31,13 +31,13 @@ class QuizCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Center(
                     child: Text(
                       quizes.quizName!,
-                      style: TextStyle(fontSize: 20, fontFamily: 'Swissblack'),
+                      style: const TextStyle(fontSize: 20, fontFamily: 'Swissblack'),
                     ),
                   ),
                 ]),
@@ -53,14 +53,14 @@ class QuizCard extends StatelessWidget {
             bottom: 0,
             child: Text(quizes.quizName,style: TextStyle(color: Colors.black87),),
           ),*/
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Positioned(
             bottom: -5,
             left: 0,
             right: 0,
             child: Container(
               height: 25,
-              margin: EdgeInsets.only(bottom: 5),
+              margin: const EdgeInsets.only(bottom: 5),
               alignment: Alignment.center,
               child: ElevatedButton(
                   onPressed: () {
@@ -69,8 +69,8 @@ class QuizCard extends StatelessWidget {
                     _controller.getQuizScreen();
                   },
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 30), backgroundColor: Colors.purple.withOpacity(0.5),
-                    side: BorderSide(width: 1, style: BorderStyle.solid, color: Colors.white),
+                    padding: const EdgeInsets.symmetric(horizontal: 30), backgroundColor: Colors.purple.withOpacity(0.5),
+                    side: const BorderSide(width: 1, style: BorderStyle.solid, color: Colors.white),
 
                     /*Color primary, // set the background color
                       TextStyle textStyle,
@@ -78,7 +78,7 @@ class QuizCard extends StatelessWidget {
                       BorderSide side,
                       OutlinedBorder shape,*/
                   ),
-                  child: Text(
+                  child: const Text(
                     'Çöz !',
                     style: TextStyle(color: Colors.white, fontSize: 17),
                   )),

@@ -190,8 +190,8 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
   }
 
   void startTimer() {
-    const oneSec = const Duration(seconds: 1);
-    _timer = new Timer.periodic(
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(
       oneSec,
       (Timer timer) {
         timerStart.value++;
@@ -240,13 +240,13 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
       onlineSelectedReset();
       resetOnlineTimer();
       isVisible.value = false;
-      Get.off(OnlineScoreScreen());
+      Get.off(const OnlineScoreScreen());
     }
   }
 
   @override
   void onInit() {
-    _animationController = AnimationController(duration: Duration(seconds: 60), vsync: this);
+    _animationController = AnimationController(duration: const Duration(seconds: 60), vsync: this);
     _animation = Tween(begin: 1.0, end: 0.0).animate(_animationController)
       ..addListener(() {
         //update like setState
@@ -418,7 +418,7 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
       print("surv:::: $_pSurvivalQuestions");
       _isAnswered = false;
       //_pageController.nextPage(duration: Duration(milliseconds: 1), curve: Curves.ease);
-      _pageController.nextPage(duration: Duration(milliseconds: 1), curve: Curves.easeIn);
+      _pageController.nextPage(duration: const Duration(milliseconds: 1), curve: Curves.easeIn);
       _isVisible.value = false;
     } else {
       //get package's simple navigation to another page
@@ -442,7 +442,7 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
 
   void onlinePreviousQuestion() {
     if (_questionNumber.value != 1) {
-      _pageController.previousPage(duration: Duration(milliseconds: 50), curve: Curves.easeIn);
+      _pageController.previousPage(duration: const Duration(milliseconds: 50), curve: Curves.easeIn);
     }
   }
 
@@ -453,7 +453,7 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
       }
       _isAnswered = false;
       //_pageController.nextPage(duration: Duration(milliseconds: 1), curve: Curves.ease);
-      _pageController.nextPage(duration: Duration(milliseconds: 1), curve: Curves.easeIn);
+      _pageController.nextPage(duration: const Duration(milliseconds: 1), curve: Curves.easeIn);
 
       //reset counter
       cooldownReset();
@@ -512,7 +512,7 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
   bool hsCheck(String quizID) {
     //high score checker , finds desired quiz info score and compere
     var _updaterList = Get.find<QuizController>().quizInfo.where((i) => i.quizId == quizID).toList();
-    if (_updaterList.length == 0 || int.parse(_updaterList[0].score ?? '') < (numOfCorrectAns * 10)) {
+    if (_updaterList.isEmpty || int.parse(_updaterList[0].score ?? '') < (numOfCorrectAns * 10)) {
       return true;
     } else {
       return false;

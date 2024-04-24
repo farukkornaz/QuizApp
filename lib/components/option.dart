@@ -49,16 +49,17 @@ class Option extends StatelessWidget {
           IconData? getTheRightIcon() {
             if (qnController.onlineActive) {
               return getTheRightColor() == Colors.black87 ? Icons.star : null;
-            } else
+            } else {
               return getTheRightColor() == kRedColor ? Icons.close : Icons.done;
+            }
           }
 
           return Expanded(
             child: InkWell(
               onTap: press,
               child: Container(
-                margin: EdgeInsets.only(top: 5),
-                padding: EdgeInsets.fromLTRB(kDefaultPadding, 0, kDefaultPadding, 0),
+                margin: const EdgeInsets.only(top: 5),
+                padding: const EdgeInsets.fromLTRB(kDefaultPadding, 0, kDefaultPadding, 0),
                 decoration: BoxDecoration(
                   border: Border.all(color: getTheRightColor(), width: 2),
                   borderRadius: BorderRadius.circular(15),
@@ -68,7 +69,7 @@ class Option extends StatelessWidget {
                       color: Colors.grey.withOpacity(0.1),
                       spreadRadius: 3,
                       blurRadius: 3,
-                      offset: Offset(0, 3), // changes position of shadow
+                      offset: const Offset(0, 3), // changes position of shadow
                     ),
                   ],
                 ),
@@ -76,7 +77,7 @@ class Option extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      margin: EdgeInsets.fromLTRB(0, 0, 5, 0),
+                      margin: const EdgeInsets.fromLTRB(0, 0, 5, 0),
                       height: 18,
                       width: 18,
                       decoration: BoxDecoration(
@@ -91,17 +92,17 @@ class Option extends StatelessWidget {
                     '${String.fromCharCode(0x41 + index)} )   ',
                     style: TextStyle(color: getTheRightColor(), fontSize: 15),
                   ),*/
-                    Container(
+                    SizedBox(
                       width: MediaQuery.of(context).size.width * 2 / 3,
                       child: Center(
                         child: AutoSizeText(
                           '$text',
                           textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.black87, fontSize: 17),
+                          style: const TextStyle(color: Colors.black87, fontSize: 17),
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
                   ],

@@ -6,12 +6,14 @@ import 'package:quiz_test_app/constants.dart';
 import 'package:quiz_test_app/controllers/question_controller.dart'; // custom question controller class
 
 class Body extends StatelessWidget {
-  const Body({super.key});
+  Body({super.key});
+
+  final QuestionController _questionController = Get.put(QuestionController());
 
   @override
   Widget build(BuildContext context) {
     //accessing controller
-    QuestionController _questionController = Get.put(QuestionController());
+
     return Scaffold(
       backgroundColor: Colors.purple,
       extendBodyBehindAppBar: true,
@@ -54,7 +56,7 @@ class Body extends StatelessWidget {
               ),*/
               Container(
                   height: 185,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.purple,
                     //color: Colors.white.withOpacity(0.3),
                     //borderRadius: BorderRadius.all(Radius.circular(10)),),
@@ -64,7 +66,7 @@ class Body extends StatelessWidget {
                     ),
                   )),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -83,12 +85,12 @@ class Body extends StatelessWidget {
                           child: Container(
                             width: 26,
                             height: 26,
-                            margin: EdgeInsets.fromLTRB(0, 0, 5, 5),
+                            margin: const EdgeInsets.fromLTRB(0, 0, 5, 5),
                             alignment: Alignment.center,
                             //padding: EdgeInsets.all(5),
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 color: Colors.redAccent, borderRadius: BorderRadius.all(Radius.circular(25))),
-                            child: Icon(
+                            child: const Icon(
                               Icons.close_rounded,
                               size: 22,
                             ),
@@ -100,14 +102,14 @@ class Body extends StatelessWidget {
                       flex: 4,
                       child: Stack(children: [
                         Container(
-                          margin: EdgeInsets.fromLTRB(kDefaultPadding, 0, kDefaultPadding, 0),
-                          padding: EdgeInsets.fromLTRB(kDefaultPadding, kDefaultPadding, kDefaultPadding, 0),
+                          margin: const EdgeInsets.fromLTRB(kDefaultPadding, 0, kDefaultPadding, 0),
+                          padding: const EdgeInsets.fromLTRB(kDefaultPadding, kDefaultPadding, kDefaultPadding, 0),
                           width: double.infinity,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             //color: Colors.white.withOpacity(0.3),
                             //borderRadius: BorderRadius.all(Radius.circular(10)),),
-                            borderRadius: BorderRadius.only(
+                            borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(10),
                               topRight: Radius.circular(10),
                             ),
@@ -116,7 +118,7 @@ class Body extends StatelessWidget {
                                 color: Colors.purple.withOpacity(0.3),
                                 spreadRadius: 3,
                                 blurRadius: 7,
-                                offset: Offset(0, 3), // changes position of shadow
+                                offset: const Offset(0, 3), // changes position of shadow
                               ),
                             ],
                           ),
@@ -128,11 +130,11 @@ class Body extends StatelessWidget {
                                 children: [
                                   Row(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         width: 43,
                                         child: Row(
                                           children: [
-                                            Icon(
+                                            const Icon(
                                               Icons.done_rounded,
                                               color: kGreenColor,
                                               size: 20.0,
@@ -140,17 +142,17 @@ class Body extends StatelessWidget {
                                             Obx(
                                               () => Text(
                                                 ' ${_questionController.correct.value} ',
-                                                style: TextStyle(color: Colors.black87),
+                                                style: const TextStyle(color: Colors.black87),
                                               ),
                                             ),
                                           ],
                                         ),
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: 43,
                                         child: Row(
                                           children: [
-                                            Icon(
+                                            const Icon(
                                               Icons.close_rounded,
                                               color: kRedColor,
                                               size: 20.0,
@@ -158,17 +160,17 @@ class Body extends StatelessWidget {
                                             Obx(
                                               () => Text(
                                                 ' ${_questionController.wrong.value} ',
-                                                style: TextStyle(color: Colors.black87),
+                                                style: const TextStyle(color: Colors.black87),
                                               ),
                                             ),
                                           ],
                                         ),
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: 43,
                                         child: Row(
                                           children: [
-                                            Icon(
+                                            const Icon(
                                               Icons.skip_next_rounded,
                                               color: Colors.black87,
                                               size: 20.0,
@@ -176,7 +178,7 @@ class Body extends StatelessWidget {
                                             Obx(
                                               () => Text(
                                                 ' ${_questionController.skipped} ',
-                                                style: TextStyle(color: Colors.black87),
+                                                style: const TextStyle(color: Colors.black87),
                                               ),
                                             ),
                                           ],
@@ -202,7 +204,7 @@ class Body extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                        Text(
+                                        const Text(
                                           'Puan : ',
                                           style: TextStyle(color: Colors.purple, fontWeight: FontWeight.bold),
                                         ),
@@ -210,7 +212,7 @@ class Body extends StatelessWidget {
                                         Obx(
                                           () => Text(
                                             '${_questionController.score}',
-                                            style: TextStyle(color: Colors.black),
+                                            style: const TextStyle(color: Colors.black),
                                           ),
                                         ),
                                       ],
@@ -218,7 +220,7 @@ class Body extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              Center(
+                              const Center(
                                 child: ProgressBar(),
                               ),
                             ],
@@ -244,12 +246,12 @@ class Body extends StatelessWidget {
                     //Divider(thickness: 1),
                     Expanded(
                       flex: 30,
-                      child: Container(
+                      child: SizedBox(
                         width: double.infinity,
                         //height: double.infinity,
                         child: PageView.builder(
                           //block swiping
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           controller: _questionController.pageController,
                           onPageChanged: _questionController.updateTheQnNum,
                           itemCount: _questionController.questions.length,
@@ -294,27 +296,25 @@ class Body extends StatelessWidget {
                 right: 0,
                 bottom: 0,
                 top: MediaQuery.of(context).size.height * 6 / 7,
-                child: Container(
-                  child: Obx(
-                    () => Visibility(
-                      visible: _questionController.isVisible.value,
-                      child: Center(
-                        child: InkWell(
-                          // provides clickable and cool click animation
-                          onTap: () {
-                            _questionController.nextQuestion();
-                            _questionController.alreadyAnswered = false;
-                          },
-                          child: Container(
-                            width: 50,
-                            height: 50,
-                            //margin: EdgeInsets.fromLTRB(0, 10, 10, 10),
-                            alignment: Alignment.center,
-                            padding: EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                                gradient: kPrimaryGradient, borderRadius: BorderRadius.all(Radius.circular(50))),
-                            child: Icon(Icons.skip_next),
-                          ),
+                child: Obx(
+                  () => Visibility(
+                    visible: _questionController.isVisible.value,
+                    child: Center(
+                      child: InkWell(
+                        // provides clickable and cool click animation
+                        onTap: () {
+                          _questionController.nextQuestion();
+                          _questionController.alreadyAnswered = false;
+                        },
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          //margin: EdgeInsets.fromLTRB(0, 10, 10, 10),
+                          alignment: Alignment.center,
+                          padding: const EdgeInsets.all(5),
+                          decoration: const BoxDecoration(
+                              gradient: kPrimaryGradient, borderRadius: BorderRadius.all(Radius.circular(50))),
+                          child: const Icon(Icons.skip_next),
                         ),
                       ),
                     ),

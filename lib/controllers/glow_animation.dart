@@ -12,7 +12,7 @@ class GlowAnimationController extends GetxController with GetSingleTickerProvide
   @override
   void onInit() {
     _animationController =
-        AnimationController(duration: Duration(milliseconds: 700), vsync: this);
+        AnimationController(duration: const Duration(milliseconds: 700), vsync: this);
     _animationController.repeat(reverse: true);
     _animation = Tween(begin: 1.0, end: 3.0).animate(_animationController)
       ..addListener(() {

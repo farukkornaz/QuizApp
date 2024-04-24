@@ -32,13 +32,13 @@ class QuestionCard extends StatelessWidget {
                   width: double.infinity,
                   /*constraints: BoxConstraints(
                     minHeight: 150, minWidth: double.infinity, maxHeight: 150),*/
-                  margin: EdgeInsets.fromLTRB(kDefaultPadding, 0, kDefaultPadding, 3),
-                  padding: EdgeInsets.fromLTRB(kDefaultPadding, 0, kDefaultPadding, kDefaultPadding / 2),
+                  margin: const EdgeInsets.fromLTRB(kDefaultPadding, 0, kDefaultPadding, 3),
+                  padding: const EdgeInsets.fromLTRB(kDefaultPadding, 0, kDefaultPadding, kDefaultPadding / 2),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: _controller.onlineActive
                         ? BorderRadius.circular(10)
-                        : BorderRadius.only(
+                        : const BorderRadius.only(
                             bottomLeft: Radius.circular(10),
                             bottomRight: Radius.circular(10),
                           ),
@@ -47,7 +47,7 @@ class QuestionCard extends StatelessWidget {
                         color: Colors.purple.withOpacity(0.15),
                         spreadRadius: 3,
                         blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
+                        offset: const Offset(0, 3), // changes position of shadow
                       ),
                     ],
                   ),
@@ -57,7 +57,7 @@ class QuestionCard extends StatelessWidget {
                       child: AutoSizeText(
                         question.question ?? '',
                         textAlign: question.question?.contains("I)") ?? false ? TextAlign.start : TextAlign.center,
-                        style: TextStyle(fontSize: 20),
+                        style: const TextStyle(fontSize: 20),
                         //style: Theme.of(context).textTheme.headline6.copyWith(color: kBlackColor),
                         /*style: Theme.of(context).textTheme.headline5
                           .copyWith(color: Colors.black87),*/
@@ -77,7 +77,7 @@ class QuestionCard extends StatelessWidget {
         Expanded(
           flex: 12,
           child: Container(
-            margin: EdgeInsets.fromLTRB(kDefaultPadding, 0, kDefaultPadding, 0),
+            margin: const EdgeInsets.fromLTRB(kDefaultPadding, 0, kDefaultPadding, 0),
             /*margin: EdgeInsets.fromLTRB(kDefaultPadding, 0, kDefaultPadding, kDefaultPadding),
             padding: EdgeInsets.all(kDefaultPadding),
             decoration: BoxDecoration(
@@ -86,7 +86,7 @@ class QuestionCard extends StatelessWidget {
             ),*/
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: kDefaultPadding / 2,
                 ),
                 ...List.generate(
@@ -126,27 +126,27 @@ class QuestionCard extends StatelessWidget {
   Widget getWidget(bool x, String question) {
     if (x) {
       return Container(
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         child: IconButton(
             onPressed: () => Get.defaultDialog(
                 title: "Uzun sorularda aşağıya kaydırınız",
-                content: Container(
+                content: SizedBox(
                   height: 390,
                   width: 300,
                   child: SingleChildScrollView(
                     child: Column(children: [
                       Text(
                         question,
-                        style: TextStyle(fontSize: 20),
+                        style: const TextStyle(fontSize: 20),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Container(
                           //alignment: Alignment.centerRight,
                           child: IconButton(
                               onPressed: () => Get.back(),
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.zoom_out_rounded,
                                 color: Colors.purple,
                                 size: 40,
@@ -154,7 +154,7 @@ class QuestionCard extends StatelessWidget {
                     ]),
                   ),
                 )),
-            icon: Icon(
+            icon: const Icon(
               Icons.zoom_in_rounded,
               color: Colors.purple,
               size: 30,

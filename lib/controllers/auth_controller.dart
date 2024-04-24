@@ -9,8 +9,8 @@ import 'package:quiz_test_app/models/user.dart';
 import 'package:quiz_test_app/services/database.dart';
 
 class AuthController extends GetxController {
-  FirebaseAuth _auth = FirebaseAuth.instance;
-  Rxn<User> _firebaseUser = Rxn<User>(); //firebase user
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final Rxn<User> _firebaseUser = Rxn<User>(); //firebase user
 
   User? get user => _firebaseUser.value;
   bool guest = false;
@@ -68,7 +68,7 @@ class AuthController extends GetxController {
               borderColor: Colors.purpleAccent,
               borderWidth: 1.5,
               isDismissible: true,
-              icon: Icon(
+              icon: const Icon(
                 Icons.error_outline_rounded,
                 color: Colors.white,
               ),
@@ -92,7 +92,7 @@ class AuthController extends GetxController {
           borderColor: Colors.purpleAccent,
           borderWidth: 1.5,
           isDismissible: true,
-          icon: Icon(
+          icon: const Icon(
             Icons.error_outline_rounded,
             color: Colors.white,
           ),
@@ -117,7 +117,7 @@ class AuthController extends GetxController {
           borderColor: Colors.purpleAccent,
           borderWidth: 1.5,
           isDismissible: true,
-          icon: Icon(
+          icon: const Icon(
             Icons.error_outline_rounded,
             color: Colors.white,
           ),
@@ -189,7 +189,7 @@ class AuthController extends GetxController {
             borderColor: Colors.purpleAccent,
             borderWidth: 1.5,
             isDismissible: true,
-            icon: Icon(
+            icon: const Icon(
               Icons.error_outline_rounded,
               color: Colors.white,
             ),
@@ -263,7 +263,7 @@ class AuthController extends GetxController {
           borderColor: Colors.purpleAccent,
           borderWidth: 1.5,
           isDismissible: true,
-          icon: Icon(
+          icon: const Icon(
             Icons.error_outline_rounded,
             color: Colors.white,
           ),
@@ -281,7 +281,7 @@ class AuthController extends GetxController {
 
   snackbarWait() async {
     snackWait.value = true;
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 3));
     snackWait.value = false;
   }
 }

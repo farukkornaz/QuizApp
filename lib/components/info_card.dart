@@ -10,13 +10,13 @@ class InfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       child: Row(
         children: [
           Expanded(
               child: Text(
             qm?.score ?? '',
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
           )),
           Checkbox(
               value: qm?.done,
