@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:quiz_test_app/controllers/question_controller.dart';
 import 'package:quiz_test_app/controllers/user_controller.dart';
-import 'package:quiz_test_app/models/Questions.dart';
+import 'package:quiz_test_app/models/Question.dart';
 import 'package:quiz_test_app/models/quiz_DB.dart';
 import 'package:quiz_test_app/models/user.dart';
 
@@ -45,9 +45,8 @@ class Database {
           (question) => Question(
             id: question['id'],
             question: question['question'],
-            questionsId: question['questionsId'],
             options: question['options'],
-            answer: question['answer_index'],
+            answerIndex: question['answer_index'],
           ),
         )
         .toList();

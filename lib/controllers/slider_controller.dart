@@ -48,7 +48,7 @@ class SliderController extends GetxController {
                       confirmTextColor: Colors.white,
                       buttonColor: Colors.purple,
                       title: "Online Sınav",
-                      titleStyle: TextStyle(fontSize: 20, color: Colors.purple),
+                      titleStyle: const TextStyle(fontSize: 20, color: Colors.purple),
                       content: Container(
                         margin: EdgeInsets.symmetric(horizontal: 10),
                         child: Column(
@@ -75,7 +75,7 @@ class SliderController extends GetxController {
                     _ccontroller.selectedOnlineAnswers =
                         List<int>.filled(_ccontroller.databaseQuestions?.length ?? 0, -1);
                     getInfoDialog();
-                  } else if (_acontroller.guest != true) {
+                  } else if (!_acontroller.guest) {
                     await Database().getOnlineQData();
                     _acontroller.onlineExamChecker =
                         await Database().checkOnlineExam(_acontroller.user?.email ?? '', _ccontroller.onlineTestName);

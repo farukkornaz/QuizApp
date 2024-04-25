@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:quiz_test_app/controllers/auth_controller.dart';
 import 'package:quiz_test_app/controllers/quiz_controller.dart';
-import 'package:quiz_test_app/models/Questions.dart';
+import 'package:quiz_test_app/models/Question.dart';
 import 'package:quiz_test_app/models/quizes.dart';
 import 'package:quiz_test_app/screens/online_score_screen.dart';
 import 'package:quiz_test_app/screens/quiz_screen.dart';
@@ -15,8 +15,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 //get is for state management
 
+
+
+//TODO: Firebase instance olustur.
+
+
 class QuestionController extends GetxController with GetTickerProviderStateMixin  {
-  AuthController _controller = Get.put(AuthController());
+  final AuthController _controller = Get.put(AuthController());
 
   late AnimationController _animationController; // _variable means private type
 
@@ -24,55 +29,9 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
 
   late PageController _pageController;
 
-  List<Question> _survivalQuestions = survival_questions
-      .map(
-        (question) => Question(
-          id: question['id'],
-          question: question['question'],
-          questionsId: question['questionsId'],
-          options: question['options'],
-          answer: question['answer_index'],
-        ),
-      )
-      .toList();
-
   List<Question>? databaseQuestions;
 
-  List<Question> _allQuestion = allQuestions
-      .map(
-        (question) => Question(
-          id: question['id'],
-          question: question['question'],
-          questionsId: question['questionsId'],
-          options: question['options'],
-          answer: question['answer_index'],
-        ),
-      )
-      .toList();
-
-  List<Question> _questions = testQ
-      .map(
-        (question) => Question(
-          id: question['id'],
-          question: question['question'],
-          questionsId: question['questionsId'],
-          options: question['options'],
-          answer: question['answer_index'],
-        ),
-      )
-      .toList();
-
-  List<Quizes> _quizes = quiz_list
-      .map(
-        (qCatalog) => Quizes(
-          id: qCatalog['id'],
-          quizName: qCatalog['quizName'],
-          questionsId: qCatalog['questionsId'],
-          category: qCatalog['category'],
-          popular: qCatalog['popular'],
-        ),
-      )
-      .toList();
+  //TODO: List<Quizes> _quizes ve List<Question> _questions kullanılsa iyi olur
 
   List<Quizes>? popularQuizes;
 
@@ -100,8 +59,6 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
   RxInt score = 0.obs;
 
   var prefss;
-
-  int sModeLength = survival_questions.length;
 
   int? activeQuiz;
 
@@ -137,14 +94,6 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
   Animation get animation => this._animation; // getter method
 
   PageController get pageController => this._pageController;
-
-  List<Question> get survivalQuestions => this._survivalQuestions;
-
-  List<Question> get allQuestion => this._allQuestion;
-
-  List<Question> get questions => this._questions;
-
-  List<Quizes> get quizes => this._quizes;
 
   int? get selectedAns => this._selectedAns;
 
@@ -359,7 +308,7 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
     //when user pressed button it will run
     if (!alreadyAnswered) {
       _isAnswered = true;
-      _correctAns = question.answer;
+      _correctAns = question.answerIndex;
       _selectedAns = selectedIndex;
       _isVisible.value = true;
 
@@ -388,7 +337,7 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
 
   void onlineAnswered(Question question, int selectedIndex) {
     _onlineSelectedAnswer = selectedIndex;
-    onlineTrueAnswerIndex = question.answer;
+    onlineTrueAnswerIndex = question.answerIndex;
 
     update();
   }
@@ -400,7 +349,7 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
   void checkOnlineAnswers() {
     if (databaseQuestions == null) return;
     for (int i = 0; i < databaseQuestions!.length; i++) {
-      if (selectedOnlineAnswers[i] == databaseQuestions![i].answer) {
+      if (selectedOnlineAnswers[i] == databaseQuestions![i].answerIndex) {
         _numOfCorrectAns++;
       }
     }
@@ -543,6 +492,8 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
     Get.to(() => QuizScreen());
   }
 
+
+  //TODO: quizz sorularını cek
   void getTheRightQuestions(String qId) {
     var rightList = allQuestion.where((i) => i.questionsId == qId).toList();
     _questions = rightList;

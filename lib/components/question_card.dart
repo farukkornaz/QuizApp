@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quiz_test_app/controllers/cooldown_controller.dart';
 import 'package:quiz_test_app/controllers/question_controller.dart';
-import 'package:quiz_test_app/models/Questions.dart';
+import 'package:quiz_test_app/models/Question.dart';
 
 import '../constants.dart';
 import 'option.dart';
@@ -95,11 +95,10 @@ class QuestionCard extends StatelessWidget {
                   (index) => Option(
                     index: index,
                     text: question.options?[index],
-                    qid: question.id,
                     press: () {
                       if (_controller.onlineActive) {
                         _controller.onlineAnswered(question, index);
-                        _controller.newOnlineSelectedValue(question.id!, index);
+                        //_controller.newOnlineSelectedValue(question.id!, index);
                       } else {
                         _controller.checkAns(question, index);
                         _controller.alreadyAnswered = true;

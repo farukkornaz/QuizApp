@@ -1,12 +1,29 @@
 class Question {
-  final int? id, answer;
-  final String? question,questionsId;
-  final List<dynamic>? options;
+  String? id;
+  String? question;
+  List<String>? options;
+  int? answerIndex;
 
-  Question({this.id, this.question,this.questionsId, this.answer, this.options});
+  Question({this.id, this.question, this.options, this.answerIndex});
 
+  Question.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    question = json['question'];
+    options = json['options'].cast<String>();
+    answerIndex = json['answer_index'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['question'] = this.question;
+    data['options'] = this.options;
+    data['answer_index'] = this.answerIndex;
+    return data;
+  }
 }
-const List<Map<String, dynamic>> allQuestions = [
+
+/*const List<Map<String, dynamic>> allQuestions = [
   {
     "questionsId": "nk_1",
     "id": 1,
@@ -1305,4 +1322,4 @@ const List testQ = [ //map list, Questions and answers stored locally
     "options": ['1', '2', '3', '4'],
     "answer_index": 2,
   },
-];
+];*/

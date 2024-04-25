@@ -735,33 +735,33 @@ class CategorySample extends StatelessWidget {
                     (_controller.quizesScores[
                                 _controller.quizes[index].id! - 1] >
                             0)
-                        ? Icon(
+                        ? const Icon(
                             Icons.star,
                             color: Colors.yellow,
                           )
-                        : Icon(
+                        : const Icon(
                             Icons.star_border,
                             color: Colors.grey,
                           ),
                     (_controller.quizesScores[
                                 _controller.quizes[index].id! - 1] >
                             1)
-                        ? Icon(
+                        ? const Icon(
                             Icons.star,
                             color: Colors.yellow,
                           )
-                        : Icon(
+                        : const Icon(
                             Icons.star_border,
                             color: Colors.grey,
                           ),
                     (_controller.quizesScores[
                                 _controller.quizes[index].id! - 1] >
                             2)
-                        ? Icon(
+                        ? const Icon(
                             Icons.star,
                             color: Colors.yellow,
                           )
-                        : Icon(
+                        : const Icon(
                             Icons.star_border,
                             color: Colors.grey,
                           ),

@@ -13,7 +13,7 @@ class CategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Kategoriler'),
+          title: const Text('Kategoriler'),
           centerTitle: true,
         ),
         body: SafeArea(
@@ -27,22 +27,22 @@ class CategoriesScreen extends StatelessWidget {
                 ],
                 begin: const FractionalOffset(0.0, 0.0),
                 end: const FractionalOffset(1.0, 0.0),
-                stops: [0.0, 1.0],
+                stops: const [0.0, 1.0],
                 tileMode: TileMode.clamp),
           ),
           child: SingleChildScrollView(
             child: Container(
-              margin: EdgeInsets.only(top: kDefaultPadding),
+              margin: const EdgeInsets.only(top: kDefaultPadding),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
-                    padding: EdgeInsets.all(kDefaultPadding),
+                    padding: const EdgeInsets.all(kDefaultPadding),
                     child: ExpandableNotifier(
                       // <-- Provides ExpandableController to its children
                       child: Container(
                         padding: EdgeInsets.all(kDefaultPadding / 2),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                           //color: Colors.white.withOpacity(0.3),
                           //borderRadius: BorderRadius.all(Radius.circular(10)),),
@@ -87,7 +87,7 @@ class CategoriesScreen extends StatelessWidget {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10)),
                                   ),
-                                  child: Column(
+                                  child: const Column(
                                     children: [
                                       CategorySample(index: 0),
                                       CategorySample(index: 1),
@@ -99,7 +99,7 @@ class CategoriesScreen extends StatelessWidget {
                                   color: Colors.white,
                                   child: ExpandableButton(
                                     // <-- Collapses when tapped on
-                                    child: Row(
+                                    child: const Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
