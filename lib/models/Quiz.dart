@@ -3,9 +3,15 @@ import 'Question.dart';
 class Quiz {
   String? id;
   String? name;
-  List<Question>? questions;
+  List<Question>? _questions = [];
 
-  Quiz({this.id, this.name, this.questions});
+  List<Question>? get questions => _questions;
+
+  set questions(List<Question>? value) {
+    _questions = value;
+  }
+
+  Quiz({this.id, this.name, List<Question>? questions}) : _questions = questions;
 
   Quiz.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -13,7 +19,7 @@ class Quiz {
     if (json['questions'] != null) {
       questions = <Question>[];
       json['questions'].forEach((v) {
-        questions!.add(new Question.fromJson(v));
+        questions!.add(Question.fromJson(v));
       });
     }
   }

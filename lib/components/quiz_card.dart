@@ -4,10 +4,12 @@ import 'package:quiz_test_app/constants.dart';
 import 'package:quiz_test_app/controllers/question_controller.dart';
 import 'package:quiz_test_app/models/quizes.dart';
 
+import '../models/Quiz.dart';
+
 class QuizCard extends StatelessWidget {
   const QuizCard({super.key, required this.quizes});
 
-  final Quizes quizes;
+  final Quiz quizes;
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +22,7 @@ class QuizCard extends StatelessWidget {
             width: 130,
             height: 120,
             decoration: BoxDecoration(
-              color: quizes.category == 1
-                  ? nkColor
-                  : quizes.category == 2
-                      ? iaColor
-                      : hloiColor,
+              color: Colors.blue,
               borderRadius: BorderRadius.circular(15),
             ),
             child: Column(
@@ -36,7 +34,7 @@ class QuizCard extends StatelessWidget {
                   ),
                   Center(
                     child: Text(
-                      quizes.quizName!,
+                      quizes.name!,
                       style: const TextStyle(fontSize: 20, fontFamily: 'Swissblack'),
                     ),
                   ),
@@ -64,8 +62,8 @@ class QuizCard extends StatelessWidget {
               alignment: Alignment.center,
               child: ElevatedButton(
                   onPressed: () {
-                    _controller.getTheRightQuestions(quizes.questionsId ?? '');
-                    _controller.activeQuiz = quizes.id! - 1;
+                    _controller.getTheRightQuestions("dsf");
+                    _controller.activeQuizId = quizes.id;
                     _controller.getQuizScreen();
                   },
                   style: ElevatedButton.styleFrom(

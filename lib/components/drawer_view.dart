@@ -118,7 +118,7 @@ class DrawerView extends GetWidget<AuthController> {
                             SizedBox(
                                 width: 75,
                                 child: Text(
-                                  "${_controller.quizesScoresSum} / ${_controller.quizes.length * 3}",
+                                  "${_controller.quizesScoresSum}",
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18),

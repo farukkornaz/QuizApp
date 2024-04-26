@@ -8,7 +8,8 @@ import 'package:quiz_test_app/controllers/question_controller.dart'; // custom q
 class Body extends StatelessWidget {
   Body({super.key});
 
-  final QuestionController _questionController = Get.put(QuestionController());
+  //final QuestionController _questionController = Get.put(QuestionController());
+  final QuestionController _questionController = Get.find<QuestionController>();
 
   @override
   Widget build(BuildContext context) {
@@ -17,34 +18,6 @@ class Body extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.purple,
       extendBodyBehindAppBar: true,
-      /*appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: Text('Quiz Test'),
-        centerTitle: true,
-        leading: Padding(
-          padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-          child: Obx( // Obx provides changeable variables in stateless
-                () => Text.rich(TextSpan(
-              text: '${_questionController.questionNumber.value}',
-              style: Theme.of(context).textTheme.headline6.copyWith(color: kSecondaryColor),
-              children: [
-                TextSpan(text: '/${_questionController.questions.length}',style:  Theme.of(context).textTheme.bodyText2.copyWith(color: kSecondaryColor)
-                ),
-              ],
-            ),
-            ),
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.skip_next),
-            onPressed: () {
-              _questionController.nextQuestion();
-              _questionController.skipped ++;
-            },
-          )
-        ],
-      ),*/
       body: SafeArea(
         child: Container(
           color: kLightPurple,
@@ -58,8 +31,6 @@ class Body extends StatelessWidget {
                   height: 185,
                   decoration: const BoxDecoration(
                     color: Colors.purple,
-                    //color: Colors.white.withOpacity(0.3),
-                    //borderRadius: BorderRadius.all(Radius.circular(10)),),
                     borderRadius: BorderRadius.only(
                       bottomRight: Radius.circular(20),
                       bottomLeft: Radius.circular(20),
@@ -75,7 +46,6 @@ class Body extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: InkWell(
-                          // provides clickable and cool click animation
                           onTap: () {
                             Get.back();
                             _questionController.questReset();
@@ -198,7 +168,7 @@ class Body extends StatelessWidget {
                                               style: Theme.of(context).textTheme.headlineSmall,
                                               children: [
                                                 TextSpan(
-                                                    text: '/${_questionController.questions.length}    ',
+                                                    text: '/${_questionController.questionss?.length}    ',
                                                     style: Theme.of(context).textTheme.titleLarge),
                                               ],
                                             ),
@@ -228,22 +198,6 @@ class Body extends StatelessWidget {
                         ),
                       ]),
                     ),
-                    /*Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-                      child: Obx( // Obx provides changeable variables in stateless
-                            () => Text.rich(TextSpan(
-                        text: 'Soru ${_questionController.questionNumber.value}',
-                        style: Theme.of(context).textTheme.headline5.copyWith(color: kSecondaryColor),
-                        children: [
-                          TextSpan(text: '/${_questionController.questions.length}',style:  Theme.of(context).textTheme
-                              .headline5.copyWith(color: kSecondaryColor)
-                          ),
-                        ],
-                      ),
-                      ),
-                      ),
-                    ),*/
-                    //Divider(thickness: 1),
                     Expanded(
                       flex: 30,
                       child: SizedBox(
@@ -254,9 +208,9 @@ class Body extends StatelessWidget {
                           physics: const NeverScrollableScrollPhysics(),
                           controller: _questionController.pageController,
                           onPageChanged: _questionController.updateTheQnNum,
-                          itemCount: _questionController.questions.length,
+                          itemCount: _questionController.questionss?.length,
                           itemBuilder: (context, index) => QuestionCard(
-                              question: _questionController.questions[index]), // sending question name via constructor
+                              question: _questionController.questionss![index]), // sending question name via constructor
                         ),
                       ),
                     ),

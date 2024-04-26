@@ -1150,7 +1150,7 @@ class Question {
     "options": ["MÖ 3000-MÖ 500", "MÖ 2000-MÖ 500", "MÖ 1000-MÖ 500", "MÖ 500-MÖ 1"],
     "answer_index": 0
   },
-];
+];*/
 const List survival_questions = [//map list, Questions and answers stored locally
   {
     "questionsId": "surv_3",
@@ -1322,4 +1322,4 @@ const List testQ = [ //map list, Questions and answers stored locally
     "options": ['1', '2', '3', '4'],
     "answer_index": 2,
   },
-];*/
+];

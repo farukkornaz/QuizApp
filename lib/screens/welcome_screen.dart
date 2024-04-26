@@ -9,9 +9,11 @@ import 'package:quiz_test_app/controllers/auth_controller.dart';
 import 'package:quiz_test_app/controllers/question_controller.dart';
 //import 'package:quiz_test_app/controllers/refresh_user_info_controller.dart';
 import 'package:quiz_test_app/controllers/slider_controller.dart';
+import 'package:quiz_test_app/models/Question.dart';
 import 'package:quiz_test_app/screens/survival_quiz_screen.dart';
 
 import '../controllers/glow_animation.dart';
+import '../models/Quiz.dart';
 
 class WelcomeScreen extends GetWidget<AuthController> {
   @override
@@ -28,34 +30,14 @@ class WelcomeScreen extends GetWidget<AuthController> {
     return PopScope(
       canPop: false,
       child: Scaffold(
-        drawer: DrawerView(),
+        //drawer: DrawerView(),
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          //automaticallyImplyLeading: false,
-          /*leading: IconButton(
-            icon: Icon(Icons.exit_to_app),
-            onPressed: () {
-              if(authController.guest)
-              {
-                Get.back();
-                authController.guest = false;
-              }
-              else
-                controller.signOut();
-            },
-          ),*/
-          title: Text(
+          title: const Text(
             'Ana Sayfa',
             style: TextStyle(fontSize: 20),
           ),
           centerTitle: true,
-          actions: [
-            IconButton(
-                onPressed: () {
-                  _controller.resetLocalQuizesScore();
-                },
-                icon: Icon(Icons.refresh)),
-          ],
         ), // most common app layout
         body: SingleChildScrollView(
           child: Stack(
@@ -69,13 +51,14 @@ class WelcomeScreen extends GetWidget<AuthController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        //Slider *********************************************************
                         Obx(
                           () => Container(
                             child: Stack(children: [
                               CarouselSlider(
                                 items: sController.imageSliders,
                                 options: CarouselOptions(
-                                    autoPlayInterval: Duration(seconds: 15),
+                                    autoPlayInterval: const Duration(seconds: 15),
                                     viewportFraction: 1,
                                     autoPlay: true,
                                     enlargeCenterPage: true,
@@ -96,7 +79,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                     return Container(
                                       width: 8.0,
                                       height: 8.0,
-                                      margin: EdgeInsets.symmetric(
+                                      margin: const EdgeInsets.symmetric(
                                           vertical: 10.0, horizontal: 2.0),
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
@@ -112,6 +95,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
                             ]),
                           ),
                         ),
+                        //populer  *******************************************************
                         Column(
                           children: [
                             SingleChildScrollView(
@@ -121,13 +105,13 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                     decoration: BoxDecoration(
                                       color: Colors.white70,
                                       borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
+                                          const BorderRadius.all(Radius.circular(10)),
                                       boxShadow: [
                                         BoxShadow(
                                           color: Colors.grey.withOpacity(0.3),
                                           spreadRadius: 3,
                                           blurRadius: 7,
-                                          offset: Offset(0,
+                                          offset: const Offset(0,
                                               3), // changes position of shadow
                                         ),
                                       ],
@@ -136,7 +120,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                       children: [
                                         Container(
                                           margin: EdgeInsets.all(10),
-                                          child: Center(
+                                          child: const Center(
                                               child: Text(
                                             'Popüler Quizler',
                                             style: TextStyle(
@@ -168,523 +152,187 @@ class WelcomeScreen extends GetWidget<AuthController> {
                             ),
                           ],
                         ),
+
+
+
+                        //Kategoriler ve testleri ****************************************
                         Container(
-                          margin: EdgeInsets.only(top: kDefaultPadding),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: kDefaultPadding),
-                                child: ExpandableNotifier(
-                                  // <-- Provides ExpandableController to its children
-                                  child: Container(
-                                    padding:
-                                        EdgeInsets.all(kDefaultPadding / 2),
-                                    decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.3),
-                                          spreadRadius: 3,
-                                          blurRadius: 7,
-                                          offset: Offset(0,
-                                              3), // changes position of shadow
-                                        ),
-                                      ],
-                                      color: Colors.white,
-                                      //color: Colors.white.withOpacity(0.3),
-                                      //borderRadius: BorderRadius.all(Radius.circular(10)),),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(15)),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Expandable(
-                                          // <-- Driven by ExpandableController from ExpandableNotifier
-                                          collapsed: ExpandableButton(
-                                            // <-- Expands when tapped on the cover photo
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  '  Matematik',
-                                                  style: TextStyle(
-                                                      color: Colors.purple,
-                                                      fontSize: 18),
-                                                ),
-                                                Icon(
-                                                  Icons.arrow_downward_rounded,
-                                                  color: Colors.purple,
-                                                ),
-                                              ],
-                                            ),
+                          margin: const EdgeInsets.only(top: kDefaultPadding),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: kDefaultPadding),
+                                  child: ExpandableNotifier(
+                                    child: Container(
+                                      padding:
+                                          const EdgeInsets.all(kDefaultPadding / 2),
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.3),
+                                            spreadRadius: 3,
+                                            blurRadius: 7,
+                                            offset: const Offset(0,
+                                                3), // changes position of shadow
                                           ),
-                                          expanded: Column(children: [
-                                            Text(
-                                              'Matematik Testleri',
-                                              style: TextStyle(
-                                                  color: Colors.purple,
-                                                  fontSize: 25),
-                                            ),
-                                            Divider(
-                                              color: Colors.purple,
-                                              thickness: 2,
-                                            ),
-                                            Container(
-                                              padding: EdgeInsets.all(
-                                                  kDefaultPadding),
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10)),
-                                              ),
-                                              child: Column(
+                                        ],
+                                        color: Colors.white,
+                                        //color: Colors.white.withOpacity(0.3),
+                                        //borderRadius: BorderRadius.all(Radius.circular(10)),),
+                                        borderRadius:
+                                            const BorderRadius.all(Radius.circular(15)),
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Expandable(
+                                            collapsed: ExpandableButton(
+                                              child: const Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
-                                                  CategorySample(index: 0),
-                                                  CategorySample(index: 1),
-                                                  CategorySample(index: 2),
-                                                  CategorySample(index: 3),
-                                                  /*Container(
-                                                        width: 225,
-                                                        child: ElevatedButton(
-                                                          style: ElevatedButton.styleFrom(
-                                                            primary: Colors.purple,
-                                                          ),
-                                                          onPressed: () async{
-                                                            _controller.survivalActive = true;
-                                                            _controller.survHigh.value = 0;
-                                                            _controller.getTheRightSurvivalQuestions("surv_1");
-                                                            Get.to(SurvivalQuizScreen());
-                                                          },
-                                                          child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                            children: [
-                                                              Text('Hayatta Kalma Modu',style: TextStyle(color: Colors.white,fontSize: 15),),
-                                                              Icon(Icons.access_time_rounded),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      SizedBox(height: 10,)*/
-                                                ],
-                                              ),
-                                            ),
-                                            Container(
-                                              color: Colors.white,
-                                              child: ExpandableButton(
-                                                // <-- Collapses when tapped on
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      '  Matematik',
-                                                      style: TextStyle(
-                                                          color: Colors.purple,
-                                                          fontSize: 18),
-                                                    ),
-                                                    Icon(
-                                                      Icons
-                                                          .arrow_upward_rounded,
-                                                      color: Colors.purple,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ]),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: kDefaultPadding),
-                                child: ExpandableNotifier(
-                                  // <-- Provides ExpandableController to its children
-                                  child: Container(
-                                    padding:
-                                        EdgeInsets.all(kDefaultPadding / 2),
-                                    decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.3),
-                                          spreadRadius: 3,
-                                          blurRadius: 7,
-                                          offset: Offset(0,
-                                              3), // changes position of shadow
-                                        ),
-                                      ],
-                                      color: Colors.white,
-                                      //color: Colors.white.withOpacity(0.3),
-                                      //borderRadius: BorderRadius.all(Radius.circular(10)),),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(15)),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Expandable(
-                                          // <-- Driven by ExpandableController from ExpandableNotifier
-                                          collapsed: ExpandableButton(
-                                            // <-- Expands when tapped on the cover photo
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  '  Genel Kültür',
-                                                  style: TextStyle(
-                                                      color: Colors.purple,
-                                                      fontSize: 18),
-                                                ),
-                                                Icon(
-                                                  Icons.arrow_downward_rounded,
-                                                  color: Colors.purple,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          expanded: Column(children: [
-                                            Text(
-                                              'Genel Kültür Testleri',
-                                              style: TextStyle(
-                                                  color: Colors.purple,
-                                                  fontSize: 25),
-                                            ),
-                                            Divider(
-                                              color: Colors.purple,
-                                              thickness: 2,
-                                            ),
-                                            Container(
-                                              padding: EdgeInsets.all(
-                                                  kDefaultPadding),
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10)),
-                                              ),
-                                              child: Column(
-                                                children: [
-                                                  CategorySample(index: 4),
-                                                  CategorySample(index: 5),
-                                                  /*Container(
-                                                        width: 225,
-                                                        child: ElevatedButton(
-                                                          style: ElevatedButton.styleFrom(
-                                                            primary: Colors.purple,
-                                                          ),
-                                                          onPressed: (){
-                                                            _controller.survivalActive = true;
-                                                            _controller.survHigh.value = 0;
-                                                            _controller.getTheRightSurvivalQuestions("surv_2");
-                                                            Get.to(SurvivalQuizScreen());
-                                                          },
-                                                          child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                            children: [
-                                                              Text('Hayatta Kalma Modu',style: TextStyle(color: Colors.white,fontSize: 15),),
-                                                              Icon(Icons.access_time_rounded),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      SizedBox(height: 10,)*/
-                                                ],
-                                              ),
-                                            ),
-                                            Container(
-                                              color: Colors.white,
-                                              child: ExpandableButton(
-                                                // <-- Collapses when tapped on
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      '  Genel Kültür',
-                                                      style: TextStyle(
-                                                          color: Colors.purple,
-                                                          fontSize: 18),
-                                                    ),
-                                                    Icon(
-                                                      Icons
-                                                          .arrow_upward_rounded,
-                                                      color: Colors.purple,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ]),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: kDefaultPadding),
-                                child: ExpandableNotifier(
-                                  // <-- Provides ExpandableController to its children
-                                  child: Container(
-                                    padding:
-                                        EdgeInsets.all(kDefaultPadding / 2),
-                                    decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.3),
-                                          spreadRadius: 3,
-                                          blurRadius: 7,
-                                          offset: Offset(0,
-                                              3), // changes position of shadow
-                                        ),
-                                      ],
-                                      color: Colors.white,
-                                      //color: Colors.white.withOpacity(0.3),
-                                      //borderRadius: BorderRadius.all(Radius.circular(10)),),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(15)),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Expandable(
-                                          // <-- Driven by ExpandableController from ExpandableNotifier
-                                          collapsed: ExpandableButton(
-                                            // <-- Expands when tapped on the cover photo
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  '  Tarih',
-                                                  style: TextStyle(
-                                                      color: Colors.purple,
-                                                      fontSize: 18),
-                                                ),
-                                                Icon(
-                                                  Icons.arrow_downward_rounded,
-                                                  color: Colors.purple,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          expanded: Column(children: [
-                                            Text(
-                                              'Tarih Testleri',
-                                              style: TextStyle(
-                                                  color: Colors.purple,
-                                                  fontSize: 17),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                            Divider(
-                                              color: Colors.purple,
-                                              thickness: 2,
-                                            ),
-                                            Container(
-                                              padding: EdgeInsets.all(
-                                                  kDefaultPadding),
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10)),
-                                              ),
-                                              child: Column(
-                                                children: [
-                                                  CategorySample(index: 6),
-                                                  CategorySample(index: 7),
-                                                  SizedBox(height: 10,),
-                                                ],
-                                              ),
-                                            ),
-                                            Container(
-                                              color: Colors.white,
-                                              child: ExpandableButton(
-                                                // <-- Collapses when tapped on
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      '  Tarih',
-                                                      style: TextStyle(
-                                                          color: Colors.purple,
-                                                          fontSize: 17),
-                                                    ),
-                                                    Icon(
-                                                      Icons
-                                                          .arrow_upward_rounded,
-                                                      color: Colors.purple,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ]),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Center(
-                                child: InkWell(
-                                  onTap: () {
-                                    _controller.survivalActive = true;
-                                    _controller.survHigh.value = 0;
-                                    _controller
-                                        .getTheRightSurvivalQuestions("surv_3");
-                                    Get.to(SurvivalQuizScreen());
-                                  },
-                                  child: GetBuilder<GlowAnimationController>(
-                                      init: GlowAnimationController(),
-                                      builder: (controller) {
-                                        return Container(
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(15)),
-                                              color: Colors.purple,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    spreadRadius: controller
-                                                        .animation.value,
-                                                    blurRadius: controller
-                                                        .animation.value,
-                                                    color: Colors.purple
-                                                        .withOpacity(0.8))
-                                              ]),
-                                          height: 35,
-                                          width: 225,
-                                          child: Container(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 10),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  'Hayatta Kalma Modu',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 15,
+                                                  Text(
+                                                    '  Matematik',
+                                                    style: TextStyle(
+                                                        color: Colors.purple,
+                                                        fontSize: 18),
                                                   ),
-                                                ),
-                                                Icon(Icons.access_time_rounded),
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      }),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              /*Container(
-                                padding: EdgeInsets.symmetric(vertical: kDefaultPadding),
-                                child: ExpandableNotifier(  // <-- Provides ExpandableController to its children
-                                  child: Container(
-                                    padding: EdgeInsets.all(kDefaultPadding/2),
-                                    decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.3),
-                                          spreadRadius: 3,
-                                          blurRadius: 7,
-                                          offset: Offset(0, 3), // changes position of shadow
-                                        ),
-                                      ],
-                                      color: Colors.white,
-                                      //color: Colors.white.withOpacity(0.3),
-                                      //borderRadius: BorderRadius.all(Radius.circular(10)),),
-                                      borderRadius: BorderRadius.all(Radius.circular(15)),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Expandable(           // <-- Driven by ExpandableController from ExpandableNotifier
-                                          collapsed: ExpandableButton(  // <-- Expands when tapped on the cover photo
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text('  Türkçe',style: TextStyle(color: Colors.purple,fontSize: 20),),
-                                                Icon(Icons.arrow_downward_rounded,color: Colors.purple,),
-                                              ],
-                                            ),
-                                          ),
-                                          expanded: Column(
-                                              children: [
-                                                Text('Türkçe Testleri',style: TextStyle(color: Colors.purple,fontSize: 25),),
-                                                Divider(color: Colors.purple,thickness: 2,),
-                                                Container(
-                                                  padding: EdgeInsets.all(kDefaultPadding),
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                  Icon(
+                                                    Icons.arrow_downward_rounded,
+                                                    color: Colors.purple,
                                                   ),
-                                                  child: Column(
+                                                ],
+                                              ),
+                                            ),
+                                            expanded: Column(children: [
+                                              const Text(
+                                                'Matematik Testleri',
+                                                style: TextStyle(
+                                                    color: Colors.purple,
+                                                    fontSize: 25),
+                                              ),
+                                              const Divider(
+                                                color: Colors.purple,
+                                                thickness: 2,
+                                              ),
+                                              Container(
+                                                padding: const EdgeInsets.all(
+                                                    kDefaultPadding),
+                                                decoration: const BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(10)),
+                                                ),
+                                                child: Column(
+                                                  children: [
+                                                    CategorySample(quiz: Quiz(id: "S1YRgOThEUkE5IWPNQ0i",name: "Fizik", questions: [
+                                                      Question(id: "dfg", answerIndex: 2,options: ["1", "2", "3", "4"], question: "vecap nedire?"),
+                                                      Question(id: "dfg", answerIndex: 2,options: ["1", "2", "3", "4"], question: "cevap nedir?")
+                                                    ])),
+                                                    /*CategorySample(index: 1),
+                                                    CategorySample(index: 2),
+                                                    CategorySample(index: 3),*/
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                color: Colors.white,
+                                                child: ExpandableButton(
+                                                  // <-- Collapses when tapped on
+                                                  child: const Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
                                                     children: [
-                                                      CategorySample(index: 6),
-                                                      CategorySample(index: 7),
-                                                      CategorySample(index: 8),
-                                                      Container(
-                                                        width: 225,
-                                                        child: ElevatedButton(
-                                                          style: ElevatedButton.styleFrom(
-                                                            primary: Colors.purple,
-                                                          ),
-                                                          onPressed: (){
-                                                            _controller.survivalActive = true;
-                                                            _controller.getTheRightSurvivalQuestions("surv_2");
-                                                            Get.to(SurvivalQuizScreen());
-                                                          },
-                                                          child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                            children: [
-                                                              Text('Hayatta Kalma Modu',style: TextStyle(color: Colors.white,fontSize: 15),),
-                                                              Icon(Icons.access_time_rounded),
-                                                            ],
-                                                          ),
-                                                        ),
+                                                      Text(
+                                                        '  Matematik',
+                                                        style: TextStyle(
+                                                            color: Colors.purple,
+                                                            fontSize: 18),
                                                       ),
-                                                      SizedBox(height: 10,)
+                                                      Icon(
+                                                        Icons
+                                                            .arrow_upward_rounded,
+                                                        color: Colors.purple,
+                                                      ),
                                                     ],
                                                   ),
                                                 ),
-                                                Container(
-                                                  color: Colors.white,
-                                                  child: ExpandableButton(       // <-- Collapses when tapped on
-                                                    child: Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                      children: [
-                                                        Text('  Türkçe',style: TextStyle(color: Colors.purple,fontSize: 20),),
-                                                        Icon(Icons.arrow_upward_rounded,color: Colors.purple,),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ]
+                                              ),
+                                            ]),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),*/
-                            ],
+                              ],
+                            ),
                           ),
+                        ),
+
+
+
+                        // Survival Questions *********************************************
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Center(
+                          child: InkWell(
+                            onTap: () {
+                              _controller.survivalActive = true;
+                              _controller.survHigh.value = 0;
+                              /*_controller
+                                  .getTheRightSurvivalQuestions("surv_3");*/
+                              Get.to(SurvivalQuizScreen());
+                            },
+                            child: GetBuilder<GlowAnimationController>(
+                                init: GlowAnimationController(),
+                                builder: (controller) {
+                                  return Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(15)),
+                                        color: Colors.purple,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              spreadRadius: controller
+                                                  .animation.value,
+                                              blurRadius: controller
+                                                  .animation.value,
+                                              color: Colors.purple
+                                                  .withOpacity(0.8))
+                                        ]),
+                                    height: 35,
+                                    width: 225,
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
+                                      child: const Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment
+                                            .spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Hayatta Kalma Modu',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                          Icon(Icons.access_time_rounded),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                }),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
                         ),
                       ],
                     ),
@@ -700,9 +348,9 @@ class WelcomeScreen extends GetWidget<AuthController> {
 }
 
 class CategorySample extends StatelessWidget {
-  CategorySample({super.key, required this.index});
+  CategorySample({super.key, required this.quiz});
 
-  final int index;
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context) {
@@ -712,21 +360,20 @@ class CategorySample extends StatelessWidget {
       height: 300,
       child: Column(
         children: [
-          //sınav ismi
           Container(
             margin: EdgeInsets.only(top: 5),
             child: Text(
-              _controller.quizes[index].quizName ?? '',
+              quiz.name ?? '',
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 20, color: Colors.purple, fontFamily: 'Quicksand'),
             ),
           ),
           SizedBox(
             height: 10,
           ),
-          //kazanılan yıldızlar
-          Container(
+          //TODO: kazanılan yıldızlar kullanıcıdan al
+          /*Container(
               width: 155,
               child: Obx(
                 () => Row(
@@ -767,26 +414,22 @@ class CategorySample extends StatelessWidget {
                           ),
                   ],
                 ),
-              )),
-          SizedBox(
+              )),*/
+          const SizedBox(
             height: 10,
           ),
           InkWell(
-            onTap: () {
-              _controller.activeQuiz = _controller.quizes[index].id! - 1;
-              _controller
-                  .getTheRightQuestions(_controller.quizes[index].questionsId!);
+            onTap: () async {
+              _controller.activeQuizId = quiz.id;
+              await _controller
+                  .getTheRightQuestions("S1YRgOThEUkE5IWPNQ0i");
               _controller.getQuizScreen();
             },
             child: Container(
               height: 140,
               width: 180,
               decoration: BoxDecoration(
-                color: _controller.quizes[index].category == 1
-                    ? nkColor
-                    : _controller.quizes[index].category == 2
-                        ? iaColor
-                        : hloiColor,
+                color: Colors.amberAccent,
                 border: Border.all(
                   color: Colors.deepOrange,
                   width: 3,
@@ -799,8 +442,8 @@ class CategorySample extends StatelessWidget {
                 children: [
                   Center(
                     child: Text(
-                      _controller.quizes[index].quizName!,
-                      style: TextStyle(fontSize: 20, fontFamily: 'Swissblack'),
+                      quiz.name!,
+                      style: const TextStyle(fontSize: 20, fontFamily: 'Swissblack'),
                     ),
                   ),
                 ],

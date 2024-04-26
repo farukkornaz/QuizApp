@@ -5,9 +5,15 @@ import 'package:quiz_test_app/constants.dart';
 //import 'package:quiz_test_app/controllers/auth_controller.dart';
 import 'package:quiz_test_app/controllers/question_controller.dart';
 
+
 class ScoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
+    throw UnimplementedError();
+  }
+  //@override
+  /*Widget build(BuildContext context) {
     QuestionController _qnController = Get.put(QuestionController());
     //TODO: kullancının bilgileri skor ekranında gozuksun
     //AuthController _aController = Get.find<AuthController>();
@@ -96,15 +102,15 @@ class ScoreScreen extends StatelessWidget {
                               _qnController.storeLocalQuizesScore(1, _qnController.activeQuiz);
                           }*/
                           if (_qnController.questions.length == _qnController.correct.value)
-                            _qnController.storeLocalQuizesScore(3, _qnController.activeQuiz!);
+                            _qnController.storeLocalQuizesScore(3, _qnController.activeQuizId!);
                           else if (_qnController.questions.length / _qnController.correct.value >= 1 &&
                               _qnController.questions.length / _qnController.correct.value <= 2)
-                            _qnController.storeLocalQuizesScore(2, _qnController.activeQuiz!);
+                            _qnController.storeLocalQuizesScore(2, _qnController.activeQuizId!);
                           else if (_qnController.correct.value == 0) {
                           } else
-                            _qnController.storeLocalQuizesScore(1, _qnController.activeQuiz!);
+                            _qnController.storeLocalQuizesScore(1, _qnController.activeQuizId!);
 
-                          _qnController.activeQuiz = 0;
+                          _qnController.activeQuizId = 0;
                         }
                         _qnController.getQuizesScores();
                         _qnController.questReset();
@@ -129,9 +135,9 @@ class ScoreScreen extends StatelessWidget {
         ),
       ),
     );
-  }
+  }*/
 
-  Widget getWidget(BuildContext context) {
+  /*Widget getWidget(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -144,5 +150,6 @@ class ScoreScreen extends StatelessWidget {
             style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: Colors.purple)),
       ],
     );
-  }
+  }*/
 }
+

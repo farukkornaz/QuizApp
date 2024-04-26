@@ -71,12 +71,12 @@ class SliderController extends GetxController {
                       ),
                     ).whenComplete(() => dialogChecker.value = false);
                   } else if (_acontroller.user?.uid == "TbTq1loYiUcCbSsTgcQp90nKS2c2") {
-                    await Database().getOnlineQData();
+                    //await Database().getOnlineQData();
                     _ccontroller.selectedOnlineAnswers =
                         List<int>.filled(_ccontroller.databaseQuestions?.length ?? 0, -1);
                     getInfoDialog();
                   } else if (!_acontroller.guest) {
-                    await Database().getOnlineQData();
+                    //await Database().getOnlineQData();
                     _acontroller.onlineExamChecker =
                         await Database().checkOnlineExam(_acontroller.user?.email ?? '', _ccontroller.onlineTestName);
                     if (_acontroller.onlineExamChecker == 1) {

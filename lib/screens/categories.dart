@@ -6,7 +6,7 @@ import 'package:quiz_test_app/constants.dart';
 import 'package:quiz_test_app/controllers/question_controller.dart';
 import 'package:quiz_test_app/screens/quiz_screen.dart';
 
-class CategoriesScreen extends StatelessWidget {
+/*class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key});
 
   @override
@@ -275,7 +275,7 @@ class CategoriesScreen extends StatelessWidget {
                                   color: Colors.white,
                                   child: ExpandableButton(
                                     // <-- Collapses when tapped on
-                                    child: Row(
+                                    child: const Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
@@ -306,9 +306,9 @@ class CategoriesScreen extends StatelessWidget {
           ),
         )));
   }
-}
+}*/
 
-class CategorySample extends StatelessWidget {
+/*class CategorySample extends StatelessWidget {
   const CategorySample({super.key, required this.index});
 
   final int index;
@@ -404,4 +404,4 @@ class CategorySample extends StatelessWidget {
       ],
     );
   }
-}
+}*/

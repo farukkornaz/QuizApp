@@ -68,7 +68,7 @@ class QuestionCard extends StatelessWidget {
                 Positioned(
                   bottom: 0,
                   right: 0,
-                  child: getWidget(_controller.onlineActive, question.question!),
+                  child: getWidget(_controller.onlineActive, question.question ?? ""),
                 ),
               ],
             ),

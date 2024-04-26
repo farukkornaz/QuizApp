@@ -13,6 +13,8 @@ import 'package:quiz_test_app/screens/score_screen.dart';
 import 'package:quiz_test_app/services/database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/Quiz.dart';
+
 //get is for state management
 
 
@@ -21,6 +23,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 class QuestionController extends GetxController with GetTickerProviderStateMixin  {
+  Database db = Database();
+  
   final AuthController _controller = Get.put(AuthController());
 
   late AnimationController _animationController; // _variable means private type
@@ -31,9 +35,24 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
 
   List<Question>? databaseQuestions;
 
+  /*var survivalQuestions = survival_questions.map((e) => {
+    "id": e.id,
+    "question": e.question,
+    "options": e.options,
+    "answerIndex": e.answerIndex,
+  }).toList();*/
+  
   //TODO: List<Quizes> _quizes ve List<Question> _questions kullanılsa iyi olur
 
-  List<Quizes>? popularQuizes;
+  List<Question>? _questionss;
+
+  List<Question>? get questionss => _questionss;
+
+  set questionss(List<Question>? value) {
+    _questionss = value;
+  }
+
+  List<Quiz>? popularQuizes;
 
   bool _isAnswered = false;
 
@@ -60,7 +79,7 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
 
   var prefss;
 
-  int? activeQuiz;
+  String? activeQuizId;
 
   String? activeSurvivalQuiz;
 
@@ -113,11 +132,11 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
 
   void getQuizesScores() async {
     /// Get scores of local quizes locally
-    quizesScoresSum = 0;
+    /*quizesScoresSum = 0;
     for (int i = 0; i < _quizes.length; i++) {
       quizesScores[i] = await getLocalQuizesScoreData(i);
       quizesScoresSum += quizesScores[i];
-    }
+    }*/
 
     /// This is overload read from DB when login account
     /*if(!_controller.guest){
@@ -205,7 +224,7 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
     // after 60 sn go to next question
     //_animationController.forward().whenComplete(nextQuestion);
     _pageController = PageController();
-    _pSurvivalQuestions = List.filled(sModeLength, Question());
+    _pSurvivalQuestions = List.filled(5, Question());
     getQuizesScores();
     getPopularQuizes();
     /*if(_controller.guest == true){
@@ -263,21 +282,12 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
     return _data;
   }
 
+  //TODO: kontrol edilecek
   void getOnlineQuizesScoreData() async {
     if (!_controller.guest) {
       final _data = await Database().getOnlineQuizResultDB(_controller.user?.email ?? '');
       onlineQuizScore.value = _data;
     }
-  }
-
-  resetLocalQuizesScore() async {
-    final prefs = await SharedPreferences.getInstance();
-    for (var i = 0; i < quizes.length; i++) {
-      prefs.setInt("$i", 0);
-    }
-    prefs.setInt("surv_1", 0);
-    prefs.setInt("surv_2", 0);
-    prefs.setInt("surv_3", 0);
   }
 
   //called just before the controller delete from memory
@@ -395,8 +405,10 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
     }
   }
 
+
+  //TODO: buna bakılacak
   void nextQuestion() {
-    if (_questionNumber.value != _questions.length) {
+    if (true/*_questionNumber.value != _questions.length*/) {
       if (!_isAnswered) {
         skipped.value++;
       }
@@ -425,6 +437,7 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
     }
   }
 
+  //TODO:Bu ne?
   void updateTheQnNum(int index) {
     _questionNumber.value = index + 1;
   }
@@ -441,6 +454,7 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
     _animationController.forward().whenComplete(nextQuestion);
   }
 
+  //TODO: Bu ne?
   void questReset() {
     _questionNumber.value = 1;
     _isVisible.value = false;
@@ -458,6 +472,7 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
     //update();
   }
 
+  //TODO: bu ne?
   bool hsCheck(String quizID) {
     //high score checker , finds desired quiz info score and compere
     var _updaterList = Get.find<QuizController>().quizInfo.where((i) => i.quizId == quizID).toList();
@@ -468,8 +483,8 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
     }
   }
 
-  void getPopularQuizes() {
-    popularQuizes = quizes.where((i) => i.popular == true).toList();
+  Future<void> getPopularQuizes() async{
+    popularQuizes = await db.getPoplulerQuizes();
   }
 
   void resetStatus() {
@@ -492,20 +507,27 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
     Get.to(() => QuizScreen());
   }
 
-
   //TODO: quizz sorularını cek
-  void getTheRightQuestions(String qId) {
-    var rightList = allQuestion.where((i) => i.questionsId == qId).toList();
-    _questions = rightList;
+  Future<void> getTheRightQuestions(String quizId) async{
+     //List<Quiz> quizes = await db.getQuizesByCategory("4nM9V2ISVZTpFwSGPkyN");
+
+    var quiz = await db.getQuiz(quizId);
+
+    questionss = quiz.questions;
+
+
+    //return _questionss;
+    /*var rightList = allQuestion.where((i) => i.questionsId == qId).toList();
+    _questions = rightList;*/
   }
 
-  void getTheRightSurvivalQuestions(String qId) {
-    var rightSList = survivalQuestions.where((i) => i.questionsId == qId).toList();
+  /*void getTheRightSurvivalQuestions(String qId) {
+    var rightSList = survivalQuestions;
     activeSurvivalQuiz = qId;
     rightSList.shuffle();
     for (int i = 0; i < rightSList.length; i++) {
       print(rightSList[i]);
-      pSurvivalQuestions![i] = rightSList[i];
+      pSurvivalQuestions![i] = Question.fromJson(rightSList[i]);
     }
-  }
+  }*/
 }

@@ -50,13 +50,13 @@ class MyApp extends StatelessWidget {
       labelStyle: TextStyle(color: Colors.black87),
       hintStyle: TextStyle(color: Colors.grey),
       suffixStyle: TextStyle(color: Colors.black87),
-      enabledBorder: new OutlineInputBorder(
+      enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
           color: Colors.purple,
         ),
       ),
-      focusedBorder: new OutlineInputBorder(
+      focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
           color: Colors.purple,
