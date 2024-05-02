@@ -44,7 +44,7 @@ class Database {
 
     final quizesQuerySnapShot = await _firebaseFirestore
         .collection("Quizes")
-        .where("populer", isNotEqualTo: true)
+        .where("populer", isEqualTo: true)
         .get();
     quizList =
         quizesQuerySnapShot.docs.map((e) => Quiz.fromJson(e.data())).toList();
@@ -64,7 +64,7 @@ class Database {
 
     return quizList;
   }
-
+  // cat.Category --> Model/Caregory.dart
   Future<List<cat.Category>> getCategories() async {
     List<cat.Category> categoryList;
 
