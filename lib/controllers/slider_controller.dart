@@ -253,7 +253,6 @@ class SliderController extends GetxController {
                     style: TextStyle(fontSize: 18),
                     textAlign: TextAlign.center,
                   ),
-                  //Text("${differenceHour} saat kaldı"),
                 ],
               ),
             ).whenComplete(() => dialogChecker.value = false);
@@ -436,23 +435,23 @@ class SliderController extends GetxController {
                                     ),
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
-                                AutoSizeText(
+                                const AutoSizeText(
                                   "Yarışma süresince yarışmaya erişebilirsiniz.",
                                   maxLines: 1,
                                   minFontSize: 10,
                                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
-                                Text(
+                                const Text(
                                   "Okuyamadığınız soruları",
                                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 const Text(
@@ -470,7 +469,7 @@ class SliderController extends GetxController {
                                 const Text("Başarılar Dileriz"),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             InkWell(
@@ -496,7 +495,7 @@ class SliderController extends GetxController {
                                         offset: const Offset(0, 0),
                                       )
                                     ]),
-                                child: Center(
+                                child: const Center(
                                   child: Text(
                                     "Başla",
                                     style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
@@ -504,7 +503,7 @@ class SliderController extends GetxController {
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             )
                           ],
@@ -516,13 +515,13 @@ class SliderController extends GetxController {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               Container(
                                   width: 65,
                                   height: 65,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.all(Radius.circular(50)),
                                   ),
@@ -536,7 +535,7 @@ class SliderController extends GetxController {
                   ),
                 ]),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 1,
               ),
             ],

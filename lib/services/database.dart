@@ -39,6 +39,19 @@ class Database {
     return quiz;
   }
 
+  Stream<DocumentSnapshot<Map<String, dynamic>>> listenAdminForChangeOfNextOrPreviousQuestion() {
+    Stream<DocumentSnapshot<Map<String, dynamic>>> streamOfOnlineQuiz = _firebaseFirestore
+        .collection("online_tests")
+        .doc("online_test")
+        .snapshots();
+
+    return streamOfOnlineQuiz;
+  }
+
+  resetOnlineQuestionShiftValues(){
+    _firebaseFirestore.collection("online_tests").doc("online_test").update({"next": false, "previous": false});
+  }
+
   Future<List<Quiz>> getPoplulerQuizes() async {
     List<Quiz> quizList;
 
@@ -64,6 +77,7 @@ class Database {
 
     return quizList;
   }
+
   // cat.Category --> Model/Caregory.dart
   Future<List<cat.Category>> getCategories() async {
     List<cat.Category> categoryList;
@@ -114,11 +128,10 @@ class Database {
         .get();
     var allData = snapshot.docs.map((doc) => doc.data()).toList();
 
-
-
     //List<Question> onlineQuestions = allData.map((e) => Question.fromJson(e)).toList();
     allData.map((e) => print(e));
-    List<Question> onlineQuestions = allData.map((e) => Question.fromJson(e)).toList();
+    List<Question> onlineQuestions =
+        allData.map((e) => Question.fromJson(e)).toList();
     return onlineQuestions;
     /*ccontroller.databaseQuestions = allData
         .map(
