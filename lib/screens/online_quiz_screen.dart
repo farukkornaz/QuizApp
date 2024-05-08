@@ -111,7 +111,7 @@ class OnlineQuizScreen extends StatelessWidget {
                                 _controller.onlineSelectedReset();
                                 _controller.resetOnlineTimer();
                                 _controller.isVisible.value = false;
-                                Get.off(OnlineScoreScreen());
+                                Get.off(const OnlineScoreScreen());
                               },
                               child: Container(
                                 width: 59,
@@ -123,7 +123,7 @@ class OnlineQuizScreen extends StatelessWidget {
                                     color: Colors.redAccent,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(25))),
-                                child: Text(
+                                child: const Text(
                                   "Testi Bitir",
                                   style: TextStyle(
                                       fontSize: 11, color: Colors.white),
@@ -137,7 +137,7 @@ class OnlineQuizScreen extends StatelessWidget {
                         Expanded(
                             flex: 2,
                             child: Container(
-                              margin: EdgeInsets.fromLTRB(
+                              margin: const EdgeInsets.fromLTRB(
                                   kDefaultPadding, 0, kDefaultPadding, 0),
                               width: double.infinity,
                               /*decoration: BoxDecoration(
@@ -155,7 +155,7 @@ class OnlineQuizScreen extends StatelessWidget {
                           ],
                         ),*/
                               child: Obx(() => Container(
-                                    margin: EdgeInsets.fromLTRB(17, 0, 17, 5),
+                                    margin: const EdgeInsets.fromLTRB(17, 0, 17, 5),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -174,7 +174,7 @@ class OnlineQuizScreen extends StatelessWidget {
                                             Text(
                                               "${_controller.timerMinute.value.toString().padLeft(2, '0')} "
                                               ": ${_controller.timerStart.value.toString().padLeft(2, '0')}",
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   fontSize: 15,
                                                   color: Colors.white),
                                             ),
@@ -330,12 +330,12 @@ class OnlineQuizScreen extends StatelessWidget {
                                               _controller.resetOnlineTimer();
                                               _controller.isVisible.value =
                                                   false;
-                                              Get.off(OnlineScoreScreen());
+                                              Get.off(const OnlineScoreScreen());
                                             },
                                             child: Container(
                                               width: 200,
                                               height: 50,
-                                              margin: EdgeInsets.fromLTRB(
+                                              margin: const EdgeInsets.fromLTRB(
                                                   0, 0, 5, 0),
                                               alignment: Alignment.center,
                                               //padding: EdgeInsets.all(5),
@@ -394,9 +394,7 @@ class OnlineQuizScreen extends StatelessWidget {
                                     _controller.onlinePreviousQuestion();
                                     db.resetOnlineQuestionShiftValues();
                                   }
-
-                                  print(data);
-                                  return Text("");
+                                  return const Text("");
                                   //final data = snapshot.requireData.data();
                                 });
 
