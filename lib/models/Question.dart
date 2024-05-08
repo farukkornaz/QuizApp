@@ -1,5 +1,5 @@
 class Question {
-  String? id;
+  int? id;
   String? question;
   List<String>? options;
   int? answerIndex;
@@ -15,10 +15,10 @@ class Question {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['question'] = this.question;
-    data['options'] = this.options;
-    data['answer_index'] = this.answerIndex;
+    data['id'] = id;
+    data['question'] = question;
+    data['options'] = options;
+    data['answer_index'] = answerIndex;
     return data;
   }
 }

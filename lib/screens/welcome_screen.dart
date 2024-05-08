@@ -245,7 +245,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                                           name: "Fizik",
                                                           questions: [
                                                         Question(
-                                                            id: "dfg",
+                                                            id: 1,
                                                             answerIndex: 2,
                                                             options: [
                                                               "1",
@@ -256,7 +256,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                                             question:
                                                                 "vecap nedire?"),
                                                         Question(
-                                                            id: "dfg",
+                                                            id: 2,
                                                             answerIndex: 2,
                                                             options: [
                                                               "1",

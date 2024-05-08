@@ -92,11 +92,11 @@ class QuestionCard extends StatelessWidget {
                   (index) => Option(
                     index: index,
                     text: question.options?[index],
-                    qid: int.parse(question.id!),
+                    qid: question.id,
                     press: () {
                       if (_controller.onlineActive) {
                         _controller.onlineAnswered(question, index);
-                        _controller.newOnlineSelectedValue(int.parse(question.id!), index);
+                        _controller.newOnlineSelectedValue(question.id!, index);
                       } else {
                         _controller.checkAns(question, index);
                         _controller.alreadyAnswered = true;
