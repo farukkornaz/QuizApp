@@ -22,9 +22,11 @@ class OnlineQuizScreen extends StatelessWidget {
   late QuestionController _controller;
   late AuthController _aController;
   late Database db;
+  int count = 0;
 
-  @override
-  oninit() {
+  Init() {
+    print("$count kere onInıt calisti");
+
     db = Database();
     stream = db.listenAdminForChangeOfNextOrPreviousQuestion();
 
@@ -35,7 +37,7 @@ class OnlineQuizScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    oninit();
+    Init();
     /*QuestionController _controller = Get.put(QuestionController());
     AuthController _aController = Get.find<AuthController>();*/
     //OnlineStatusController _osc = Get.put(OnlineStatusController());
@@ -405,55 +407,51 @@ class OnlineQuizScreen extends StatelessWidget {
                         Expanded(
                           flex: 2,
                           child: Container(
-                            margin: EdgeInsets.fromLTRB(10, 0, 10, 5),
+                            margin: const EdgeInsets.fromLTRB(10, 0, 10, 5),
                             child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Container(
-                                    child: Center(
-                                      child: InkWell(
-                                        onTap: () {
-                                          _controller.onlinePreviousQuestion();
-                                        },
-                                        child: Container(
-                                          width: 75,
-                                          height: 25,
-                                          margin:
-                                              const EdgeInsets.only(left: 7.5),
-                                          alignment: Alignment.center,
-                                          decoration: const BoxDecoration(
-                                              gradient: kPrimaryGradient,
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(25))),
-                                          child: const Icon(
-                                            Icons.arrow_back_rounded,
-                                            size: 20,
-                                          ),
+                                  Center(
+                                    child: InkWell(
+                                      onTap: () {
+                                        _controller.onlinePreviousQuestion();
+                                      },
+                                      child: Container(
+                                        width: 75,
+                                        height: 25,
+                                        margin:
+                                            const EdgeInsets.only(left: 7.5),
+                                        alignment: Alignment.center,
+                                        decoration: const BoxDecoration(
+                                            gradient: kPrimaryGradient,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(25))),
+                                        child: const Icon(
+                                          Icons.arrow_back_rounded,
+                                          size: 20,
                                         ),
                                       ),
                                     ),
                                   ),
-                                  Container(
-                                    child: Center(
-                                      child: InkWell(
-                                        // provides clickable and cool click animation
-                                        onTap: () {
-                                          _controller.onlineNextQuestion();
-                                        },
-                                        child: Container(
-                                          width: 75,
-                                          height: 25,
-                                          margin: EdgeInsets.only(right: 7.5),
-                                          alignment: Alignment.center,
-                                          decoration: const BoxDecoration(
-                                              gradient: kPrimaryGradient,
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(50))),
-                                          child: const Icon(
-                                            Icons.arrow_forward_rounded,
-                                            size: 20,
-                                          ),
+                                  Center(
+                                    child: InkWell(
+                                      // provides clickable and cool click animation
+                                      onTap: () {
+                                        _controller.onlineNextQuestion();
+                                      },
+                                      child: Container(
+                                        width: 75,
+                                        height: 25,
+                                        margin: const EdgeInsets.only(right: 7.5),
+                                        alignment: Alignment.center,
+                                        decoration: const BoxDecoration(
+                                            gradient: kPrimaryGradient,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50))),
+                                        child: const Icon(
+                                          Icons.arrow_forward_rounded,
+                                          size: 20,
                                         ),
                                       ),
                                     ),

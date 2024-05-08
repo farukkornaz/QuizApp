@@ -13,6 +13,8 @@ class Login extends GetWidget<AuthController> {
   final TextEditingController passwordController = TextEditingController();
   final SliderController sController = SliderController();
 
+  Login({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -41,7 +43,7 @@ class Login extends GetWidget<AuthController> {
                     Container(
                       width: MediaQuery.of(context).size.height / 3,
                       height: MediaQuery.of(context).size.height / 3,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage('assets/images/app_logo.png'),
                           fit: BoxFit.fill,
@@ -66,20 +68,20 @@ class Login extends GetWidget<AuthController> {
                       children: [
                         TextFormField(
                           textInputAction: TextInputAction.next,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: 'Email',
                             labelText: 'Email',
                           ),
                           controller: emailController,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         Obx(() {
                           return TextFormField(
                             decoration: InputDecoration(
                               suffixIcon: IconButton(
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.remove_red_eye_rounded,
                                   color: Colors.purple,
                                 ),
@@ -95,7 +97,7 @@ class Login extends GetWidget<AuthController> {
                         }),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Column(
@@ -105,21 +107,21 @@ class Login extends GetWidget<AuthController> {
                             controller.login(emailController.text, passwordController.text);
                           },
                           child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 20),
+                            margin: const EdgeInsets.symmetric(horizontal: 20),
                             width: double.infinity,
                             height: 45,
                             decoration: BoxDecoration(
                               color: Colors.purple,
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            child: Center(
+                            child: const Center(
                                 child: Text(
                               "Giriş",
                               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                             )),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         InkWell(
@@ -132,7 +134,7 @@ class Login extends GetWidget<AuthController> {
                             passwordController.clear();
                           },
                           child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 20),
+                            margin: const EdgeInsets.symmetric(horizontal: 20),
                             width: double.infinity,
                             height: 45,
                             decoration: BoxDecoration(
@@ -140,7 +142,7 @@ class Login extends GetWidget<AuthController> {
                               color: kLightPurple,
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            child: Center(
+                            child: const Center(
                                 child: Text(
                               "Misafir Girişi",
                               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.purple),
@@ -172,7 +174,7 @@ class Login extends GetWidget<AuthController> {
                             onPressed: () {
                               Get.to(Signup());
                             },
-                            child: Text(
+                            child: const Text(
                               'Kayıt Ol',
                               style: TextStyle(color: Colors.purple, fontSize: 16),
                             )),
@@ -180,14 +182,14 @@ class Login extends GetWidget<AuthController> {
                           onPressed: () {
                             Get.to(PassResetScreen());
                           },
-                          child: Text(
+                          child: const Text(
                             'Şifremi Unuttum',
                             style: TextStyle(color: Colors.purple, fontSize: 16),
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                   ],

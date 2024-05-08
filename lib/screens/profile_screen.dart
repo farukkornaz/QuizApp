@@ -10,12 +10,12 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserUpdateController controller = Get.put(UserUpdateController());
-    UserController _uController = Get.find<UserController>();
+    UserUpdateController userUpdateController = Get.put(UserUpdateController());
+    UserController userController = Get.find<UserController>();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("Kullanıcı Bilgileri"),
+        title: const Text("Kullanıcı Bilgileri"),
       ),
       body: Center(
         child: Padding(
@@ -23,35 +23,33 @@ class ProfileScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Obx(
               () => Form(
-                key: controller.formKey,
-                autovalidateMode: controller.autovalidateMode.value,
+                key: userUpdateController.formKey,
+                autovalidateMode: userUpdateController.autovalidateMode.value,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      child: Text(
-                        _uController.user.email ?? '',
-                      ),
+                    Text(
+                      userController.user.email ?? '',
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     TextFormField(
                       maxLength: 30,
                       decoration: InputDecoration(
                         labelText:
-                            'Adınız : ${_uController.user.name ?? ""/* != "" ? _uController.user.name : ""*/}',
+                            'Adınız : ${userController.user.name ?? ""/* != "" ? _uController.user.name : ""*/}',
                         counterText: "",
                       ),
-                      controller: controller.SNameController,
+                      controller: userUpdateController.SNameController,
                       onSaved: (value) {
-                        controller.SName = value ?? '';
+                        userUpdateController.SName = value ?? '';
                       },
                       validator: (value) {
-                        return controller.validateName(value ?? '');
+                        return userUpdateController.validateName(value ?? '');
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     /*TextFormField(
@@ -71,22 +69,22 @@ class ProfileScreen extends StatelessWidget {
                       maxLength: 11,
                       decoration: InputDecoration(
                         labelText:
-                            'Tel : ${_uController.user.tel != "" ? _uController.user.tel : ""}',
+                            'Tel : ${userController.user.tel != "" ? userController.user.tel : ""}',
                         counterText: "",
                       ),
-                      controller: controller.STelController,
+                      controller: userUpdateController.STelController,
                       onSaved: (value) {
-                        controller.STel = value!;
+                        userUpdateController.STel = value!;
                       },
                       validator: (value) {
-                        return controller.validateTel(value ?? '');
+                        return userUpdateController.validateTel(value ?? '');
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     Container(
-                      padding: EdgeInsets.fromLTRB(
+                      padding: const EdgeInsets.fromLTRB(
                           kDefaultPadding, 5, kDefaultPadding, 5),
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -98,13 +96,13 @@ class ProfileScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                              "Doğum Tarihiniz : ${_uController.user.birthday != "" ? controller.birthday : ""} ${controller.dText.value}"),
+                              "Doğum Tarihiniz : ${userController.user.birthday != "" ? userUpdateController.birthday : ""} ${userUpdateController.dText.value}"),
                           IconButton(
                             onPressed: () {
-                              controller.pickDate(context);
-                              controller.birthday = "";
+                              userUpdateController.pickDate(context);
+                              userUpdateController.birthday = "";
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.calendar_today_rounded,
                               color: Colors.purple,
                             ),
@@ -112,14 +110,14 @@ class ProfileScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     TextButton(
                         onPressed: () {
-                          controller.checkUpdate();
+                          userUpdateController.checkUpdate();
                         },
-                        child: Text(
+                        child: const Text(
                           'Güncelle',
                           style: TextStyle(color: Colors.purple),
                         )),

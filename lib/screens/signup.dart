@@ -4,6 +4,8 @@ import 'package:quiz_test_app/constants.dart';
 import 'package:quiz_test_app/controllers/signup_controller.dart';
 
 class Signup extends GetWidget<SignUpController> {
+  const Signup({super.key});
+
   @override
   Widget build(BuildContext context) {
     SignUpController controller = Get.put(SignUpController());
@@ -17,7 +19,7 @@ class Signup extends GetWidget<SignUpController> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Kayıt Ol', style: TextStyle(fontSize: 20)),
+          title: const Text('Kayıt Ol', style: TextStyle(fontSize: 20)),
           centerTitle: true,
         ),
         body: Container(
@@ -33,17 +35,17 @@ class Signup extends GetWidget<SignUpController> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
+                        const Text(
                           "* Zorunlu Alanlar",
                           style: TextStyle(fontSize: 20),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
                         TextFormField(
                           textInputAction: TextInputAction.next,
                           maxLength: 30,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: 'Ad Soyad',
                             labelText: 'Adınız :',
                             counterText: "",
@@ -56,7 +58,7 @@ class Signup extends GetWidget<SignUpController> {
                             return controller.validateName(value ?? '');
                           },
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         /*TextFormField(
@@ -75,7 +77,7 @@ class Signup extends GetWidget<SignUpController> {
                         TextFormField(
                           textInputAction: TextInputAction.next,
                           maxLength: 30,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: 'örnek@örnekmail.com',
                             labelText: '*Email :',
                             counterText: "",
@@ -88,13 +90,13 @@ class Signup extends GetWidget<SignUpController> {
                             return controller.validateEmail(value);
                           },
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         TextFormField(
                           textInputAction: TextInputAction.next,
                           maxLength: 20,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: 'en az 6 karakter',
                             labelText: '*Şifre :',
                             counterText: "",
@@ -107,12 +109,12 @@ class Signup extends GetWidget<SignUpController> {
                             return controller.validatePassword(value);
                           },
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         TextFormField(
                           maxLength: 11,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: '05*********',
                             labelText: 'Tel :',
                             counterText: "",
@@ -125,11 +127,11 @@ class Signup extends GetWidget<SignUpController> {
                             return controller.validateTel(value);
                           },
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                         Container(
-                          padding: EdgeInsets.fromLTRB(kDefaultPadding, 5, kDefaultPadding, 5),
+                          padding: const EdgeInsets.fromLTRB(kDefaultPadding, 5, kDefaultPadding, 5),
                           decoration: BoxDecoration(
                             border: Border.all(
                               color: Colors.purple,
@@ -142,7 +144,7 @@ class Signup extends GetWidget<SignUpController> {
                               Text("Doğum Tarihiniz :    ${controller.dText.value}"),
                               IconButton(
                                 onPressed: () => controller.pickDate(context),
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.calendar_today_rounded,
                                   color: Colors.purple,
                                 ),
@@ -150,7 +152,7 @@ class Signup extends GetWidget<SignUpController> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Container(
@@ -160,11 +162,11 @@ class Signup extends GetWidget<SignUpController> {
                             onPressed: () {
                               controller.checkSingUp();
                             },
-                            child: Text('Kayıt Ol'),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.purple,
                               minimumSize: Size.infinite,
                             ),
+                            child: const Text('Kayıt Ol'),
                           ),
                         ),
                       ],

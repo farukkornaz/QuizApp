@@ -8,11 +8,13 @@ import 'package:quiz_test_app/controllers/question_controller.dart';
 import '../constants.dart'; // question controller class
 
 class SurvivalQuizScreen extends StatelessWidget {
+  const SurvivalQuizScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    QuestionController _controller = Get.find<QuestionController>();
+    QuestionController questionController = Get.find<QuestionController>();
     //QuestionController _controller = Get.put(QuestionController());
-    CooldownControl _ccontroller = Get.put(CooldownControl());
+    CooldownControl cooldownController = Get.put(CooldownControl());
     //_controller.onInit();
 
     return PopScope(
@@ -29,7 +31,7 @@ class SurvivalQuizScreen extends StatelessWidget {
                 children: [
                   Container(
                       height: 185,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.purple,
                         //color: Colors.white.withOpacity(0.3),
                         //borderRadius: BorderRadius.all(Radius.circular(10)),),
@@ -39,7 +41,7 @@ class SurvivalQuizScreen extends StatelessWidget {
                         ),
                       )),
                   Container(
-                    margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                    margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -49,39 +51,39 @@ class SurvivalQuizScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                margin: EdgeInsets.fromLTRB(kDefaultPadding, 0, 0, 0),
-                                child: Obx(() => _controller.survHigh.value <
-                                        _controller.survivalScores[
-                                            (int.tryParse((_controller.activeSurvivalQuiz?.substring(5, 6)) ?? '') ??
+                                margin: const EdgeInsets.fromLTRB(kDefaultPadding, 0, 0, 0),
+                                child: Obx(() => questionController.survHigh.value <
+                                        questionController.survivalScores[
+                                            (int.tryParse((questionController.activeSurvivalQuiz?.substring(5, 6)) ?? '') ??
                                                     0) -
                                                 1]
                                     ? Text(
-                                        "En Yüksek Skor : ${_controller.survivalScores[(int.tryParse(_controller.activeSurvivalQuiz?.substring(5, 6) ?? '') ?? 0) - 1]}",
-                                        style: TextStyle(color: Colors.white),
+                                        "En Yüksek Skor : ${questionController.survivalScores[(int.tryParse(questionController.activeSurvivalQuiz?.substring(5, 6) ?? '') ?? 0) - 1]}",
+                                        style: const TextStyle(color: Colors.white),
                                       )
                                     : Text(
-                                        "En Yüksek Skor : ${_controller.survHigh.value}",
-                                        style: TextStyle(color: Colors.white),
+                                        "En Yüksek Skor : ${questionController.survHigh.value}",
+                                        style: const TextStyle(color: Colors.white),
                                       )),
                               ),
                               InkWell(
                                 // provides clickable and cool click animation
                                 onTap: () {
                                   Get.back();
-                                  _controller.questReset();
-                                  _controller.resetStatus();
-                                  _controller.survivalActive = false;
-                                  _controller.alreadyAnswered = false;
+                                  questionController.questReset();
+                                  questionController.resetStatus();
+                                  questionController.survivalActive = false;
+                                  questionController.alreadyAnswered = false;
                                 },
                                 child: Container(
                                   width: 26,
                                   height: 26,
-                                  margin: EdgeInsets.fromLTRB(0, 0, 5, 0),
+                                  margin: const EdgeInsets.fromLTRB(0, 0, 5, 0),
                                   alignment: Alignment.center,
                                   //padding: EdgeInsets.all(5),
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                       color: Colors.redAccent, borderRadius: BorderRadius.all(Radius.circular(25))),
-                                  child: Icon(
+                                  child: const Icon(
                                     Icons.close_rounded,
                                     size: 22,
                                   ),
@@ -93,14 +95,14 @@ class SurvivalQuizScreen extends StatelessWidget {
                         Expanded(
                           flex: 5,
                           child: Container(
-                            margin: EdgeInsets.fromLTRB(kDefaultPadding, 5, kDefaultPadding, 0),
-                            padding: EdgeInsets.fromLTRB(kDefaultPadding, 5, kDefaultPadding, 5),
+                            margin: const EdgeInsets.fromLTRB(kDefaultPadding, 5, kDefaultPadding, 0),
+                            padding: const EdgeInsets.fromLTRB(kDefaultPadding, 5, kDefaultPadding, 5),
                             width: double.infinity,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               //color: Colors.white.withOpacity(0.3),
                               //borderRadius: BorderRadius.all(Radius.circular(10)),),
-                              borderRadius: BorderRadius.only(
+                              borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(10),
                                 topRight: Radius.circular(10),
                               ),
@@ -109,7 +111,7 @@ class SurvivalQuizScreen extends StatelessWidget {
                                   color: Colors.purple.withOpacity(0.3),
                                   spreadRadius: 3,
                                   blurRadius: 7,
-                                  offset: Offset(0, 3), // changes position of shadow
+                                  offset: const Offset(0, 3), // changes position of shadow
                                 ),
                               ],
                             ),
@@ -124,37 +126,37 @@ class SurvivalQuizScreen extends StatelessWidget {
                                       children: [
                                         Row(
                                           children: [
-                                            Icon(
+                                            const Icon(
                                               Icons.done_rounded,
                                               color: Colors.purple,
                                               size: 30.0,
                                             ),
                                             Obx(
                                               () => Text(
-                                                ' ${_controller.correct.value} ',
-                                                style: TextStyle(color: Colors.black87, fontSize: 15),
+                                                ' ${questionController.correct.value} ',
+                                                style: const TextStyle(color: Colors.black87, fontSize: 15),
                                               ),
                                             ),
                                           ],
                                         ),
                                       ],
                                     ),
-                                    Container(margin: EdgeInsets.only(left: 10), child: CircularCooldown()),
+                                    Container(margin: const EdgeInsets.only(left: 10), child: const CircularCooldown()),
                                     Obx(
                                       () => Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.favorite_rounded,
                                             color: Colors.red,
                                           ),
                                           Icon(
                                             Icons.favorite_rounded,
-                                            color: _controller.wrong.value < 2 ? Colors.red : Colors.grey,
+                                            color: questionController.wrong.value < 2 ? Colors.red : Colors.grey,
                                           ),
                                           Icon(
                                             Icons.favorite_rounded,
-                                            color: _controller.wrong.value == 0 ? Colors.red : Colors.grey,
+                                            color: questionController.wrong.value == 0 ? Colors.red : Colors.grey,
                                           ),
                                         ],
                                       ),
@@ -172,13 +174,13 @@ class SurvivalQuizScreen extends StatelessWidget {
                             //height: double.infinity,
                             child: PageView.builder(
                               //block swiping
-                              physics: NeverScrollableScrollPhysics(),
-                              controller: _controller.pageController,
-                              onPageChanged: _controller.updateTheQnNum,
-                              itemCount: _controller.pSurvivalQuestions!.length,
+                              physics: const NeverScrollableScrollPhysics(),
+                              controller: questionController.pageController,
+                              onPageChanged: questionController.updateTheQnNum,
+                              itemCount: questionController.pSurvivalQuestions!.length,
                               itemBuilder: (context, index) => QuestionCard(
                                   question:
-                                      _controller.pSurvivalQuestions![index]), // sending question name via constructor
+                                      questionController.pSurvivalQuestions![index]), // sending question name via constructor
                             ),
                           ),
                         ),
@@ -190,28 +192,26 @@ class SurvivalQuizScreen extends StatelessWidget {
                     right: 0,
                     bottom: 0,
                     top: MediaQuery.of(context).size.height * 6 / 7,
-                    child: Container(
-                      child: Obx(
-                        () => Visibility(
-                          visible: _controller.isVisible.value,
-                          child: Center(
-                            child: InkWell(
-                              // provides clickable and cool click animation
-                              onTap: () {
-                                _controller.survivalNextQuestion();
-                                _controller.alreadyAnswered = false;
-                                _ccontroller.restart();
-                              },
-                              child: Container(
-                                width: 50,
-                                height: 50,
-                                //margin: EdgeInsets.fromLTRB(0, 10, 10, 10),
-                                alignment: Alignment.center,
-                                padding: EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                    gradient: kPrimaryGradient, borderRadius: BorderRadius.all(Radius.circular(50))),
-                                child: Icon(Icons.skip_next),
-                              ),
+                    child: Obx(
+                      () => Visibility(
+                        visible: questionController.isVisible.value,
+                        child: Center(
+                          child: InkWell(
+                            // provides clickable and cool click animation
+                            onTap: () {
+                              questionController.survivalNextQuestion();
+                              questionController.alreadyAnswered = false;
+                              cooldownController.restart();
+                            },
+                            child: Container(
+                              width: 50,
+                              height: 50,
+                              //margin: EdgeInsets.fromLTRB(0, 10, 10, 10),
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.all(5),
+                              decoration: const BoxDecoration(
+                                  gradient: kPrimaryGradient, borderRadius: BorderRadius.all(Radius.circular(50))),
+                              child: const Icon(Icons.skip_next),
                             ),
                           ),
                         ),

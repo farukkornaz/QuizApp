@@ -9,7 +9,7 @@ class Category extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("kategori sayfası"),
+        title: const Text("kategori sayfası"),
       ),
       body: ResponsiveGridList(
         horizontalGridMargin: 50,
@@ -19,6 +19,7 @@ class Category extends StatelessWidget {
           100,
           (index) => GestureDetector(
             onTap: (){
+              //Todo: veritabanından gelen veriler gösterilecek
               print(index);
             },
             child: ColoredBox(

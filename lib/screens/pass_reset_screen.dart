@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quiz_test_app/controllers/auth_controller.dart';
@@ -7,6 +8,8 @@ import '../constants.dart';
 class PassResetScreen extends GetWidget<AuthController> {
   final TextEditingController fEmailController = TextEditingController();
   final AuthController _authController = AuthController();
+
+  PassResetScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,40 +22,40 @@ class PassResetScreen extends GetWidget<AuthController> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Şifre Sıfırlama", style: TextStyle(fontSize: 20)),
+          title: const Text("Şifre Sıfırlama", style: TextStyle(fontSize: 20)),
           centerTitle: true,
         ),
         body: Container(
           color: kLightPurple,
           child: Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
+                const Icon(
                   Icons.info_rounded,
                   color: Colors.purple,
                   size: 50,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-                Text(
+                const Text(
                   "Lüfen mail adresinizi düzgün yazdığınıza emin olunuz.",
                   style: TextStyle(fontSize: 21, color: Colors.purple),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 TextFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Email',
                     labelText: 'Email :',
                   ),
                   controller: fEmailController,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 ElevatedButton(
@@ -69,23 +72,25 @@ class PassResetScreen extends GetWidget<AuthController> {
                           borderColor: Colors.purpleAccent,
                           borderWidth: 1.5,
                           isDismissible: true,
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.error_outline_rounded,
                             color: Colors.white,
                           ),
                           shouldIconPulse: false,
                         );
                       } else {
-                        print("duplicate");
+                        if (kDebugMode) {
+                          print("duplicate");
+                        }
                       }
                     } else {
                       controller.forgetPassword(fEmailController.text);
                     }
                   },
-                  child: Text("Sıfırlama maili gönder"),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.purple,
                   ),
+                  child: const Text("Sıfırlama maili gönder"),
                 ),
               ],
             ),

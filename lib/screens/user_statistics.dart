@@ -18,11 +18,11 @@ class UserStatistics extends GetWidget<AuthController> {
 
   @override
   Widget build(BuildContext context) {
+    //AuthController _aController = Get.put(AuthController());
+    QuestionController questionController = Get.find<QuestionController>();
+    //AuthController _aController = Get.put(AuthController());
+    questionController.getOnlineQuizesScoreData();
 
-    //AuthController _aController = Get.put(AuthController());
-    QuestionController _controller = Get.find<QuestionController>();
-    //AuthController _aController = Get.put(AuthController());
-    _controller.getOnlineQuizesScoreData();
     return Scaffold(
       extendBodyBehindAppBar: true,
       /*appBar: AppBar(
@@ -36,50 +36,59 @@ class UserStatistics extends GetWidget<AuthController> {
               Positioned(
                 child: Container(
                   height: 285,
-                  color: Color(0xFF4c03a2),
+                  color: const Color(0xFF4c03a2),
                 ),
               ),
               SafeArea(
                 child: Container(
-                  padding: EdgeInsets.all(15),
+                  padding: const EdgeInsets.all(15),
                   child: Column(
                     //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "${(_controller.quizesScoresSum * 10 + _controller.survivalScoresSum + _controller.onlineQuizScore.value)}",
-                        style: TextStyle(color: Color(0xFFDFDFDF), fontSize: 45),
+                        "${(questionController.quizesScoresSum * 10 + questionController.survivalScoresSum + questionController.onlineQuizScore.value)}",
+                        style: const TextStyle(
+                            color: Color(0xFFDFDFDF), fontSize: 45),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Column(
                             children: [
-                              Text("Geçen Hafta", style: TextStyle(color: Color(0xFFDFDFDF))),
-                              Text("- Puan", style: TextStyle(color: Color(0xFFDFDFDF))),
-                              Text("(-.Sıra)", style: TextStyle(color: Color(0xFFDFDFDF))),
+                              Text("Geçen Hafta",
+                                  style: TextStyle(color: Color(0xFFDFDFDF))),
+                              Text("- Puan",
+                                  style: TextStyle(color: Color(0xFFDFDFDF))),
+                              Text("(-.Sıra)",
+                                  style: TextStyle(color: Color(0xFFDFDFDF))),
                             ],
                           ),
                           Column(
                             children: [
-                              Text("Bu Hafta", style: TextStyle(color: Color(0xFFDFDFDF))),
-                              Text("- Puan", style: TextStyle(color: Color(0xFFDFDFDF))),
-                              Text("(-.Sıra)", style: TextStyle(color: Color(0xFFDFDFDF))),
+                              Text("Bu Hafta",
+                                  style: TextStyle(color: Color(0xFFDFDFDF))),
+                              Text("- Puan",
+                                  style: TextStyle(color: Color(0xFFDFDFDF))),
+                              Text("(-.Sıra)",
+                                  style: TextStyle(color: Color(0xFFDFDFDF))),
                             ],
                           )
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("${(_controller.quizesScoresSum * 10 + _controller.survivalScoresSum) ~/ 50}",
-                              style: TextStyle(color: Color(0xFFDFDFDF), fontSize: 50)),
-                          SizedBox(
+                          Text(
+                              "${(questionController.quizesScoresSum * 10 + questionController.survivalScoresSum) ~/ 50}",
+                              style: const TextStyle(
+                                  color: Color(0xFFDFDFDF), fontSize: 50)),
+                          const SizedBox(
                             width: 10,
                           ),
                           Image.asset(
@@ -89,22 +98,22 @@ class UserStatistics extends GetWidget<AuthController> {
                           )
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Container(
                         height: 55,
                         width: double.infinity,
-                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          gradient: new LinearGradient(
+                          gradient: const LinearGradient(
                               colors: [
-                                const Color(0xFFfcb075),
-                                const Color(0xFFfed083),
+                                Color(0xFFfcb075),
+                                Color(0xFFfed083),
                               ],
-                              begin: const FractionalOffset(0.5, 1.0),
-                              end: const FractionalOffset(0.5, 0.0),
+                              begin: FractionalOffset(0.5, 1.0),
+                              end: FractionalOffset(0.5, 0.0),
                               stops: [0.0, 1.0],
                               tileMode: TileMode.clamp),
                           boxShadow: [
@@ -112,14 +121,15 @@ class UserStatistics extends GetWidget<AuthController> {
                               color: Colors.black87.withOpacity(0.3),
                               spreadRadius: 2,
                               blurRadius: 10,
-                              offset: Offset(0, 5), // changes position of shadow
+                              offset: const Offset(
+                                  0, 5), // changes position of shadow
                             ),
                           ],
                         ),
                         child: Center(
                             child: Text(
-                          "Hayatta Kalma ${_controller.survivalScoresSum} Puan",
-                          style: TextStyle(
+                          "Hayatta Kalma ${questionController.survivalScoresSum} Puan",
+                          style: const TextStyle(
                             color: Color(0xFFDFDFDF),
                             fontSize: 20,
                             shadows: [
@@ -132,22 +142,22 @@ class UserStatistics extends GetWidget<AuthController> {
                           ),
                         )),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 25,
                       ),
                       Container(
                         height: 55,
                         width: double.infinity,
-                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          gradient: new LinearGradient(
+                          gradient: const LinearGradient(
                               colors: [
-                                const Color(0xFFfd5d8c),
-                                const Color(0xFFfd78a3),
+                                Color(0xFFfd5d8c),
+                                Color(0xFFfd78a3),
                               ],
-                              begin: const FractionalOffset(0.5, 1.0),
-                              end: const FractionalOffset(0.5, 0.0),
+                              begin: FractionalOffset(0.5, 1.0),
+                              end: FractionalOffset(0.5, 0.0),
                               stops: [0.0, 1.0],
                               tileMode: TileMode.clamp),
                           boxShadow: [
@@ -155,14 +165,15 @@ class UserStatistics extends GetWidget<AuthController> {
                               color: Colors.black87.withOpacity(0.3),
                               spreadRadius: 2,
                               blurRadius: 10,
-                              offset: Offset(0, 5), // changes position of shadow
+                              offset: const Offset(
+                                  0, 5), // changes position of shadow
                             ),
                           ],
                         ),
                         child: Center(
                             child: Text(
-                          "Klasik Testler ${_controller.quizesScoresSum * 10} Puan",
-                          style: TextStyle(
+                          "Klasik Testler ${questionController.quizesScoresSum * 10} Puan",
+                          style: const TextStyle(
                             color: Color(0xFFDFDFDF),
                             fontSize: 20,
                             shadows: [
@@ -175,22 +186,22 @@ class UserStatistics extends GetWidget<AuthController> {
                           ),
                         )),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 25,
                       ),
                       Container(
                         height: 55,
                         width: double.infinity,
-                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          gradient: new LinearGradient(
+                          gradient: const LinearGradient(
                               colors: [
-                                const Color(0xFF8260f6),
-                                const Color(0xFFaa81fb),
+                                Color(0xFF8260f6),
+                                Color(0xFFaa81fb),
                               ],
-                              begin: const FractionalOffset(0.5, 1.0),
-                              end: const FractionalOffset(0.5, 0.0),
+                              begin: FractionalOffset(0.5, 1.0),
+                              end: FractionalOffset(0.5, 0.0),
                               stops: [0.0, 1.0],
                               tileMode: TileMode.clamp),
                           boxShadow: [
@@ -198,15 +209,16 @@ class UserStatistics extends GetWidget<AuthController> {
                               color: Colors.black87.withOpacity(0.3),
                               spreadRadius: 2,
                               blurRadius: 10,
-                              offset: Offset(0, 5), // changes position of shadow
+                              offset: const Offset(
+                                  0, 5), // changes position of shadow
                             ),
                           ],
                         ),
                         child: Center(
                             child: Obx(
                           () => Text(
-                            "Yarışma Dereceleri ${_controller.onlineQuizScore.value} Puan",
-                            style: TextStyle(
+                            "Yarışma Dereceleri ${questionController.onlineQuizScore.value} Puan",
+                            style: const TextStyle(
                               color: Color(0xFFDFDFDF),
                               fontSize: 20,
                               shadows: [
@@ -220,7 +232,7 @@ class UserStatistics extends GetWidget<AuthController> {
                           ),
                         )),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       InkWell(
@@ -233,10 +245,12 @@ class UserStatistics extends GetWidget<AuthController> {
                           height: 50,
                           //margin: EdgeInsets.fromLTRB(0, 10, 10, 10),
                           alignment: Alignment.center,
-                          padding: EdgeInsets.all(5),
-                          decoration:
-                              BoxDecoration(color: Colors.green, borderRadius: BorderRadius.all(Radius.circular(50))),
-                          child: Icon(
+                          padding: const EdgeInsets.all(5),
+                          decoration: const BoxDecoration(
+                              color: Colors.green,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(50))),
+                          child: const Icon(
                             Icons.arrow_back_rounded,
                           ),
                         ),

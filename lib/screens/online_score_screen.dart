@@ -10,42 +10,42 @@ class OnlineScoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    QuestionController _controller = Get.put(QuestionController());
+    QuestionController controller = Get.put(QuestionController());
     return SafeArea(
       child: Scaffold(
         body: Container(
           color: Colors.white,
-          padding: EdgeInsets.all(kDefaultPadding),
+          padding: const EdgeInsets.all(kDefaultPadding),
           child:Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(height: 40,),
+              const SizedBox(height: 40,),
               Container(
                 height: 250,
-                  child: Image(image: AssetImage("assets/images/baloons.jpeg"),
+                  child: const Image(image: AssetImage("assets/images/baloons.jpeg"),
                   )
               ),
               Column(
                 children: [
-                  Text("TEBRİKLER !",style: TextStyle(color: Colors.purple,fontSize: 22)),
-                  SizedBox(height: 25,),
+                  const Text("TEBRİKLER !",style: TextStyle(color: Colors.purple,fontSize: 22)),
+                  const SizedBox(height: 25,),
                   Text("Sınavı başarıyla tamamladınız",style: TextStyle(color: Colors.grey[600],fontSize: 17)),
                 ],
               ),
-              SizedBox(height: 25,),
+              const SizedBox(height: 25,),
               InkWell( // provides clickable and cool click animation
                 onTap: (){
-                  _controller.onlineActive = false;
+                  controller.onlineActive = false;
                   Get.back();
 
                 }, // Get package easy navigate function
                 child: Container(
                   width: double.infinity,
                   alignment: Alignment.center,
-                  padding: EdgeInsets.all(kDefaultPadding),
-                  decoration: BoxDecoration(
+                  padding: const EdgeInsets.all(kDefaultPadding),
+                  decoration: const BoxDecoration(
                       gradient: kPrimaryGradient,
                       borderRadius: BorderRadius.all(Radius.circular(12))
                   ),

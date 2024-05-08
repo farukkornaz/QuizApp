@@ -18,13 +18,15 @@ import '../controllers/glow_animation.dart';
 import '../models/Quiz.dart';
 
 class WelcomeScreen extends GetWidget<AuthController> {
+  const WelcomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    SliderController sController = Get.put(SliderController());
+    SliderController sliderController = Get.put(SliderController());
     //AuthController authController = Get.put(AuthController());
-    QuestionController _controller = Get.put(QuestionController());
+    QuestionController questionController = Get.put(QuestionController());
     //RefreshUserController _rucontroller = Get.put(RefreshUserController());
-    sController.BContext.value = MediaQuery.of(context).size.width;
+    sliderController.BContext.value = MediaQuery.of(context).size.width;
     //var size = MediaQuery.of(context).size;
     /*if(!authController.guest){
       QuizController _quizController = Get.put(QuizController());// injection and trigger onInıt
@@ -32,7 +34,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
     return PopScope(
       canPop: false,
       child: Scaffold(
-        drawer: DrawerView(),
+        drawer: const DrawerView(),
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           title: const Text(
@@ -55,48 +57,46 @@ class WelcomeScreen extends GetWidget<AuthController> {
                       children: [
                         //Slider *********************************************************
                         Obx(
-                          () => Container(
-                            child: Stack(children: [
-                              CarouselSlider(
-                                items: sController.imageSliders,
-                                options: CarouselOptions(
-                                    autoPlayInterval:
-                                        const Duration(seconds: 15),
-                                    viewportFraction: 1,
-                                    autoPlay: true,
-                                    enlargeCenterPage: true,
-                                    aspectRatio: 1.75,
-                                    onPageChanged: (index, reason) {
-                                      sController.current.value = index;
-                                    }),
+                          () => Stack(children: [
+                            CarouselSlider(
+                              items: sliderController.imageSliders,
+                              options: CarouselOptions(
+                                  autoPlayInterval:
+                                      const Duration(seconds: 15),
+                                  viewportFraction: 1,
+                                  autoPlay: true,
+                                  enlargeCenterPage: true,
+                                  aspectRatio: 1.75,
+                                  onPageChanged: (index, reason) {
+                                    sliderController.current.value = index;
+                                  }),
+                            ),
+                            Positioned(
+                              bottom: 10,
+                              left: 0,
+                              right: 0,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: sliderController.imgAList.map((url) {
+                                  int index =
+                                      sliderController.imgAList.indexOf(url);
+                                  return Container(
+                                    width: 8.0,
+                                    height: 8.0,
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 10.0, horizontal: 2.0),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color:
+                                          sliderController.current.value == index
+                                              ? Colors.purple
+                                              : Colors.white,
+                                    ),
+                                  );
+                                }).toList(),
                               ),
-                              Positioned(
-                                bottom: 10,
-                                left: 0,
-                                right: 0,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: sController.imgAList.map((url) {
-                                    int index =
-                                        sController.imgAList.indexOf(url);
-                                    return Container(
-                                      width: 8.0,
-                                      height: 8.0,
-                                      margin: const EdgeInsets.symmetric(
-                                          vertical: 10.0, horizontal: 2.0),
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color:
-                                            sController.current.value == index
-                                                ? Colors.purple
-                                                : Colors.white,
-                                      ),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                            ]),
-                          ),
+                            ),
+                          ]),
                         ),
                         //populer  *******************************************************
                         Column(
@@ -122,7 +122,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                     child: Column(
                                       children: [
                                         Container(
-                                          margin: EdgeInsets.all(10),
+                                          margin: const EdgeInsets.all(10),
                                           child: const Center(
                                               child: Text(
                                             'Popüler Quizler',
@@ -133,17 +133,17 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                         ),
                                         Container(
                                           margin:
-                                              EdgeInsets.fromLTRB(10, 0, 0, 10),
+                                              const EdgeInsets.fromLTRB(10, 0, 0, 10),
                                           height: 130,
                                           width: double.infinity,
                                           child: ListView.builder(
                                             scrollDirection: Axis.horizontal,
-                                            itemCount: _controller
+                                            itemCount: questionController
                                                     .popularQuizes?.length ??
                                                 0,
                                             itemBuilder: (context, index) =>
                                                 QuizCard(
-                                                    quizes: _controller
+                                                    quizes: questionController
                                                         .popularQuizes![index]),
                                           ),
                                         ),
@@ -167,203 +167,199 @@ class WelcomeScreen extends GetWidget<AuthController> {
                             ),
                           ),
                         ),
-                        Container(
-                          child: SingleChildScrollView(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: kDefaultPadding),
-                                  child: ExpandableNotifier(
-                                    child: Container(
-                                      padding: const EdgeInsets.all(
-                                          kDefaultPadding / 2),
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.3),
-                                            spreadRadius: 3,
-                                            blurRadius: 7,
-                                            offset: const Offset(0,
-                                                3), // changes position of shadow
+                        SingleChildScrollView(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: kDefaultPadding),
+                                child: ExpandableNotifier(
+                                  child: Container(
+                                    padding: const EdgeInsets.all(
+                                        kDefaultPadding / 2),
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.3),
+                                          spreadRadius: 3,
+                                          blurRadius: 7,
+                                          offset: const Offset(0,
+                                              3), // changes position of shadow
+                                        ),
+                                      ],
+                                      color: Colors.white,
+                                      //color: Colors.white.withOpacity(0.3),
+                                      //borderRadius: BorderRadius.all(Radius.circular(10)),),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(15)),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Expandable(
+                                          collapsed: ExpandableButton(
+                                            child: const Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  '  Matematik',
+                                                  style: TextStyle(
+                                                      color: Colors.purple,
+                                                      fontSize: 18),
+                                                ),
+                                                Icon(
+                                                  Icons
+                                                      .arrow_downward_rounded,
+                                                  color: Colors.purple,
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ],
-                                        color: Colors.white,
-                                        //color: Colors.white.withOpacity(0.3),
-                                        //borderRadius: BorderRadius.all(Radius.circular(10)),),
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(15)),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Expandable(
-                                            collapsed: ExpandableButton(
-                                              child: const Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
+                                          expanded: Column(children: [
+                                            const Text(
+                                              'Matematik Testleri',
+                                              style: TextStyle(
+                                                  color: Colors.purple,
+                                                  fontSize: 25),
+                                            ),
+                                            const Divider(
+                                              color: Colors.purple,
+                                              thickness: 2,
+                                            ),
+                                            Container(
+                                              padding: const EdgeInsets.all(
+                                                  kDefaultPadding),
+                                              decoration: const BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.all(
+                                                        Radius.circular(10)),
+                                              ),
+                                              child: Column(
                                                 children: [
-                                                  Text(
-                                                    '  Matematik',
-                                                    style: TextStyle(
-                                                        color: Colors.purple,
-                                                        fontSize: 18),
-                                                  ),
-                                                  Icon(
-                                                    Icons
-                                                        .arrow_downward_rounded,
-                                                    color: Colors.purple,
-                                                  ),
+                                                  CategorySample(
+                                                      quiz: Quiz(
+                                                          id: "S1YRgOThEUkE5IWPNQ0i",
+                                                          name: "Fizik",
+                                                          questions: [
+                                                        Question(
+                                                            id: "dfg",
+                                                            answerIndex: 2,
+                                                            options: [
+                                                              "1",
+                                                              "2",
+                                                              "3",
+                                                              "4"
+                                                            ],
+                                                            question:
+                                                                "vecap nedire?"),
+                                                        Question(
+                                                            id: "dfg",
+                                                            answerIndex: 2,
+                                                            options: [
+                                                              "1",
+                                                              "2",
+                                                              "3",
+                                                              "4"
+                                                            ],
+                                                            question:
+                                                                "cevap nedir?")
+                                                      ])),
+                                                  /*CategorySample(index: 1),
+                                                  CategorySample(index: 2),
+                                                  CategorySample(index: 3),*/
                                                 ],
                                               ),
                                             ),
-                                            expanded: Column(children: [
-                                              const Text(
-                                                'Matematik Testleri',
-                                                style: TextStyle(
-                                                    color: Colors.purple,
-                                                    fontSize: 25),
-                                              ),
-                                              const Divider(
-                                                color: Colors.purple,
-                                                thickness: 2,
-                                              ),
-                                              Container(
-                                                padding: const EdgeInsets.all(
-                                                    kDefaultPadding),
-                                                decoration: const BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                ),
-                                                child: Column(
+                                            Container(
+                                              color: Colors.white,
+                                              child: ExpandableButton(
+                                                // <-- Collapses when tapped on
+                                                child: const Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                   children: [
-                                                    CategorySample(
-                                                        quiz: Quiz(
-                                                            id: "S1YRgOThEUkE5IWPNQ0i",
-                                                            name: "Fizik",
-                                                            questions: [
-                                                          Question(
-                                                              id: "dfg",
-                                                              answerIndex: 2,
-                                                              options: [
-                                                                "1",
-                                                                "2",
-                                                                "3",
-                                                                "4"
-                                                              ],
-                                                              question:
-                                                                  "vecap nedire?"),
-                                                          Question(
-                                                              id: "dfg",
-                                                              answerIndex: 2,
-                                                              options: [
-                                                                "1",
-                                                                "2",
-                                                                "3",
-                                                                "4"
-                                                              ],
-                                                              question:
-                                                                  "cevap nedir?")
-                                                        ])),
-                                                    /*CategorySample(index: 1),
-                                                    CategorySample(index: 2),
-                                                    CategorySample(index: 3),*/
+                                                    Text(
+                                                      '  Matematik',
+                                                      style: TextStyle(
+                                                          color:
+                                                              Colors.purple,
+                                                          fontSize: 18),
+                                                    ),
+                                                    Icon(
+                                                      Icons
+                                                          .arrow_upward_rounded,
+                                                      color: Colors.purple,
+                                                    ),
                                                   ],
                                                 ),
                                               ),
-                                              Container(
-                                                color: Colors.white,
-                                                child: ExpandableButton(
-                                                  // <-- Collapses when tapped on
-                                                  child: const Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                        '  Matematik',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Colors.purple,
-                                                            fontSize: 18),
-                                                      ),
-                                                      Icon(
-                                                        Icons
-                                                            .arrow_upward_rounded,
-                                                        color: Colors.purple,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ]),
-                                          ),
-                                        ],
-                                      ),
+                                            ),
+                                          ]),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                         // Survival Questions *********************************************
                         const SizedBox(
                           height: 10,
                         ),
-                        Container(
-                          child: Center(
-                            child: InkWell(
-                              onTap: () {
-                                _controller.survivalActive = true;
-                                _controller.survHigh.value = 0;
-                                /*_controller
-                                    .getTheRightSurvivalQuestions("surv_3");*/
-                                Get.to(SurvivalQuizScreen());
-                              },
-                              child: GetBuilder<GlowAnimationController>(
-                                  init: GlowAnimationController(),
-                                  builder: (controller) {
-                                    return Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(15)),
-                                          color: Colors.purple,
-                                          boxShadow: [
-                                            BoxShadow(
-                                                spreadRadius:
-                                                    controller.animation.value,
-                                                blurRadius:
-                                                    controller.animation.value,
-                                                color: Colors.purple
-                                                    .withOpacity(0.8))
-                                          ]),
-                                      height: 35,
-                                      width: 225,
-                                      child: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 10),
-                                        child: const Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              'Hayatta Kalma Modu',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 15,
-                                              ),
+                        Center(
+                          child: InkWell(
+                            onTap: () {
+                              questionController.survivalActive = true;
+                              questionController.survHigh.value = 0;
+                              /*_controller
+                                  .getTheRightSurvivalQuestions("surv_3");*/
+                              Get.to(const SurvivalQuizScreen());
+                            },
+                            child: GetBuilder<GlowAnimationController>(
+                                init: GlowAnimationController(),
+                                builder: (controller) {
+                                  return Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(15)),
+                                        color: Colors.purple,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              spreadRadius:
+                                                  controller.animation.value,
+                                              blurRadius:
+                                                  controller.animation.value,
+                                              color: Colors.purple
+                                                  .withOpacity(0.8))
+                                        ]),
+                                    height: 35,
+                                    width: 225,
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
+                                      child: const Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Hayatta Kalma Modu',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 15,
                                             ),
-                                            Icon(Icons.access_time_rounded),
-                                          ],
-                                        ),
+                                          ),
+                                          Icon(Icons.access_time_rounded),
+                                        ],
                                       ),
-                                    );
-                                  }),
-                            ),
+                                    ),
+                                  );
+                                }),
                           ),
                         ),
                         const SizedBox(
@@ -383,20 +379,20 @@ class WelcomeScreen extends GetWidget<AuthController> {
 }
 
 class CategorySample extends StatelessWidget {
-  CategorySample({super.key, required this.quiz});
+  const CategorySample({super.key, required this.quiz});
 
   final Quiz quiz;
 
   @override
   Widget build(BuildContext context) {
-    QuestionController _controller = Get.put(QuestionController());
+    QuestionController questionController = Get.put(QuestionController());
     return Container(
       width: 155,
       height: 300,
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.only(top: 5),
+            margin: const EdgeInsets.only(top: 5),
             child: Text(
               quiz.name ?? '',
               textAlign: TextAlign.center,
@@ -404,7 +400,7 @@ class CategorySample extends StatelessWidget {
                   fontSize: 20, color: Colors.purple, fontFamily: 'Quicksand'),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           //TODO: kazanılan yıldızlar kullanıcıdan al
@@ -455,9 +451,9 @@ class CategorySample extends StatelessWidget {
           ),
           InkWell(
             onTap: () async {
-              _controller.activeQuizId = quiz.id;
-              await _controller.getTheRightQuestions("S1YRgOThEUkE5IWPNQ0i");
-              _controller.getQuizScreen();
+              questionController.activeQuizId = quiz.id;
+              await questionController.getTheRightQuestions("S1YRgOThEUkE5IWPNQ0i");
+              questionController.getQuizScreen();
             },
             child: Container(
               height: 140,
