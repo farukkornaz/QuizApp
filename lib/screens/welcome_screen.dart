@@ -10,7 +10,9 @@ import 'package:quiz_test_app/controllers/question_controller.dart';
 //import 'package:quiz_test_app/controllers/refresh_user_info_controller.dart';
 import 'package:quiz_test_app/controllers/slider_controller.dart';
 import 'package:quiz_test_app/models/Question.dart';
+import 'package:quiz_test_app/screens/Category.dart';
 import 'package:quiz_test_app/screens/survival_quiz_screen.dart';
+import 'package:responsive_grid_list/responsive_grid_list.dart';
 
 import '../controllers/glow_animation.dart';
 import '../models/Quiz.dart';
@@ -30,7 +32,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
     return PopScope(
       canPop: false,
       child: Scaffold(
-        //drawer: DrawerView(),
+        drawer: DrawerView(),
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           title: const Text(
@@ -58,7 +60,8 @@ class WelcomeScreen extends GetWidget<AuthController> {
                               CarouselSlider(
                                 items: sController.imageSliders,
                                 options: CarouselOptions(
-                                    autoPlayInterval: const Duration(seconds: 15),
+                                    autoPlayInterval:
+                                        const Duration(seconds: 15),
                                     viewportFraction: 1,
                                     autoPlay: true,
                                     enlargeCenterPage: true,
@@ -104,8 +107,8 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                   Container(
                                     decoration: BoxDecoration(
                                       color: Colors.white70,
-                                      borderRadius:
-                                          const BorderRadius.all(Radius.circular(10)),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(10)),
                                       boxShadow: [
                                         BoxShadow(
                                           color: Colors.grey.withOpacity(0.3),
@@ -152,12 +155,19 @@ class WelcomeScreen extends GetWidget<AuthController> {
                             ),
                           ],
                         ),
-
-
-
                         //Kategoriler ve testleri ****************************************
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Get.to(const Category());
+                              },
+                              child: const Text("Kategoriler"),
+                            ),
+                          ),
+                        ),
                         Container(
-                          margin: const EdgeInsets.only(top: kDefaultPadding),
                           child: SingleChildScrollView(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -167,8 +177,8 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                       vertical: kDefaultPadding),
                                   child: ExpandableNotifier(
                                     child: Container(
-                                      padding:
-                                          const EdgeInsets.all(kDefaultPadding / 2),
+                                      padding: const EdgeInsets.all(
+                                          kDefaultPadding / 2),
                                       decoration: BoxDecoration(
                                         boxShadow: [
                                           BoxShadow(
@@ -182,8 +192,8 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                         color: Colors.white,
                                         //color: Colors.white.withOpacity(0.3),
                                         //borderRadius: BorderRadius.all(Radius.circular(10)),),
-                                        borderRadius:
-                                            const BorderRadius.all(Radius.circular(15)),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(15)),
                                       ),
                                       child: Column(
                                         children: [
@@ -201,7 +211,8 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                                         fontSize: 18),
                                                   ),
                                                   Icon(
-                                                    Icons.arrow_downward_rounded,
+                                                    Icons
+                                                        .arrow_downward_rounded,
                                                     color: Colors.purple,
                                                   ),
                                                 ],
@@ -223,15 +234,40 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                                     kDefaultPadding),
                                                 decoration: const BoxDecoration(
                                                   color: Colors.white,
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(10)),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(10)),
                                                 ),
                                                 child: Column(
                                                   children: [
-                                                    CategorySample(quiz: Quiz(id: "S1YRgOThEUkE5IWPNQ0i",name: "Fizik", questions: [
-                                                      Question(id: "dfg", answerIndex: 2,options: ["1", "2", "3", "4"], question: "vecap nedire?"),
-                                                      Question(id: "dfg", answerIndex: 2,options: ["1", "2", "3", "4"], question: "cevap nedir?")
-                                                    ])),
+                                                    CategorySample(
+                                                        quiz: Quiz(
+                                                            id: "S1YRgOThEUkE5IWPNQ0i",
+                                                            name: "Fizik",
+                                                            questions: [
+                                                          Question(
+                                                              id: "dfg",
+                                                              answerIndex: 2,
+                                                              options: [
+                                                                "1",
+                                                                "2",
+                                                                "3",
+                                                                "4"
+                                                              ],
+                                                              question:
+                                                                  "vecap nedire?"),
+                                                          Question(
+                                                              id: "dfg",
+                                                              answerIndex: 2,
+                                                              options: [
+                                                                "1",
+                                                                "2",
+                                                                "3",
+                                                                "4"
+                                                              ],
+                                                              question:
+                                                                  "cevap nedir?")
+                                                        ])),
                                                     /*CategorySample(index: 1),
                                                     CategorySample(index: 2),
                                                     CategorySample(index: 3),*/
@@ -250,7 +286,8 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                                       Text(
                                                         '  Matematik',
                                                         style: TextStyle(
-                                                            color: Colors.purple,
+                                                            color:
+                                                                Colors.purple,
                                                             fontSize: 18),
                                                       ),
                                                       Icon(
@@ -273,62 +310,60 @@ class WelcomeScreen extends GetWidget<AuthController> {
                             ),
                           ),
                         ),
-
-
-
                         // Survival Questions *********************************************
                         const SizedBox(
                           height: 10,
                         ),
-                        Center(
-                          child: InkWell(
-                            onTap: () {
-                              _controller.survivalActive = true;
-                              _controller.survHigh.value = 0;
-                              /*_controller
-                                  .getTheRightSurvivalQuestions("surv_3");*/
-                              Get.to(SurvivalQuizScreen());
-                            },
-                            child: GetBuilder<GlowAnimationController>(
-                                init: GlowAnimationController(),
-                                builder: (controller) {
-                                  return Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(15)),
-                                        color: Colors.purple,
-                                        boxShadow: [
-                                          BoxShadow(
-                                              spreadRadius: controller
-                                                  .animation.value,
-                                              blurRadius: controller
-                                                  .animation.value,
-                                              color: Colors.purple
-                                                  .withOpacity(0.8))
-                                        ]),
-                                    height: 35,
-                                    width: 225,
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10),
-                                      child: const Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment
-                                            .spaceBetween,
-                                        children: [
-                                          Text(
-                                            'Hayatta Kalma Modu',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 15,
+                        Container(
+                          child: Center(
+                            child: InkWell(
+                              onTap: () {
+                                _controller.survivalActive = true;
+                                _controller.survHigh.value = 0;
+                                /*_controller
+                                    .getTheRightSurvivalQuestions("surv_3");*/
+                                Get.to(SurvivalQuizScreen());
+                              },
+                              child: GetBuilder<GlowAnimationController>(
+                                  init: GlowAnimationController(),
+                                  builder: (controller) {
+                                    return Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(15)),
+                                          color: Colors.purple,
+                                          boxShadow: [
+                                            BoxShadow(
+                                                spreadRadius:
+                                                    controller.animation.value,
+                                                blurRadius:
+                                                    controller.animation.value,
+                                                color: Colors.purple
+                                                    .withOpacity(0.8))
+                                          ]),
+                                      height: 35,
+                                      width: 225,
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        child: const Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              'Hayatta Kalma Modu',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                              ),
                                             ),
-                                          ),
-                                          Icon(Icons.access_time_rounded),
-                                        ],
+                                            Icon(Icons.access_time_rounded),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                }),
+                                    );
+                                  }),
+                            ),
                           ),
                         ),
                         const SizedBox(
@@ -421,8 +456,7 @@ class CategorySample extends StatelessWidget {
           InkWell(
             onTap: () async {
               _controller.activeQuizId = quiz.id;
-              await _controller
-                  .getTheRightQuestions("S1YRgOThEUkE5IWPNQ0i");
+              await _controller.getTheRightQuestions("S1YRgOThEUkE5IWPNQ0i");
               _controller.getQuizScreen();
             },
             child: Container(
@@ -443,7 +477,8 @@ class CategorySample extends StatelessWidget {
                   Center(
                     child: Text(
                       quiz.name!,
-                      style: const TextStyle(fontSize: 20, fontFamily: 'Swissblack'),
+                      style: const TextStyle(
+                          fontSize: 20, fontFamily: 'Swissblack'),
                     ),
                   ),
                 ],

@@ -193,7 +193,7 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
           borderColor: Colors.purpleAccent,
           borderWidth: 1.5,
           isDismissible: true,
-          icon: Icon(
+          icon: const Icon(
             Icons.error_outline_rounded,
             color: Colors.white,
           ),
@@ -437,7 +437,6 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
     }
   }
 
-  //TODO:Bu ne?
   void updateTheQnNum(int index) {
     _questionNumber.value = index + 1;
   }

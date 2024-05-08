@@ -19,7 +19,7 @@ class Option extends StatelessWidget {
   final int? index;
   final VoidCallback? press;
   final int? qid;
-  late final int? selected;
+  int? selected;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,8 @@ class Option extends StatelessWidget {
         builder: (qnController) {
           Color getTheRightColor() {
             if (qnController.onlineActive) {
-              selected = qnController.selectedOnlineAnswers[(qid ?? 0) - 1];
+              //qid null gelıyor
+              selected = qnController.selectedOnlineAnswers[(qid ?? 1) - 1];
               if (selected != -1) {
                 if (index == selected) {
                   return Colors.black87;
@@ -73,39 +74,45 @@ class Option extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(0, 0, 5, 0),
-                      height: 18,
-                      width: 18,
-                      decoration: BoxDecoration(
-                        color: getTheRightColor() == Colors.grey[350] ? Colors.transparent : getTheRightColor(),
-                        borderRadius: BorderRadius.circular(50),
-                        border: Border.all(color: getTheRightColor()),
+                child: GestureDetector(
+                  onTap:() {
+                    print("deneme");
+                    getTheRightColor();
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(0, 0, 5, 0),
+                        height: 18,
+                        width: 18,
+                        decoration: BoxDecoration(
+                          color: getTheRightColor() == Colors.grey[350] ? Colors.transparent : getTheRightColor(),
+                          borderRadius: BorderRadius.circular(50),
+                          border: Border.all(color: getTheRightColor()),
+                        ),
+                        child: getTheRightColor() == Colors.grey[350] ? null : Icon(getTheRightIcon(), size: 10),
                       ),
-                      child: getTheRightColor() == Colors.grey[350] ? null : Icon(getTheRightIcon(), size: 10),
-                    ),
-                    /*Text(
-                    //'${index + 1}.',
-                    '${String.fromCharCode(0x41 + index)} )   ',
-                    style: TextStyle(color: getTheRightColor(), fontSize: 15),
-                  ),*/
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 2 / 3,
-                      child: Center(
-                        child: AutoSizeText(
-                          '$text',
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(color: Colors.black87, fontSize: 17),
+                      /*Text(
+                      //'${index + 1}.',
+                      '${String.fromCharCode(0x41 + index)} )   ',
+                      style: TextStyle(color: getTheRightColor(), fontSize: 15),
+                    ),*/
+                      Container(
+                        width: MediaQuery.of(context).size.width * 2 / 3,
+                        child: Center(
+                          child: AutoSizeText(
+                            '$text',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(color: Colors.black87, fontSize: 18),
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                  ],
+                      const SizedBox(
+                        width: 20,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

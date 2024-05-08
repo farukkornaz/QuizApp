@@ -65,6 +65,8 @@ class QuestionCard extends StatelessWidget {
                     ),
                   ),
                 ),
+
+                // Soru bölümü (GetWidget) *****************************
                 Positioned(
                   bottom: 0,
                   right: 0,
@@ -74,31 +76,27 @@ class QuestionCard extends StatelessWidget {
             ),
           ),
         ),
+
+        // Soru şıkları *******************************
         Expanded(
           flex: 12,
           child: Container(
             margin: const EdgeInsets.fromLTRB(kDefaultPadding, 0, kDefaultPadding, 0),
-            /*margin: EdgeInsets.fromLTRB(kDefaultPadding, 0, kDefaultPadding, kDefaultPadding),
-            padding: EdgeInsets.all(kDefaultPadding),
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(25)
-            ),*/
             child: Column(
               children: [
                 const SizedBox(
                   height: kDefaultPadding / 2,
                 ),
                 ...List.generate(
-                  // ... spread operator for showing list elements in list
                   question.options?.length ?? 0,
                   (index) => Option(
                     index: index,
                     text: question.options?[index],
+                    qid: int.parse(question.id!),
                     press: () {
                       if (_controller.onlineActive) {
                         _controller.onlineAnswered(question, index);
-                        //_controller.newOnlineSelectedValue(question.id!, index);
+                        _controller.newOnlineSelectedValue(int.parse(question.id!), index);
                       } else {
                         _controller.checkAns(question, index);
                         _controller.alreadyAnswered = true;

@@ -13,7 +13,7 @@ import '../models/Quiz.dart';
 class Database {
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   UserController controller = Get.put(UserController());
-  //QuestionController ccontroller = Get.put(QuestionController());
+  //QuestionController ccontroller = Get.find<QuestionController>();
 
   Future<Quiz> getQuiz(String quizId) async {
     Quiz quiz;
@@ -106,14 +106,21 @@ class Database {
     }
   }
 
-  /*getOnlineQData() async {
+  Future<List<Question>> getOnlineQData() async {
     var snapshot = await _firebaseFirestore
         .collection('online_tests')
         .doc("online_test")
         .collection("questions")
         .get();
     var allData = snapshot.docs.map((doc) => doc.data()).toList();
-    ccontroller.databaseQuestions = allData
+
+
+
+    //List<Question> onlineQuestions = allData.map((e) => Question.fromJson(e)).toList();
+    allData.map((e) => print(e));
+    List<Question> onlineQuestions = allData.map((e) => Question.fromJson(e)).toList();
+    return onlineQuestions;
+    /*ccontroller.databaseQuestions = allData
         .map(
           (question) => Question(
             id: question['id'],
@@ -122,15 +129,15 @@ class Database {
             answerIndex: question['answer_index'],
           ),
         )
-        .toList();
-    await _firebaseFirestore
+        .toList();*/
+    /*await _firebaseFirestore
         .collection('online_tests')
         .doc("online_test")
         .get()
         .then((snapshot) {
       ccontroller.onlineTestName = snapshot["name"];
-    });
-  }*/
+    });*/
+  }
 
   Future<UserModel> getUser(String uid) async {
     try {

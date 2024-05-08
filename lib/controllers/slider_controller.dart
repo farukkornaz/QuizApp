@@ -17,6 +17,8 @@ class SliderController extends GetxController {
   QuestionController _ccontroller = Get.put(QuestionController());
   DateTimeController _dTController = Get.put(DateTimeController());
 
+
+
   final List<String> imgAList = [
     'assets/images/q3.jpeg',
     'assets/images/duyuru.jpg',
@@ -33,6 +35,7 @@ class SliderController extends GetxController {
 
   @override
   void onInit() {
+    _ccontroller.onlineTestName = 'online_test_1';
     imageSliders = imgAList
         .map((item) => InkWell(
               onTap: () async {
@@ -51,7 +54,7 @@ class SliderController extends GetxController {
                       titleStyle: const TextStyle(fontSize: 20, color: Colors.purple),
                       content: Container(
                         margin: EdgeInsets.symmetric(horizontal: 10),
-                        child: Column(
+                        child: const Column(
                           children: [
                             Column(
                               children: [
@@ -71,12 +74,12 @@ class SliderController extends GetxController {
                       ),
                     ).whenComplete(() => dialogChecker.value = false);
                   } else if (_acontroller.user?.uid == "TbTq1loYiUcCbSsTgcQp90nKS2c2") {
-                    //await Database().getOnlineQData();
+                    _ccontroller.databaseQuestions = await Database().getOnlineQData();
                     _ccontroller.selectedOnlineAnswers =
                         List<int>.filled(_ccontroller.databaseQuestions?.length ?? 0, -1);
                     getInfoDialog();
                   } else if (!_acontroller.guest) {
-                    //await Database().getOnlineQData();
+                    _ccontroller.databaseQuestions = await Database().getOnlineQData();
                     _acontroller.onlineExamChecker =
                         await Database().checkOnlineExam(_acontroller.user?.email ?? '', _ccontroller.onlineTestName);
                     if (_acontroller.onlineExamChecker == 1) {
@@ -91,7 +94,7 @@ class SliderController extends GetxController {
                           borderColor: Colors.purpleAccent,
                           borderWidth: 1.5,
                           isDismissible: true,
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.error_outline_rounded,
                             color: Colors.white,
                           ),
@@ -112,7 +115,7 @@ class SliderController extends GetxController {
                           borderColor: Colors.purpleAccent,
                           borderWidth: 1.5,
                           isDismissible: true,
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.error_outline_rounded,
                             color: Colors.white,
                           ),
@@ -145,33 +148,6 @@ class SliderController extends GetxController {
                             children: <Widget>[
                               //Image.network(item, fit: BoxFit.cover, width: 1000.0),
                               Image.asset(item, fit: BoxFit.cover, width: 1000.0),
-                              /*Positioned(
-                    bottom: 0.0,
-                    left: 0.0,
-                    right: 0.0,
-                    top: 0.0,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                      child: Text(
-                        getText(imgAList.indexOf(item)),
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),*/
-                              /*Positioned(
-                    top: 75,
-                    left: 85,
-                    right: 85,
-                    child: Container(
-                      width: 100,
-                      height: 30,
-                      child: getWidget(imgAList.indexOf(item)),
-                    ),
-                  ),*/
                             ],
                           )
                         : Container(
@@ -187,7 +163,7 @@ class SliderController extends GetxController {
                             )),
                             width: double.infinity,
                             height: double.infinity,
-                            child: Center(
+                            child: const Center(
                                 child: Text(
                               "ONLİNE SINAV İÇİN TIKLA !",
                               style: TextStyle(color: Colors.purple, fontSize: 18, fontWeight: FontWeight.bold),
@@ -225,22 +201,8 @@ class SliderController extends GetxController {
               ) {
             getInfoDialog();
           }
-          /*else if (_dTController.myTime.year == serverTime.year &&
-              _dTController.myTime.day == serverTime.day) {
-            differenceHour = (dur.inHours + 1).floor().toString();
-            Get.defaultDialog(
-              title: "",
-              content: Column(
-                children: [
-                  Text("${differenceHour} saat kaldı"),
-                ],
-              ),
-            );
-          }*/
           else {
             differenceDays = (serverTime!.day - _dTController.myTime!.day).toString();
-            //differenceDays = (dur.inDays).ceil().toString();
-            //differenceHour = (dur.inHours % 24).floor().toString();
             if (dialogChecker.value == false) {
               dialogChecker.value = true;
               Get.defaultDialog(
@@ -256,14 +218,14 @@ class SliderController extends GetxController {
                   children: [
                     Text(
                       "Sınav günü : ${serverTime!.day}/${serverTime!.month}/${serverTime!.year}",
-                      style: TextStyle(fontSize: 18),
+                      style: const TextStyle(fontSize: 18),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Text(
                       "${differenceDays} gün kaldı",
-                      style: TextStyle(fontSize: 18),
+                      style: const TextStyle(fontSize: 18),
                     ),
                     //Text("${differenceHour} saat kaldı"),
                   ],
@@ -284,7 +246,7 @@ class SliderController extends GetxController {
               buttonColor: Colors.purple,
               title: "Online Sınav",
               titleStyle: TextStyle(fontSize: 20, color: Colors.purple),
-              content: Column(
+              content: const Column(
                 children: [
                   Text(
                     "Planlanan Sınav Bulunmamaktadır",
@@ -340,7 +302,7 @@ class SliderController extends GetxController {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 1,
               ),
               Container(
@@ -349,7 +311,7 @@ class SliderController extends GetxController {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Container(
@@ -375,11 +337,11 @@ class SliderController extends GetxController {
                     height: 430,
                     child: Stack(children: [
                       Container(
-                        margin: EdgeInsets.only(top: 30),
+                        margin: const EdgeInsets.only(top: 30),
                         width: double.infinity,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.white,
-                          borderRadius: const BorderRadius.all(Radius.circular(15)),
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
                         ),
                         child: Column(
                           children: [
@@ -388,12 +350,12 @@ class SliderController extends GetxController {
                             ),
                             Column(
                               children: [
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 Text(
                                   "Soru Sayısı : ${_ccontroller.databaseQuestions!.length}",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.purple,
                                     fontSize: 17,
                                     fontWeight: FontWeight.bold,
@@ -403,57 +365,57 @@ class SliderController extends GetxController {
                                            Text(
                                             "Sınav Süresi : ${_ccontroller.databaseQuestions.length*5} dakika",
                                             style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold,color: Colors.purple),),*/
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 const Text(
                                   "Bilgilendirme",
                                   style: TextStyle(color: Colors.black, fontSize: 17, fontWeight: FontWeight.bold),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 const Text(
                                   "Sorular arasında geçişi ekranı kaydırarak",
                                   style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 const Text(
                                   "veya",
                                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 const Text(
                                   "butonları kullanarak gerçekleştiriniz",
                                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10,
                                     ),
                                     Container(
                                       width: 75,
                                       height: 25,
-                                      margin: EdgeInsets.only(left: 7.5),
+                                      margin: const EdgeInsets.only(left: 7.5),
                                       alignment: Alignment.center,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           gradient: kPrimaryGradient,
                                           borderRadius: BorderRadius.all(Radius.circular(25))),
-                                      child: Icon(
+                                      child: const Icon(
                                         Icons.arrow_back_rounded,
                                         size: 20,
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10,
                                     ),
                                     Container(
@@ -461,15 +423,15 @@ class SliderController extends GetxController {
                                       height: 25,
                                       margin: EdgeInsets.only(left: 7.5),
                                       alignment: Alignment.center,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           gradient: kPrimaryGradient,
                                           borderRadius: BorderRadius.all(Radius.circular(25))),
-                                      child: Icon(
+                                      child: const Icon(
                                         Icons.arrow_forward_rounded,
                                         size: 20,
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10,
                                     ),
                                   ],
@@ -493,19 +455,19 @@ class SliderController extends GetxController {
                                 SizedBox(
                                   height: 5,
                                 ),
-                                Text(
+                                const Text(
                                   "büyüteç kullanarak büyütebilirsiniz",
                                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
                                 ),
-                                Icon(
+                                const Icon(
                                   Icons.zoom_in_rounded,
                                   color: Colors.purple,
                                   size: 45,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
-                                Text("Başarılar Dileriz"),
+                                const Text("Başarılar Dileriz"),
                               ],
                             ),
                             SizedBox(
