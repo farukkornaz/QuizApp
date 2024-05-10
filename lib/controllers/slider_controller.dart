@@ -13,11 +13,9 @@ import '../constants.dart';
 import 'auth_controller.dart';
 
 class SliderController extends GetxController {
-  AuthController _acontroller = Get.put(AuthController());
-  QuestionController _ccontroller = Get.put(QuestionController());
-  DateTimeController _dTController = Get.put(DateTimeController());
-
-
+  AuthController _acountController = Get.put(AuthController());
+  QuestionController _questionController = Get.put(QuestionController());
+  DateTimeController _dateTimeController = Get.put(DateTimeController());
 
   final List<String> imgAList = [
     'assets/images/q3.jpeg',
@@ -35,15 +33,15 @@ class SliderController extends GetxController {
 
   @override
   void onInit() {
-    _ccontroller.onlineTestName = 'online_test_1';
+    _questionController.onlineTestName = 'online_test';
     imageSliders = imgAList
         .map((item) => InkWell(
               onTap: () async {
                 if (imgAList.indexOf(item) == 0 && dialogChecker.value == false) {
-                  if (_acontroller.guest) {
+                  if (_acountController.guest) {
                     dialogChecker.value = true;
                     Get.defaultDialog(
-                      contentPadding: EdgeInsets.symmetric(vertical: 15),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 15),
                       textConfirm: "Tamam",
                       onConfirm: () {
                         Get.back();
@@ -53,7 +51,7 @@ class SliderController extends GetxController {
                       title: "Online Sınav",
                       titleStyle: const TextStyle(fontSize: 20, color: Colors.purple),
                       content: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 10),
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
                         child: const Column(
                           children: [
                             Column(
@@ -73,18 +71,14 @@ class SliderController extends GetxController {
                         ),
                       ),
                     ).whenComplete(() => dialogChecker.value = false);
-                  } else if (_acontroller.user?.uid == "TbTq1loYiUcCbSsTgcQp90nKS2c2") {
-                    _ccontroller.databaseQuestions = await Database().getOnlineQData();
-                    _ccontroller.selectedOnlineAnswers =
-                        List<int>.filled(_ccontroller.databaseQuestions?.length ?? 0, -1);
-                    getInfoDialog();
-                  } else if (!_acontroller.guest) {
-                    _ccontroller.databaseQuestions = await Database().getOnlineQData();
-                    _acontroller.onlineExamChecker =
-                        await Database().checkOnlineExam(_acontroller.user?.email ?? '', _ccontroller.onlineTestName);
-                    if (_acontroller.onlineExamChecker == 1) {
-                      if (_acontroller.snackWait == false) {
-                        _acontroller.snackbarWait();
+                  }
+                  else if (!_acountController.guest) {
+                    _questionController.databaseQuestions = await Database().getOnlineQData();
+                    _acountController.onlineExamChecker =
+                        await Database().checkOnlineExam(_acountController.user?.email ?? '', _questionController.onlineTestName);
+                    if (_acountController.onlineExamChecker == 1) {
+                      if (_acountController.snackWait == false) {
+                        _acountController.snackbarWait();
                         Get.snackbar(
                           'Bilgilendirme',
                           "Bu Testi Çözdünüz.",
@@ -103,9 +97,10 @@ class SliderController extends GetxController {
                       } else {
                         print("duplicate");
                       }
-                    } else if (_acontroller.onlineExamChecker == 3) {
-                      if (_acontroller.snackWait == false) {
-                        _acontroller.snackbarWait();
+                    }
+                    else if (_acountController.onlineExamChecker == 3) {
+                      if (_acountController.snackWait == false) {
+                        _acountController.snackbarWait();
                         Get.snackbar(
                           'Hata',
                           "Lütfen internetinizi kontrol ediniz",
@@ -124,7 +119,8 @@ class SliderController extends GetxController {
                       } else {
                         print("duplicate");
                       }
-                    } else {
+                    }
+                    else {
                       calculateRemainingTime();
                       /*_ccontroller.onlineActive = true;
               _ccontroller.isVisible.value = true;
@@ -132,44 +128,43 @@ class SliderController extends GetxController {
               _ccontroller.startTimer();*/
                     }
                   }
-                } else if (imgAList.indexOf(item) == 1) {
+                }
+                else if (imgAList.indexOf(item) == 1) {
                   if (!await launchUrl(_url)) throw 'Could not launch $_url';
                 } else {
                   print("1");
                 }
               },
               child: Container(
-                child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 10),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    child: imgAList.indexOf(item) != 0
-                        ? Stack(
-                            children: <Widget>[
-                              //Image.network(item, fit: BoxFit.cover, width: 1000.0),
-                              Image.asset(item, fit: BoxFit.cover, width: 1000.0),
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+                  child: imgAList.indexOf(item) != 0
+                      ? Stack(
+                          children: <Widget>[
+                            //Image.network(item, fit: BoxFit.cover, width: 1000.0),
+                            Image.asset(item, fit: BoxFit.cover, width: 1000.0),
+                          ],
+                        )
+                      : Container(
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Colors.purple.withOpacity(0.5),
+                              Colors.purple.withOpacity(0.050),
+                              Colors.purple.withOpacity(0.5),
                             ],
-                          )
-                        : Container(
-                            decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Colors.purple.withOpacity(0.5),
-                                Colors.purple.withOpacity(0.050),
-                                Colors.purple.withOpacity(0.5),
-                              ],
-                            )),
-                            width: double.infinity,
-                            height: double.infinity,
-                            child: const Center(
-                                child: Text(
-                              "ONLİNE SINAV İÇİN TIKLA !",
-                              style: TextStyle(color: Colors.purple, fontSize: 18, fontWeight: FontWeight.bold),
-                            )),
-                          ),
-                  ),
+                          )),
+                          width: double.infinity,
+                          height: double.infinity,
+                          child: const Center(
+                              child: Text(
+                            "ONLİNE SINAV İÇİN TIKLA !",
+                            style: TextStyle(color: Colors.purple, fontSize: 18, fontWeight: FontWeight.bold),
+                          )),
+                        ),
                 ),
               ),
             ))
@@ -186,23 +181,23 @@ class SliderController extends GetxController {
   }
 
   calculateRemainingTime() async {
-    _ccontroller.selectedOnlineAnswers = List<int>.filled(_ccontroller.databaseQuestions?.length ?? 0, -1);
+    _questionController.selectedOnlineAnswers = List<int>.filled(_questionController.databaseQuestions?.length ?? 0, -1);
     try {
       /*final result = await InternetAddress.lookup('example.com');*/
       if (/*result.isNotEmpty && result[0].rawAddress.isNotEmpty*/true) {
         await GetTime();
-        await _dTController.getNetworkTime();
-        var dur = serverTime!.difference(_dTController.myTime!);
+        await _dateTimeController.getNetworkTime();
+        var dur = serverTime!.difference(_dateTimeController.myTime!);
         if (!dur.inDays.isNegative /*&& !dur.inHours.isNegative*/) {
-          if (_dTController.myTime!.year == serverTime!.year &&
-                  _dTController.myTime!.day ==
+          if (_dateTimeController.myTime!.year == serverTime!.year &&
+                  _dateTimeController.myTime!.day ==
                       serverTime!.day /*&&
               (serverTime.hour - _dTController.myTime.hour == 0)*/
               ) {
             getInfoDialog();
           }
           else {
-            differenceDays = (serverTime!.day - _dTController.myTime!.day).toString();
+            differenceDays = (serverTime!.day - _dateTimeController.myTime!.day).toString();
             if (dialogChecker.value == false) {
               dialogChecker.value = true;
               Get.defaultDialog(
@@ -260,8 +255,8 @@ class SliderController extends GetxController {
         }
       }
     } on SocketException catch (_) {
-      if (_acontroller.snackWait == false) {
-        _acontroller.snackbarWait();
+      if (_acountController.snackWait == false) {
+        _acountController.snackbarWait();
         Get.snackbar(
           'Uyarı',
           "İnternet Bağlantınızı Kontrol ediniz",
@@ -271,7 +266,7 @@ class SliderController extends GetxController {
           borderColor: Colors.purpleAccent,
           borderWidth: 1.5,
           isDismissible: true,
-          icon: Icon(
+          icon: const Icon(
             Icons.error_outline_rounded,
             color: Colors.white,
           ),
@@ -282,9 +277,6 @@ class SliderController extends GetxController {
   }
 
   String getText(int x) {
-    if (x == 2) {
-      return "Siyer Testi 2021";
-    }
     return 'No. $x image';
   }
 
@@ -353,7 +345,7 @@ class SliderController extends GetxController {
                                   height: 5,
                                 ),
                                 Text(
-                                  "Soru Sayısı : ${_ccontroller.databaseQuestions!.length}",
+                                  "Soru Sayısı : ${_questionController.databaseQuestions!.length}",
                                   style: const TextStyle(
                                     color: Colors.purple,
                                     fontSize: 17,
@@ -475,9 +467,9 @@ class SliderController extends GetxController {
                             InkWell(
                               onTap: () {
                                 Get.back();
-                                _ccontroller.onlineActive = true;
-                                _ccontroller.isVisible.value = true;
-                                _ccontroller.startTimer();
+                                _questionController.onlineActive = true;
+                                _questionController.isVisible.value = true;
+                                _questionController.startTimer();
                                 Get.to(OnlineQuizScreen());
                               },
                               child: Container(

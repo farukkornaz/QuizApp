@@ -275,39 +275,6 @@ class Body extends StatelessWidget {
                   ),
                 ),
               ),
-              /* Positioned(
-                left: MediaQuery.of(context).size.width/2,
-                right: -MediaQuery.of(context).size.width/2 + MediaQuery.of(context).size.width/10,
-                bottom: MediaQuery.of(context).size.height/2,
-                top: -MediaQuery.of(context).size.height/2 + MediaQuery.of(context).size.height/7,
-                child: Container(
-                  child:Center(
-                    child: InkWell( // provides clickable and cool click animation
-                      onTap: () {
-                        Get.back();
-                        _questionController.questReset();
-                        _questionController.resetStatus();
-                        _questionController.alreadyAnswered = false;
-                      },
-                      child: Container(
-                        width: 25,
-                        height: 25,
-                        //margin: EdgeInsets.fromLTRB(0, 10, 10, 10),
-                        alignment: Alignment.center,
-                        padding: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                            color: Colors.redAccent,
-                            borderRadius: BorderRadius.all(Radius.circular(25))
-                        ),
-                        child:Icon(
-                            Icons.close_rounded,
-                            size: 15,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),*/
             ],
           ),
         ),

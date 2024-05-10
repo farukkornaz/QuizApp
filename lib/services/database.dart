@@ -196,7 +196,6 @@ class Database {
         'score': score,
         'time': time,
       }, SetOptions(merge: true));
-
       print("11");
     } catch (e) {
       print(e);

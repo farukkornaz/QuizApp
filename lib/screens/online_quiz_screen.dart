@@ -19,7 +19,7 @@ class OnlineQuizScreen extends StatelessWidget {
   bool previous = false;
 
   late Stream<DocumentSnapshot<Map<String, dynamic>>> stream;
-  late QuestionController _controller;
+  late QuestionController _questionController;
   late AuthController _aController;
   late Database db;
   int count = 0;
@@ -30,9 +30,9 @@ class OnlineQuizScreen extends StatelessWidget {
     db = Database();
     stream = db.listenAdminForChangeOfNextOrPreviousQuestion();
 
-    _controller = Get.put(QuestionController());
+    _questionController = Get.put(QuestionController());
     _aController = Get.find<AuthController>();
-    _controller.onInit();
+    _questionController.onInit();
   }
 
   @override
@@ -78,13 +78,13 @@ class OnlineQuizScreen extends StatelessWidget {
                             child: InkWell(
                               // provides clickable and cool click animation
                               onTap: () async {
-                                _controller.checkOnlineAnswers();
+                                _questionController.checkOnlineAnswers();
                                 try {
                                   await Database().storeOnlineExam(
-                                    _controller.onlineTestName,
-                                    _controller.numOfCorrectAns,
-                                    (_controller.timerMinute.value * 60) +
-                                        _controller.timerStart.value,
+                                    _questionController.onlineTestName,
+                                    _questionController.numOfCorrectAns,
+                                    (_questionController.timerMinute.value * 60) +
+                                        _questionController.timerStart.value,
                                     _aController.user?.email ??
                                         "email bulunamadı",
                                   );
@@ -107,12 +107,12 @@ class OnlineQuizScreen extends StatelessWidget {
                                   );
                                 }
                                 _aController.onlineExamChecker = 1;
-                                _controller.questReset();
-                                _controller.resetStatus();
-                                _controller.onlineActive = false;
-                                _controller.onlineSelectedReset();
-                                _controller.resetOnlineTimer();
-                                _controller.isVisible.value = false;
+                                _questionController.questReset();
+                                _questionController.resetStatus();
+                                _questionController.onlineActive = false;
+                                _questionController.onlineSelectedReset();
+                                _questionController.resetOnlineTimer();
+                                _questionController.isVisible.value = false;
                                 Get.off(const OnlineScoreScreen());
                               },
                               child: Container(
@@ -174,8 +174,8 @@ class OnlineQuizScreen extends StatelessWidget {
                                               width: 10,
                                             ),
                                             Text(
-                                              "${_controller.timerMinute.value.toString().padLeft(2, '0')} "
-                                              ": ${_controller.timerStart.value.toString().padLeft(2, '0')}",
+                                              "${_questionController.timerMinute.value.toString().padLeft(2, '0')} "
+                                              ": ${_questionController.timerStart.value.toString().padLeft(2, '0')}",
                                               style: const TextStyle(
                                                   fontSize: 15,
                                                   color: Colors.white),
@@ -186,14 +186,14 @@ class OnlineQuizScreen extends StatelessWidget {
                                         Obx(
                                           () => Text.rich(
                                             TextSpan(
-                                              text: _controller.questionNumber
+                                              text: _questionController.questionNumber
                                                           .value >
-                                                      (_controller
+                                                      (_questionController
                                                               .databaseQuestions
                                                               ?.length ??
                                                           0)
-                                                  ? '${_controller.databaseQuestions?.length}'
-                                                  : '${_controller.questionNumber.value}',
+                                                  ? '${_questionController.databaseQuestions?.length}'
+                                                  : '${_questionController.questionNumber.value}',
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .headlineSmall!
@@ -202,7 +202,7 @@ class OnlineQuizScreen extends StatelessWidget {
                                               children: [
                                                 TextSpan(
                                                   text:
-                                                      '/${_controller.databaseQuestions?.length ?? 0}',
+                                                      '/${_questionController.databaseQuestions?.length ?? 0}',
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .titleLarge!
@@ -226,22 +226,17 @@ class OnlineQuizScreen extends StatelessWidget {
                             //height: double.infinity,
                             child: PageView.builder(
                                 //physics: NeverScrollableScrollPhysics(),//block swiping
-                                controller: _controller.pageController,
-                                onPageChanged: _controller.updateTheQnNum,
+                                controller: _questionController.pageController,
+                                onPageChanged: _questionController.updateTheQnNum,
                                 itemCount:
-                                    (_controller.databaseQuestions?.length ??
-                                            0) +
-                                        1,
+                                    (_questionController.databaseQuestions?.length ?? 0) + 1,
                                 itemBuilder: (context, index) {
-                                  if (index ==
-                                      (_controller.databaseQuestions?.length ??
-                                          0)) {
+                                  // sorular bittiğinde
+                                  if (index >= (_questionController.databaseQuestions?.length ?? 0)) {
                                     return Container(
                                       padding: const EdgeInsets.fromLTRB(
                                           10, 0, 10, 0),
                                       decoration: const BoxDecoration(
-                                          //color: Colors.white.withOpacity(0.3),
-                                          //borderRadius: BorderRadius.all(Radius.circular(10)),),
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(20))),
                                       child: Column(
@@ -249,16 +244,11 @@ class OnlineQuizScreen extends StatelessWidget {
                                           Container(
                                               height: 200,
                                               child: const Image(
-                                                image: AssetImage(
-                                                    "assets/images/student.jpg"),
+                                                image: AssetImage("assets/images/student.jpg"),
                                                 fit: BoxFit.fill,
                                               )),
                                           const SizedBox(
-                                            height: 30,
-                                          ),
-                                          //Text("TEBRİKLER",style: TextStyle(color: Colors.purple[800],fontSize: 30),),
-                                          const SizedBox(
-                                            height: 15,
+                                            height: 45,
                                           ),
                                           Text(
                                             "Yarışmayı başarıyla bitirdiniz 😊",
@@ -286,18 +276,16 @@ class OnlineQuizScreen extends StatelessWidget {
                                           ),
                                           InkWell(
                                             onTap: () async {
-                                              _controller.checkOnlineAnswers();
+                                              _questionController.checkOnlineAnswers();
                                               try {
                                                 await Database()
                                                     .storeOnlineExam(
-                                                        _controller
+                                                        _questionController
                                                             .onlineTestName,
-                                                        _controller
+                                                        _questionController
                                                             .numOfCorrectAns,
-                                                        (_controller.timerMinute
-                                                                    .value *
-                                                                60) +
-                                                            _controller
+                                                        (_questionController.timerMinute.value * 60) +
+                                                            _questionController
                                                                 .timerStart
                                                                 .value,
                                                         _aController
@@ -324,14 +312,13 @@ class OnlineQuizScreen extends StatelessWidget {
                                                   shouldIconPulse: false,
                                                 );
                                               }
-                                              _aController.onlineExamChecker =
-                                                  1;
-                                              _controller.questReset();
-                                              _controller.resetStatus();
-                                              _controller.onlineSelectedReset();
-                                              _controller.resetOnlineTimer();
-                                              _controller.isVisible.value =
-                                                  false;
+                                              //TODO:bu sınava baslarken verilecek
+                                              _aController.onlineExamChecker = 1;
+                                              _questionController.questReset();
+                                              _questionController.resetStatus();
+                                              _questionController.onlineSelectedReset();
+                                              _questionController.resetOnlineTimer();
+                                              _questionController.isVisible.value = false;
                                               Get.off(const OnlineScoreScreen());
                                             },
                                             child: Container(
@@ -340,16 +327,12 @@ class OnlineQuizScreen extends StatelessWidget {
                                               margin: const EdgeInsets.fromLTRB(
                                                   0, 0, 5, 0),
                                               alignment: Alignment.center,
-                                              //padding: EdgeInsets.all(5),
                                               decoration: BoxDecoration(
                                                 color: Colors.white,
                                                 border: Border.all(
-                                                    color:
-                                                        Colors.purple.shade800,
+                                                    color: Colors.purple.shade800,
                                                     width: 3),
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                  Radius.circular(25),
+                                                borderRadius: const BorderRadius.all(Radius.circular(25),
                                                 ),
                                               ),
                                               child: Text(
@@ -363,9 +346,10 @@ class OnlineQuizScreen extends StatelessWidget {
                                         ],
                                       ),
                                     );
-                                  } else {
+                                  }
+                                  else {
                                     return QuestionCard(
-                                        question: _controller
+                                        question: _questionController
                                             .databaseQuestions![index]);
                                   }
                                 }
@@ -373,6 +357,8 @@ class OnlineQuizScreen extends StatelessWidget {
                                 ),
                           ),
                         ),
+
+                        // uzaktan komut
                         StreamBuilder(
                             stream: stream,
                             builder: (context, snapshot) {
@@ -384,20 +370,20 @@ class OnlineQuizScreen extends StatelessWidget {
                                 }
                                 return Builder(builder: (context){
                                   final data = snapshot.requireData.data();
+
                                   if(data != null){
                                     next = data["next"];
                                     previous = data["previous"];
                                   }
-
                                   if(next){
-                                    _controller.onlineNextQuestion();
+                                    _questionController.onlineNextQuestion();
                                     db.resetOnlineQuestionShiftValues();
-                                  }if(previous){
-                                    _controller.onlinePreviousQuestion();
+                                  }
+                                  if(previous){
+                                    _questionController.onlinePreviousQuestion();
                                     db.resetOnlineQuestionShiftValues();
                                   }
                                   return const Text("");
-                                  //final data = snapshot.requireData.data();
                                 });
 
 
@@ -415,7 +401,7 @@ class OnlineQuizScreen extends StatelessWidget {
                                   Center(
                                     child: InkWell(
                                       onTap: () {
-                                        _controller.onlinePreviousQuestion();
+                                        _questionController.onlinePreviousQuestion();
                                       },
                                       child: Container(
                                         width: 75,
@@ -438,7 +424,7 @@ class OnlineQuizScreen extends StatelessWidget {
                                     child: InkWell(
                                       // provides clickable and cool click animation
                                       onTap: () {
-                                        _controller.onlineNextQuestion();
+                                        _questionController.onlineNextQuestion();
                                       },
                                       child: Container(
                                         width: 75,
