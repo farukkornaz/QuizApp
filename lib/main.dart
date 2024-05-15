@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
   final ThemeData _theme = ThemeData(
     brightness: Brightness.light,
     fontFamily: 'Quicksand',
-    inputDecorationTheme: InputDecorationTheme(
+    inputDecorationTheme: const InputDecorationTheme(
       contentPadding: EdgeInsets.fromLTRB(10, 17, 10, 17),
       labelStyle: TextStyle(color: Colors.black87),
       hintStyle: TextStyle(color: Colors.grey),
@@ -62,20 +62,20 @@ class MyApp extends StatelessWidget {
           color: Colors.purple,
         ),
       ),
-      errorBorder: new OutlineInputBorder(
+      errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
           color: Colors.red,
         ),
       ),
-      focusedErrorBorder: new OutlineInputBorder(
+      focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(
           color: Colors.red,
         ),
       ),
     ),
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
       headlineSmall: TextStyle(fontSize: 14),
       titleLarge: TextStyle(fontSize: 12),
       /*headline6: TextStyle(fontSize: 12),
@@ -85,10 +85,10 @@ class MyApp extends StatelessWidget {
       displayColor: Colors.black87,
       fontFamily: 'Quicksand',
     ),
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       backgroundColor: Colors.purple,
     ),
-    iconTheme: IconThemeData(
+    iconTheme: const IconThemeData(
       color: Colors.white,
     ),
     textButtonTheme: TextButtonThemeData(
@@ -108,14 +108,14 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Quiz App',
       debugShowCheckedModeBanner: false,
-      localizationsDelegates: [
+      localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [
-        const Locale('tr', ''),
-        const Locale('en', ''),
+      supportedLocales: const [
+        Locale('tr', ''),
+        Locale('en', ''),
       ],
       theme: _theme.copyWith(
         colorScheme: _theme.colorScheme.copyWith(
@@ -125,7 +125,7 @@ class MyApp extends StatelessWidget {
       initialBinding: EssentialBinding(),
       defaultTransition: Transition.cupertino,
       // page change effect
-      transitionDuration: Duration(milliseconds: 150),
+      transitionDuration: const Duration(milliseconds: 150),
       // page change speed
       home: Root(),
     );

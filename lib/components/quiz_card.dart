@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quiz_test_app/constants.dart';
 import 'package:quiz_test_app/controllers/question_controller.dart';
-import 'package:quiz_test_app/models/quizes.dart';
 
 import '../models/Quiz.dart';
 

@@ -6,7 +6,6 @@ import 'package:just_audio/just_audio.dart';
 import 'package:quiz_test_app/controllers/auth_controller.dart';
 import 'package:quiz_test_app/controllers/quiz_controller.dart';
 import 'package:quiz_test_app/models/Question.dart';
-import 'package:quiz_test_app/models/quizes.dart';
 import 'package:quiz_test_app/screens/online_score_screen.dart';
 import 'package:quiz_test_app/screens/quiz_screen.dart';
 import 'package:quiz_test_app/screens/score_screen.dart';
