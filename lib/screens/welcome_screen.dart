@@ -10,7 +10,7 @@ import 'package:quiz_test_app/controllers/question_controller.dart';
 //import 'package:quiz_test_app/controllers/refresh_user_info_controller.dart';
 import 'package:quiz_test_app/controllers/slider_controller.dart';
 import 'package:quiz_test_app/models/Question.dart';
-import 'package:quiz_test_app/screens/Category.dart';
+import 'package:quiz_test_app/screens/CategoryScreen.dart';
 import 'package:quiz_test_app/screens/survival_quiz_screen.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 
@@ -161,7 +161,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
                             padding: const EdgeInsets.all(8.0),
                             child: ElevatedButton(
                               onPressed: () {
-                                Get.to(const Category());
+                                Get.to(CategoryScreen());
                               },
                               child: const Text("Kategoriler"),
                             ),
