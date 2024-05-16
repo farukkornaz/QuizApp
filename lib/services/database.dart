@@ -6,7 +6,7 @@ import 'package:quiz_test_app/controllers/user_controller.dart';
 import 'package:quiz_test_app/models/Question.dart';
 import 'package:quiz_test_app/models/quiz_DB.dart';
 import 'package:quiz_test_app/models/user.dart';
-import 'package:quiz_test_app/models/Category.dart' as cat;
+import 'package:quiz_test_app/models/category_model.dart' as cat;
 
 import '../models/Quiz.dart';
 
@@ -79,14 +79,16 @@ class Database {
   }
 
   // cat.Category --> Model/Caregory.dart
-  Future<List<cat.Category>> getCategories() async {
-    List<cat.Category> categoryList;
+  Future<List<cat.CategoryModel>> getCategories() async {
+    List<cat.CategoryModel> categoryList;
 
     final categoriesQuerySnapShot =
         await _firebaseFirestore.collection("Categories").get();
 
     categoryList = categoriesQuerySnapShot.docs
-        .map((e) => cat.Category.fromJson(e.data()))
+        .map((e) {
+          return cat.CategoryModel.fromJson({"id": e.reference.id, "name": e.get("name")});
+        })
         .toList();
 
     return categoryList;
