@@ -505,7 +505,7 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
     Get.to(() => QuizScreen());
   }
 
-  //TODO: quizz sorularını cek
+  //TODO: quiz sorularını cek
   Future<void> getTheRightQuestions(String quizId) async{
      //List<Quiz> quizes = await db.getQuizesByCategory("4nM9V2ISVZTpFwSGPkyN");
 
