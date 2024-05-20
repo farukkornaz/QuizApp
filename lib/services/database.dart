@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:quiz_test_app/controllers/question_controller.dart';
@@ -39,17 +40,22 @@ class Database {
     return quiz;
   }
 
-  Stream<DocumentSnapshot<Map<String, dynamic>>> listenAdminForChangeOfNextOrPreviousQuestion() {
-    Stream<DocumentSnapshot<Map<String, dynamic>>> streamOfOnlineQuiz = _firebaseFirestore
-        .collection("online_tests")
-        .doc("online_test")
-        .snapshots();
+  Stream<DocumentSnapshot<Map<String, dynamic>>>
+      listenAdminForChangeOfNextOrPreviousQuestion() {
+    Stream<DocumentSnapshot<Map<String, dynamic>>> streamOfOnlineQuiz =
+        _firebaseFirestore
+            .collection("online_tests")
+            .doc("online_test")
+            .snapshots();
 
     return streamOfOnlineQuiz;
   }
 
-  resetOnlineQuestionShiftValues(){
-    _firebaseFirestore.collection("online_tests").doc("online_test").update({"next": false, "previous": false});
+  resetOnlineQuestionShiftValues() {
+    _firebaseFirestore
+        .collection("online_tests")
+        .doc("online_test")
+        .update({"next": false, "previous": false});
   }
 
   Future<List<Quiz>> getPoplulerQuizes() async {
@@ -81,15 +87,26 @@ class Database {
   // cat.Category --> Model/Caregory.dart
   Future<List<cat.CategoryModel>> getCategories() async {
     List<cat.CategoryModel> categoryList;
-
+    print("1");
+    final storage = FirebaseStorage.instance;
+    print("2");
+    final storageRef = storage.ref();
+    print("3");
     final categoriesQuerySnapShot =
         await _firebaseFirestore.collection("Categories").get();
 
-    categoryList = categoriesQuerySnapShot.docs
-        .map((e) {
-          return cat.CategoryModel.fromJson({"id": e.reference.id, "name": e.get("name")});
-        })
-        .toList();
+    categoryList = categoriesQuerySnapShot.docs.map((e) {
+      return cat.CategoryModel.fromJson({
+        "id": e.reference.id,
+        "name": e.get("name"),
+      });
+    }).toList();
+
+    for (int i = 0; i < categoryList.length; i++) {
+      categoryList[i].imagePath = await storageRef
+          .child("categories/${categoryList[i].id}.png")
+          .getDownloadURL();
+    }
 
     return categoryList;
   }

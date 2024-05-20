@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:expandable/expandable.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart'; // core get package
 import 'package:quiz_test_app/components/drawer_view.dart';
@@ -147,9 +148,49 @@ class WelcomeScreen extends GetWidget<AuthController> {
                               },
                               child: Container(
                                 //decoration: BoxDecoration(color: Colors.green,borderRadius: BorderRadius.circular(20)),
-                                padding: const EdgeInsets.symmetric(
+                                padding: EdgeInsets.symmetric(
                                     vertical: kDefaultPadding),
-                                child: Container(
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(16.0),
+                                  ),
+                                  elevation: 4.0,
+                                  child: Container(
+                                    width: 200,
+                                    height: 150,
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          width: double.infinity,
+                                          height: 110, // Kartın %80'i
+                                          decoration: BoxDecoration(
+                                            borderRadius: const BorderRadius.only(
+                                              topLeft: Radius.circular(16.0),
+                                              topRight: Radius.circular(16.0),
+                                            ),
+                                            image: DecorationImage(
+                                              image: NetworkImage(
+                                                  '${snapshotData[index].imagePath}'),
+                                              fit: BoxFit.fill,
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          color: Colors.greenAccent,
+                                          width: double.infinity,
+                                          height: 40, // Kartın %20'si
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            '${snapshotData[index].name}',
+                                            style: TextStyle(fontSize: 16.0),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+
+                                /*Container(
                                   height: 150,
                                   width: 150,
                                   padding:
@@ -179,9 +220,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                                 fontSize: 22),
                                           ),
                                   ),
-
-
-                                ),
+                                ),*/
                               ),
                             ),
                           ),
