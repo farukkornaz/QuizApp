@@ -30,7 +30,9 @@
 .pub-cache/
 .pub/
 /build/
-
+/macos/
+/windows/
+/linux/
 # Web related
 
 # Symbolication related
