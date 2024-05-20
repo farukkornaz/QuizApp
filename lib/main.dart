@@ -7,7 +7,6 @@ import 'package:quiz_test_app/bindings/essential_binding.dart';
 import 'components/root.dart';
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
@@ -18,10 +17,10 @@ void main() async {
     appId: '1:573131445611:android:ad29f870a981780d4fa82e',
     messagingSenderId: '573131445611',
     projectId: 'quiz-test-app-1fd6c',
+    storageBucket: "gs://quiz-test-app-1fd6c.appspot.com",
   ));
 
-
- //List<Map<String, dynamic>> questions = allQuestions;
+  //List<Map<String, dynamic>> questions = allQuestions;
 
   /*var db = FirebaseFirestore.instance;
   final snapshot = await db.collection("category").get();
