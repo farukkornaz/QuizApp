@@ -3,6 +3,7 @@ import 'dart:convert';
 class CategoryModel {
   String? id;
   String? name;
+  String? imagePath;
 
   CategoryModel({
     this.id,
