@@ -11,6 +11,7 @@ import 'package:quiz_test_app/screens/error_screens/not_found_screen.dart';
 import 'package:quiz_test_app/screens/welcome_screen.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 
+import '../components/drawer_view.dart';
 import '../constants.dart';
 import '../models/Question.dart';
 import '../models/Quiz.dart';
@@ -64,8 +65,13 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const DrawerView(),
       appBar: AppBar(
-        title: const Text("kategori sayfası"),
+        centerTitle: true,
+        title: const Text(
+          "kategori sayfası",
+          style: TextStyle(fontSize: 20),
+        ),
       ),
       body: FutureBuilder(
         future: _fetchCategories(),
@@ -90,7 +96,7 @@ class CategoryScreen extends StatelessWidget {
                     if (snapshotData[index].id != null) {
                       categoryScreenController
                           .goCategoryQuizzes(snapshotData[index].id!);
-                    }else{
+                    } else {
                       Get.to(NotFound());
                     }
                   },

@@ -14,11 +14,23 @@ import 'package:quiz_test_app/screens/CategoryScreen.dart';
 import 'package:quiz_test_app/screens/survival_quiz_screen.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 
+import '../controllers/category_screen_controller/category_screen_controller.dart';
 import '../controllers/glow_animation.dart';
 import '../models/Quiz.dart';
+import '../models/category_model.dart';
+import 'error_screens/not_found_screen.dart';
 
 class WelcomeScreen extends GetWidget<AuthController> {
-  const WelcomeScreen({super.key});
+  WelcomeScreen({super.key});
+
+  CategoryScreenController categoryScreenController =
+      Get.put(CategoryScreenController());
+  late final List<CategoryModel> categories;
+
+  Future<List<CategoryModel>> _fetchCategories() async {
+    var categories = await categoryScreenController.getCategories();
+    return categories;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +47,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
       canPop: false,
       child: Scaffold(
         drawer: const DrawerView(),
-        extendBodyBehindAppBar: true,
+        extendBodyBehindAppBar: false,
         appBar: AppBar(
           title: const Text(
             'Ana Sayfa',
@@ -43,335 +55,144 @@ class WelcomeScreen extends GetWidget<AuthController> {
           ),
           centerTitle: true,
         ), // most common app layout
-        body: SingleChildScrollView(
-          child: Stack(
-            children: [
-              SafeArea(
-                child: Container(
-                  color: kLightPurple,
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        //Slider *********************************************************
-                        Obx(
-                          () => Stack(children: [
-                            CarouselSlider(
-                              items: sliderController.imageSliders,
-                              options: CarouselOptions(
-                                  autoPlayInterval:
-                                      const Duration(seconds: 15),
-                                  viewportFraction: 1,
-                                  autoPlay: true,
-                                  enlargeCenterPage: true,
-                                  aspectRatio: 1.75,
-                                  onPageChanged: (index, reason) {
-                                    sliderController.current.value = index;
-                                  }),
-                            ),
-                            Positioned(
-                              bottom: 10,
-                              left: 0,
-                              right: 0,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: sliderController.imgAList.map((url) {
-                                  int index =
-                                      sliderController.imgAList.indexOf(url);
-                                  return Container(
-                                    width: 8.0,
-                                    height: 8.0,
-                                    margin: const EdgeInsets.symmetric(
-                                        vertical: 10.0, horizontal: 2.0),
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color:
-                                          sliderController.current.value == index
-                                              ? Colors.purple
-                                              : Colors.white,
-                                    ),
-                                  );
-                                }).toList(),
-                              ),
-                            ),
-                          ]),
-                        ),
-                        //populer  *******************************************************
-                        Column(
-                          children: [
-                            SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white70,
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(10)),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.3),
-                                          spreadRadius: 3,
-                                          blurRadius: 7,
-                                          offset: const Offset(0,
-                                              3), // changes position of shadow
-                                        ),
-                                      ],
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          margin: const EdgeInsets.all(10),
-                                          child: const Center(
-                                              child: Text(
-                                            'Popüler Quizler',
-                                            style: TextStyle(
-                                                fontSize: 17,
-                                                color: Colors.purple),
-                                          )),
-                                        ),
-                                        Container(
-                                          margin:
-                                              const EdgeInsets.fromLTRB(10, 0, 0, 10),
-                                          height: 130,
-                                          width: double.infinity,
-                                          child: ListView.builder(
-                                            scrollDirection: Axis.horizontal,
-                                            itemCount: questionController
-                                                    .popularQuizes?.length ??
-                                                0,
-                                            itemBuilder: (context, index) =>
-                                                QuizCard(
-                                                    quizes: questionController
-                                                        .popularQuizes![index]),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        //Kategoriler ve testleri ****************************************
-                        Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Get.to(CategoryScreen());
-                              },
-                              child: const Text("Kategoriler"),
-                            ),
-                          ),
-                        ),
-                        SingleChildScrollView(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: kDefaultPadding),
-                                child: ExpandableNotifier(
-                                  child: Container(
-                                    padding: const EdgeInsets.all(
-                                        kDefaultPadding / 2),
-                                    decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.3),
-                                          spreadRadius: 3,
-                                          blurRadius: 7,
-                                          offset: const Offset(0,
-                                              3), // changes position of shadow
-                                        ),
-                                      ],
-                                      color: Colors.white,
-                                      //color: Colors.white.withOpacity(0.3),
-                                      //borderRadius: BorderRadius.all(Radius.circular(10)),),
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(15)),
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Expandable(
-                                          collapsed: ExpandableButton(
-                                            child: const Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  '  Matematik',
-                                                  style: TextStyle(
-                                                      color: Colors.purple,
-                                                      fontSize: 18),
-                                                ),
-                                                Icon(
-                                                  Icons
-                                                      .arrow_downward_rounded,
-                                                  color: Colors.purple,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          expanded: Column(children: [
-                                            const Text(
-                                              'Matematik Testleri',
-                                              style: TextStyle(
-                                                  color: Colors.purple,
-                                                  fontSize: 25),
-                                            ),
-                                            const Divider(
-                                              color: Colors.purple,
-                                              thickness: 2,
-                                            ),
-                                            Container(
-                                              padding: const EdgeInsets.all(
-                                                  kDefaultPadding),
-                                              decoration: const BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.all(
-                                                        Radius.circular(10)),
-                                              ),
-                                              child: Column(
-                                                children: [
-                                                  CategorySample(
-                                                      quiz: Quiz(
-                                                          id: "S1YRgOThEUkE5IWPNQ0i",
-                                                          name: "Fizik",
-                                                          questions: [
-                                                        Question(
-                                                            id: 1,
-                                                            answerIndex: 2,
-                                                            options: [
-                                                              "1",
-                                                              "2",
-                                                              "3",
-                                                              "4"
-                                                            ],
-                                                            question:
-                                                                "vecap nedire?"),
-                                                        Question(
-                                                            id: 2,
-                                                            answerIndex: 2,
-                                                            options: [
-                                                              "1",
-                                                              "2",
-                                                              "3",
-                                                              "4"
-                                                            ],
-                                                            question:
-                                                                "cevap nedir?")
-                                                      ])),
-                                                  /*CategorySample(index: 1),
-                                                  CategorySample(index: 2),
-                                                  CategorySample(index: 3),*/
-                                                ],
-                                              ),
-                                            ),
-                                            Container(
-                                              color: Colors.white,
-                                              child: ExpandableButton(
-                                                // <-- Collapses when tapped on
-                                                child: const Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      '  Matematik',
-                                                      style: TextStyle(
-                                                          color:
-                                                              Colors.purple,
-                                                          fontSize: 18),
-                                                    ),
-                                                    Icon(
-                                                      Icons
-                                                          .arrow_upward_rounded,
-                                                      color: Colors.purple,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ]),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        // Survival Questions *********************************************
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Center(
-                          child: InkWell(
-                            onTap: () {
-                              questionController.survivalActive = true;
-                              questionController.survHigh.value = 0;
-                              /*_controller
-                                  .getTheRightSurvivalQuestions("surv_3");*/
-                              Get.to(const SurvivalQuizScreen());
-                            },
-                            child: GetBuilder<GlowAnimationController>(
-                                init: GlowAnimationController(),
-                                builder: (controller) {
-                                  return Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(15)),
-                                        color: Colors.purple,
-                                        boxShadow: [
-                                          BoxShadow(
-                                              spreadRadius:
-                                                  controller.animation.value,
-                                              blurRadius:
-                                                  controller.animation.value,
-                                              color: Colors.purple
-                                                  .withOpacity(0.8))
-                                        ]),
-                                    height: 35,
-                                    width: 225,
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10),
-                                      child: const Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            'Hayatta Kalma Modu',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 15,
-                                            ),
-                                          ),
-                                          Icon(Icons.access_time_rounded),
-                                        ],
-                                      ),
-                                    ),
-                                  );
+        body: FutureBuilder(
+          future: _fetchCategories(),
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            if (!snapshot.hasData) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return const Center(
+                child: Text("hata"),
+              );
+            } else {
+              List<CategoryModel> snapshotData = snapshot.data;
+              return Container(
+                color: kLightPurple,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      //Slider *********************************************************
+                      Obx(
+                        () => Stack(children: [
+                          CarouselSlider(
+                            items: sliderController.imageSliders,
+                            options: CarouselOptions(
+                                autoPlayInterval: const Duration(seconds: 15),
+                                viewportFraction: 1,
+                                autoPlay: true,
+                                enlargeCenterPage: true,
+                                aspectRatio: 1.75,
+                                onPageChanged: (index, reason) {
+                                  sliderController.current.value = index;
                                 }),
                           ),
+                          Positioned(
+                            bottom: 10,
+                            left: 0,
+                            right: 0,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: sliderController.imgAList.map((url) {
+                                int index =
+                                    sliderController.imgAList.indexOf(url);
+                                return Container(
+                                  width: 8.0,
+                                  height: 8.0,
+                                  margin: const EdgeInsets.symmetric(
+                                      vertical: 10.0, horizontal: 2.0),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color:
+                                        sliderController.current.value == index
+                                            ? Colors.purple
+                                            : Colors.white,
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ]),
+                      ),
+                      //Kategoriler ve testleri ****************************************
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Get.to(CategoryScreen());
+                            },
+                            child: const Text("Kategoriler"),
+                          ),
                         ),
-                        const SizedBox(
-                          height: 20,
+                      ),
+                      // Survival Questions *********************************************
+                      Expanded(
+                        child: ResponsiveGridList(
+                          horizontalGridMargin: 10,
+                          verticalGridMargin: 10,
+                          minItemWidth: 150,
+                          children: List.generate(
+                            snapshotData.length,
+                            (index) => GestureDetector(
+                              onTap: () {
+                                if (snapshotData[index].id != null) {
+                                  categoryScreenController.goCategoryQuizzes(
+                                      snapshotData[index].id!);
+                                } else {
+                                  Get.to(const NotFound());
+                                }
+                              },
+                              child: Container(
+                                //decoration: BoxDecoration(color: Colors.green,borderRadius: BorderRadius.circular(20)),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: kDefaultPadding),
+                                child: Container(
+                                  height: 150,
+                                  width: 150,
+                                  padding:
+                                      const EdgeInsets.all(kDefaultPadding / 2),
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.3),
+                                        spreadRadius: 3,
+                                        blurRadius: 7,
+                                        offset: const Offset(
+                                            0, 3), // changes position of shadow
+                                      ),
+                                    ],
+                                    color: Colors.greenAccent,
+                                    //color: Colors.white.withOpacity(0.3),
+                                    //borderRadius: BorderRadius.all(Radius.circular(10)),),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(15)),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                            '${snapshotData[index].name}',
+                                            style: const TextStyle(
+                                              overflow: TextOverflow.ellipsis,
+                                                color: Colors.purple,
+                                                fontSize: 22),
+                                          ),
+                                  ),
+
+
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-            ],
-          ),
+              );
+            }
+          },
         ),
       ),
     );
@@ -452,7 +273,8 @@ class CategorySample extends StatelessWidget {
           InkWell(
             onTap: () async {
               questionController.activeQuizId = quiz.id;
-              await questionController.getTheRightQuestions("S1YRgOThEUkE5IWPNQ0i");
+              await questionController
+                  .getTheRightQuestions("S1YRgOThEUkE5IWPNQ0i");
               questionController.getQuizScreen();
             },
             child: Container(

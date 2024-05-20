@@ -1,8 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quiz_test_app/controllers/auth_controller.dart';
 import 'package:quiz_test_app/controllers/question_controller.dart';
+import 'package:quiz_test_app/screens/welcome_screen.dart';
 
 import '../constants.dart';
 import '../screens/profile_screen.dart';
@@ -29,17 +31,22 @@ class DrawerView extends GetWidget<AuthController> {
             children: [
               SizedBox(
                 height: 125,
-                child: const DrawerHeader(
-                  padding: EdgeInsets.zero,
-                  decoration: BoxDecoration(
-                    color: Colors.purple,
-                  ),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: Center(
-                      child: Text(
-                        'Quick Quiz',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                child: GestureDetector(
+                  onTap: (){
+                    Get.to(WelcomeScreen());
+                  },
+                  child: const DrawerHeader(
+                    padding: EdgeInsets.zero,
+                    decoration: BoxDecoration(
+                      color: Colors.purple,
+                    ),
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Center(
+                        child: Text(
+                          'Quick Quiz',
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
                       ),
                     ),
                   ),
