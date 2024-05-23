@@ -76,7 +76,6 @@ class Option extends StatelessWidget {
                 ),
                 child: GestureDetector(
                   onTap:() {
-                    print("deneme");
                     getTheRightColor();
                   },
                   child: Row(

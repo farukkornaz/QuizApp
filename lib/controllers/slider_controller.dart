@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:quiz_test_app/controllers/date_time_controller.dart';
 import 'package:quiz_test_app/controllers/question_controller.dart';
 import 'package:quiz_test_app/screens/online_quiz_screen.dart';
+import 'package:quiz_test_app/screens/online_waiting_screen.dart';
 import 'package:quiz_test_app/services/database.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -73,6 +74,7 @@ class SliderController extends GetxController {
                     ).whenComplete(() => dialogChecker.value = false);
                   }
                   else if (!_acountController.guest) {
+                    //TODO: isim numara al ve sınava gırmesını sagla
                     _questionController.databaseQuestions = await Database().getOnlineQData();
                     _acountController.onlineExamChecker =
                         await Database().checkOnlineExam(_acountController.user?.email ?? '', _questionController.onlineTestName);
@@ -325,7 +327,7 @@ class SliderController extends GetxController {
                     ],
                   ),
                   Container(
-                    height: 430,
+                    height: 460,
                     child: Stack(children: [
                       Container(
                         margin: const EdgeInsets.only(top: 30),
@@ -431,17 +433,17 @@ class SliderController extends GetxController {
                                   height: 5,
                                 ),
                                 const AutoSizeText(
-                                  "Yarışma süresince yarışmaya erişebilirsiniz.",
+                                  "Yarışma belirtilen tarih ve saatten hemen sonra",
                                   maxLines: 1,
                                   minFontSize: 10,
-                                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
+                                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.red),
                                 ),
                                 const SizedBox(
                                   height: 5,
                                 ),
                                 const Text(
-                                  "Okuyamadığınız soruları",
-                                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
+                                  "yöneticinin sınavı başlatması ile başlayacaktır.",
+                                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.red),
                                 ),
                                 const SizedBox(
                                   height: 5,
@@ -467,17 +469,14 @@ class SliderController extends GetxController {
                             InkWell(
                               onTap: () {
                                 Get.back();
-                                _questionController.onlineActive = true;
-                                _questionController.isVisible.value = true;
-                                _questionController.startTimer();
-                                Get.to(OnlineQuizScreen());
+                                Get.to(OnlineWaitingScreen());
                               },
                               child: Container(
                                 height: 40,
-                                width: 80,
+                                width: 350,
                                 decoration: BoxDecoration(
                                     color: Colors.purple,
-                                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                                    borderRadius: const BorderRadius.all(Radius.circular(50)),
                                     border: Border.all(color: Colors.purpleAccent, width: 2),
                                     boxShadow: [
                                       BoxShadow(
@@ -489,7 +488,7 @@ class SliderController extends GetxController {
                                     ]),
                                 child: const Center(
                                   child: Text(
-                                    "Başla",
+                                    "online sınav bekleme ekranına geç",
                                     style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
                                   ),
                                 ),

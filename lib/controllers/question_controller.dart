@@ -32,6 +32,12 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
 
   late PageController _pageController;
 
+  int activeQuizQuestionLength=0;
+
+  int activeQuizCurrentQuestionIndex=0;
+
+
+
   List<Question>? databaseQuestions;
 
   /*var survivalQuestions = survival_questions.map((e) => {
@@ -394,20 +400,25 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
   void onlineNextQuestion() {
     if (databaseQuestions == null) return;
     if (_questionNumber.value != databaseQuestions!.length + 1) {
-      _pageController.nextPage(duration: Duration(milliseconds: 50), curve: Curves.easeIn);
+      _pageController.nextPage(
+          duration: const Duration(milliseconds: 50),
+          curve: Curves.easeIn);
     }
   }
 
   void onlinePreviousQuestion() {
     if (_questionNumber.value != 1) {
-      _pageController.previousPage(duration: const Duration(milliseconds: 50), curve: Curves.easeIn);
+      _pageController.previousPage(
+          duration: const Duration(milliseconds: 50),
+          curve: Curves.easeIn);
     }
   }
 
 
-  //TODO: buna bakılacak
+  //TODO: activeQuizQuestionLength veri sorunun sınavın uzunlugundan al
   void nextQuestion() {
-    if (true/*_questionNumber.value != _questions.length*/) {
+    activeQuizCurrentQuestionIndex++;
+    if (activeQuizQuestionLength > activeQuizCurrentQuestionIndex) {
       if (!_isAnswered) {
         skipped.value++;
       }
@@ -426,12 +437,12 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
       //get package's simple navigation to another page
       Get.off(ScoreScreen());
       cooldownReset();
-      /*if(!_controller.guest){
+      if(!_controller.guest){
         Database().setQuizScore(
             '${numOfCorrectAns * 10}',
-            Get.find<AuthController>().user.uid,
+            Get.find<AuthController>().user!.uid,
             'quiz001');
-      }*/
+      }
       //Database().storeData('quiz1','${numOfCorrectAns * 10}', Get.find<AuthController>().user.uid);
     }
   }
@@ -452,8 +463,10 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
     _animationController.forward().whenComplete(nextQuestion);
   }
 
-  //TODO: Bu ne?
   void questReset() {
+    activeQuizCurrentQuestionIndex=0;
+    activeQuizCurrentQuestionIndex=0;
+
     _questionNumber.value = 1;
     _isVisible.value = false;
     _isAnswered = false;
@@ -470,7 +483,6 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
     //update();
   }
 
-  //TODO: bu ne?
   bool hsCheck(String quizID) {
     //high score checker , finds desired quiz info score and compere
     var _updaterList = Get.find<QuizController>().quizInfo.where((i) => i.quizId == quizID).toList();
@@ -505,14 +517,11 @@ class QuestionController extends GetxController with GetTickerProviderStateMixin
     Get.to(() => QuizScreen());
   }
 
-  //TODO: quiz sorularını cek
   Future<void> getTheRightQuestions(String quizId) async{
-     //List<Quiz> quizes = await db.getQuizesByCategory("4nM9V2ISVZTpFwSGPkyN");
-
     var quiz = await db.getQuiz(quizId);
 
     questionss = quiz.questions;
-
+    activeQuizQuestionLength = questionss!.length;
 
     //return _questionss;
     /*var rightList = allQuestion.where((i) => i.questionsId == qId).toList();

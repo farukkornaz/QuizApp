@@ -28,7 +28,12 @@ class Database {
         .collection("questions")
         .get();
 
-    quiz = Quiz.fromJson(quizSnapshot.data()!);
+
+    //quizSnapshot.data()!
+    quiz = Quiz.fromJson({
+      "id": quizSnapshot.id,
+      "name": quizSnapshot["name"],
+    });
 
     final docs = questionSnapshot.docs;
 
@@ -49,6 +54,24 @@ class Database {
             .snapshots();
 
     return streamOfOnlineQuiz;
+  }
+
+  Stream<DocumentSnapshot<Map<String, dynamic>>>
+  listenAdminForStartOnlineExam() {
+    Stream<DocumentSnapshot<Map<String, dynamic>>> streamOfOnlineQuiz =
+    _firebaseFirestore
+        .collection("online_tests")
+        .doc("online_test")
+        .snapshots();
+
+    return streamOfOnlineQuiz;
+  }
+
+  resetOnlineStarter(){
+    _firebaseFirestore.
+    collection("online_tests").
+    doc("online_test").
+    update({"start": false});
   }
 
   resetOnlineQuestionShiftValues() {
@@ -79,7 +102,10 @@ class Database {
         .where("CategoryId", isEqualTo: categoryId)
         .get();
     quizList =
-        quizesQuerySnapShot.docs.map((e) => Quiz.fromJson(e.data())).toList();
+        quizesQuerySnapShot.docs.map((e) => Quiz.fromJson({
+          "id": e.reference.id,
+          "name": e.get("name"),
+        })).toList();
 
     return quizList;
   }
@@ -87,11 +113,9 @@ class Database {
   // cat.Category --> Model/Caregory.dart
   Future<List<cat.CategoryModel>> getCategories() async {
     List<cat.CategoryModel> categoryList;
-    print("1");
+
     final storage = FirebaseStorage.instance;
-    print("2");
     final storageRef = storage.ref();
-    print("3");
     final categoriesQuerySnapShot =
         await _firebaseFirestore.collection("Categories").get();
 

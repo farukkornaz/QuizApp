@@ -129,7 +129,6 @@ class WelcomeScreen extends GetWidget<AuthController> {
                           ),
                         ),
                       ),
-                      // Survival Questions *********************************************
                       Expanded(
                         child: ResponsiveGridList(
                           horizontalGridMargin: 10,
@@ -148,7 +147,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
                               },
                               child: Container(
                                 //decoration: BoxDecoration(color: Colors.green,borderRadius: BorderRadius.circular(20)),
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     vertical: kDefaultPadding),
                                 child: Card(
                                   shape: RoundedRectangleBorder(
@@ -182,7 +181,7 @@ class WelcomeScreen extends GetWidget<AuthController> {
                                           alignment: Alignment.center,
                                           child: Text(
                                             '${snapshotData[index].name}',
-                                            style: TextStyle(fontSize: 16.0),
+                                            style: const TextStyle(fontSize: 16.0),
                                           ),
                                         ),
                                       ],
@@ -311,10 +310,15 @@ class CategorySample extends StatelessWidget {
           ),
           InkWell(
             onTap: () async {
-              questionController.activeQuizId = quiz.id;
-              await questionController
-                  .getTheRightQuestions("S1YRgOThEUkE5IWPNQ0i");
-              questionController.getQuizScreen();
+              if(true){
+                questionController.activeQuizId = quiz.id;
+                await questionController
+                    .getTheRightQuestions(quiz.id!);
+                questionController.getQuizScreen();
+              }else{
+                print("Category Sample (welcome screenın altında) screen quiz id null geliyor.");
+              }
+
             },
             child: Container(
               height: 140,

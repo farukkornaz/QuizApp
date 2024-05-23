@@ -19,7 +19,6 @@ class CategoryScreenController extends GetxController {
 
   void goCategoryQuizzes(String categoryId) async{
     List<Quiz> quizzes = await database.getQuizesByCategory(categoryId);
-    QuizController quizController = QuizController();
     Get.to(QuizzesScreen(quizzes));
 
   }

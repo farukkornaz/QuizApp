@@ -25,8 +25,6 @@ class OnlineQuizScreen extends StatelessWidget {
   int count = 0;
 
   Init() {
-    print("$count kere onInıt calisti");
-
     db = Database();
     stream = db.listenAdminForChangeOfNextOrPreviousQuestion();
 
