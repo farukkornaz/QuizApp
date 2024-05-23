@@ -20,21 +20,6 @@ void main() async {
     storageBucket: "gs://quiz-test-app-1fd6c.appspot.com",
   ));
 
-  //List<Map<String, dynamic>> questions = allQuestions;
-
-  /*var db = FirebaseFirestore.instance;
-  final snapshot = await db.collection("category").get();
-
-  final docs = snapshot.docs;
-  print("dokümanlar:::::::::::::::::::::::::::::::::::::::::::::");
-  for(int i = 0; i<docs.length; i++){
-    print(docs[i].toString());
-  }print("end");*/
-
-  /*for(int i = 0; i<10; i++){
-    db.collection("questions").add(questions[i]);
-  }*/
-
   runApp(MyApp());
 }
 
