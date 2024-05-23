@@ -135,7 +135,7 @@ class AuthController extends GetxController {
             UserCredential _userCredential =
                 await _auth.signInWithEmailAndPassword(email: email.trim(), password: password);
             Get.find<UserController>().user =
-                await Database().getUser(_userCredential.user?.uid ?? ''); //assign new user values with uid
+                await Database().getUser(_userCredential.user?.uid ?? '');
             print('login successful');
             guest = false;
             Get.find<QuestionController>().getQuizesScores();
@@ -166,7 +166,7 @@ class AuthController extends GetxController {
                 borderColor: Colors.purpleAccent,
                 borderWidth: 1.5,
                 isDismissible: true,
-                icon: Icon(
+                icon: const Icon(
                   Icons.error_outline_rounded,
                   color: Colors.white,
                 ),
@@ -219,7 +219,7 @@ class AuthController extends GetxController {
           borderColor: Colors.purpleAccent,
           borderWidth: 1.5,
           isDismissible: true,
-          icon: Icon(
+          icon: const Icon(
             Icons.error_outline_rounded,
             color: Colors.white,
           ),

@@ -1151,7 +1151,7 @@ class Question {
     "answer_index": 0
   },
 ];*/
-const List survival_questions = [//map list, Questions and answers stored locally
+/*const List survival_questions = [//map list, Questions and answers stored locally
   {
     "questionsId": "surv_3",
     "id": 1,
@@ -1322,4 +1322,4 @@ const List testQ = [ //map list, Questions and answers stored locally
     "options": ['1', '2', '3', '4'],
     "answer_index": 2,
   },
-];
+];*/
