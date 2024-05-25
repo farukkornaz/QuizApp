@@ -8,6 +8,10 @@ import 'package:quiz_test_app/screens/online_quiz_screen.dart';
 import '../services/database.dart';
 
 class OnlineWaitingScreen extends StatelessWidget {
+
+
+
+
   QuestionController _questionController = Get.put(QuestionController());
   Database database = Database();
 
@@ -44,10 +48,15 @@ class OnlineWaitingScreen extends StatelessWidget {
             });
 
           }
-          return const Scaffold(
+          return Scaffold(
             body: Center(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Container(
+                    width: 200,
+                    height: 200,
+                    child: Image.asset("assets/images/app_logo.png"),),
                   Text("lütfen yönetici sınavı"),
                   Text("başlatana kadar bekleyiniz."),
                 ],
