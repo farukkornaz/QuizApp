@@ -28,7 +28,6 @@ class Database {
         .collection("questions")
         .get();
 
-
     //quizSnapshot.data()!
     quiz = Quiz.fromJson({
       "id": quizSnapshot.id,
@@ -45,8 +44,31 @@ class Database {
     return quiz;
   }
 
+  Future<void> registerUserToOnlineExam(String mail, String onlineTestName) async {
+    await _firebaseFirestore
+        .collection("online_tests")
+        .doc(onlineTestName)
+        .collection("attendants").doc(mail).set({
+      "next": false,
+      "previous": false
+    });
+  }
+
   Stream<DocumentSnapshot<Map<String, dynamic>>>
-      listenAdminForChangeOfNextOrPreviousQuestion() {
+      listenAdminForChangeOfNextOrPreviousQuestion(String mail) {
+    Stream<DocumentSnapshot<Map<String, dynamic>>> streamOfOnlineQuiz =
+        _firebaseFirestore
+            .collection("online_tests")
+            .doc("online_test")
+            .collection("attendants")
+            .doc(mail)
+            .snapshots();
+
+    return streamOfOnlineQuiz;
+  }
+
+  Stream<DocumentSnapshot<Map<String, dynamic>>>
+      listenAdminForStartOnlineExam() {
     Stream<DocumentSnapshot<Map<String, dynamic>>> streamOfOnlineQuiz =
         _firebaseFirestore
             .collection("online_tests")
@@ -56,28 +78,18 @@ class Database {
     return streamOfOnlineQuiz;
   }
 
-  Stream<DocumentSnapshot<Map<String, dynamic>>>
-  listenAdminForStartOnlineExam() {
-    Stream<DocumentSnapshot<Map<String, dynamic>>> streamOfOnlineQuiz =
+  resetOnlineStarter() {
     _firebaseFirestore
         .collection("online_tests")
         .doc("online_test")
-        .snapshots();
-
-    return streamOfOnlineQuiz;
+        .update({"start": false});
   }
 
-  resetOnlineStarter(){
-    _firebaseFirestore.
-    collection("online_tests").
-    doc("online_test").
-    update({"start": false});
-  }
-
-  resetOnlineQuestionShiftValues() {
+  resetOnlineQuestionShiftValues(String mail) {
     _firebaseFirestore
         .collection("online_tests")
-        .doc("online_test")
+        .doc("online_test").collection("attendants")
+        .doc(mail)
         .update({"next": false, "previous": false});
   }
 
@@ -101,11 +113,12 @@ class Database {
         .collection("Quizes")
         .where("CategoryId", isEqualTo: categoryId)
         .get();
-    quizList =
-        quizesQuerySnapShot.docs.map((e) => Quiz.fromJson({
-          "id": e.reference.id,
-          "name": e.get("name"),
-        })).toList();
+    quizList = quizesQuerySnapShot.docs
+        .map((e) => Quiz.fromJson({
+              "id": e.reference.id,
+              "name": e.get("name"),
+            }))
+        .toList();
 
     return quizList;
   }

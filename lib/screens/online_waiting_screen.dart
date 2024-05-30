@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quiz_test_app/controllers/auth_controller.dart';
 import 'package:quiz_test_app/controllers/question_controller.dart';
 import 'package:quiz_test_app/screens/online_quiz_screen.dart';
 
@@ -9,17 +10,15 @@ import '../services/database.dart';
 
 class OnlineWaitingScreen extends StatelessWidget {
 
-
-
-
   QuestionController _questionController = Get.put(QuestionController());
+  AuthController _authController = Get.put(AuthController());
   Database database = Database();
 
   late Stream<DocumentSnapshot<Map<String, dynamic>>> stream;
 
   initState() {
     var db = Database();
-    stream = db.listenAdminForChangeOfNextOrPreviousQuestion();
+    stream = db.listenAdminForStartOnlineExam();
   }
 
   @override
@@ -38,11 +37,12 @@ class OnlineWaitingScreen extends StatelessWidget {
           var data = snapshot.requireData.data();
           if(data?["start"]){
             WidgetsBinding.instance.addPostFrameCallback((_){
-              database.resetOnlineStarter();
+              //database.resetOnlineStarter();
               _questionController.onlineActive = true;
               _questionController.isVisible.value = true;
               _questionController.startTimer();
               //Get.to(OnlineQuizScreen());
+              database.registerUserToOnlineExam(_authController.user!.email!, "online_test");
               Get.back();
               Get.to(OnlineQuizScreen());
             });

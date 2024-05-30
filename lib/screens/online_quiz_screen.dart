@@ -15,19 +15,18 @@ import 'online_score_screen.dart'; // question controller class
 
 class OnlineQuizScreen extends StatelessWidget {
 
-  late Stream<DocumentSnapshot<Map<String, dynamic>>> stream;
+  Stream<DocumentSnapshot<Map<String, dynamic>>>? stream;
   late QuestionController _questionController;
   late AuthController _aController;
   late Database db;
   int count = 0;
 
   Init() {
-    db = Database();
-    stream = db.listenAdminForChangeOfNextOrPreviousQuestion();
-
     _questionController = Get.put(QuestionController());
-    _aController = Get.find<AuthController>();
+    _aController = Get.put(AuthController());
     _questionController.onInit();
+    db = Database();
+    stream = db.listenAdminForChangeOfNextOrPreviousQuestion(_aController.user!.email!);
   }
 
   @override
@@ -390,14 +389,13 @@ class OnlineQuizScreen extends StatelessWidget {
                                 if (data != null) {
                                   if (data["next"]) {
                                     _questionController.onlineNextQuestion();
-                                    db.resetOnlineQuestionShiftValues();
                                   }
                                   if (data["previous"]) {
                                     _questionController
                                         .onlinePreviousQuestion();
-                                    db.resetOnlineQuestionShiftValues();
                                   }
                                 }
+                                db.resetOnlineQuestionShiftValues(_aController.user!.email!);
                                 return const Text("");
                               });
                             }),
