@@ -11,15 +11,6 @@ void main() async {
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
-  await Firebase.initializeApp(
-      options: const FirebaseOptions(
-    apiKey: 'AIzaSyDFXJd0_6ydGExtOzlH6lBZWEjfbRXocT4',
-    appId: '1:573131445611:android:ad29f870a981780d4fa82e',
-    messagingSenderId: '573131445611',
-    projectId: 'quiz-test-app-1fd6c',
-    storageBucket: "gs://quiz-test-app-1fd6c.appspot.com",
-  ));
-
   runApp(MyApp());
 }
 
